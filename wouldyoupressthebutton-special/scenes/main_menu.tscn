@@ -1,0 +1,119 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdyqluc1cfnb8"]
+
+[ext_resource type="Texture2D" uid="uid://bgygn6ii42cpa" path="res://sprites/pixel.png" id="1_1bg67"]
+
+[node name="Main Menu" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -410.0
+offset_top = 80.0
+offset_right = 410.0
+offset_bottom = 180.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 60
+text = "Would You Press The Button"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -67.5
+offset_top = 177.0
+offset_right = 67.5
+offset_bottom = 232.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "Special"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Play Button" type="Button" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -125.0
+offset_top = 324.0
+offset_right = 125.0
+offset_bottom = 404.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "Play"
+
+[node name="Credits Button" type="Button" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -125.0
+offset_top = 434.0
+offset_right = 125.0
+offset_bottom = 514.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "Credits"
+
+[node name="Settings" type="Node2D" parent="CanvasLayer"]
+visible = false
+
+[node name="background" type="Sprite2D" parent="CanvasLayer/Settings"]
+modulate = Color(0.605274, 0.605274, 0.605274, 1)
+position = Vector2(588, 309.25)
+scale = Vector2(900, 470)
+texture = ExtResource("1_1bg67")
+
+[node name="Button2" type="Button" parent="CanvasLayer/Settings"]
+offset_left = 180.0
+offset_top = 100.0
+offset_right = 300.0
+offset_bottom = 150.0
+theme_override_font_sizes/font_size = 25
+text = "Back"
+
+[node name="Credits" type="Node2D" parent="CanvasLayer"]
+visible = false
+
+[node name="background" type="Sprite2D" parent="CanvasLayer/Credits"]
+modulate = Color(0.605274, 0.605274, 0.605274, 1)
+position = Vector2(588, 309.25)
+scale = Vector2(900, 470)
+texture = ExtResource("1_1bg67")
+
+[node name="Credits" type="Label" parent="CanvasLayer/Credits"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 496.0
+offset_top = 111.0
+offset_right = 655.0
+offset_bottom = 166.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 45
+text = "CREDITS"
+
+[node name="Names" type="Label" parent="CanvasLayer/Credits"]
+offset_left = 258.0
+offset_top = 192.0
+offset_right = 908.0
+offset_bottom = 442.0
+theme_override_font_sizes/font_size = 30
+text = "Carter Gruebel
+Garrett Blake
+Jacqueline Gracey
+Brendan Trieu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer/Credits"]
+offset_left = 180.0
+offset_top = 100.0
+offset_right = 300.0
+offset_bottom = 150.0
+theme_override_font_sizes/font_size = 25
+text = "Back"
