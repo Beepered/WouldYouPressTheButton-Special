@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://bdyqluc1cfnb8"]
+[gd_scene load_steps=7 format=3 uid="uid://bdyqluc1cfnb8"]
 
 [ext_resource type="Texture2D" uid="uid://bgygn6ii42cpa" path="res://sprites/pixel.png" id="1_1bg67"]
-[ext_resource type="Script" path="res://scenes/main_menu.gd" id="1_77ssq"]
+[ext_resource type="Script" path="res://scripts/menu/main_menu.gd" id="1_77ssq"]
+[ext_resource type="Texture2D" uid="uid://dve4ik6nav6mk" path="res://sprites/arrow.png" id="3_8h1ks"]
+[ext_resource type="Script" path="res://scripts/menu/discussSettingArrow.gd" id="4_flmkl"]
+[ext_resource type="Script" path="res://scripts/menu/voteSettingArrow.gd" id="4_ntwn2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_srou7"]
+size = Vector2(30, 30)
 
 [node name="Main Menu" type="Node2D"]
 script = ExtResource("1_77ssq")
@@ -37,7 +43,7 @@ text = "Special"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Play Button" type="Button" parent="CanvasLayer"]
+[node name="SettingButton" type="Button" parent="CanvasLayer"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -62,7 +68,6 @@ theme_override_font_sizes/font_size = 40
 text = "Credits"
 
 [node name="Settings" type="Node2D" parent="CanvasLayer"]
-visible = false
 
 [node name="background" type="Sprite2D" parent="CanvasLayer/Settings"]
 modulate = Color(0.605274, 0.605274, 0.605274, 1)
@@ -70,13 +75,215 @@ position = Vector2(588, 309.25)
 scale = Vector2(900, 470)
 texture = ExtResource("1_1bg67")
 
-[node name="Button2" type="Button" parent="CanvasLayer/Settings"]
+[node name="BackButton" type="Button" parent="CanvasLayer/Settings"]
 offset_left = 180.0
 offset_top = 100.0
 offset_right = 300.0
 offset_bottom = 150.0
 theme_override_font_sizes/font_size = 25
 text = "Back"
+
+[node name="DiscussionTime" type="Label" parent="CanvasLayer/Settings"]
+offset_left = 247.0
+offset_top = 181.0
+offset_right = 480.0
+offset_bottom = 223.0
+theme_override_font_sizes/font_size = 30
+text = "Discussion Time"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="time text" type="Label" parent="CanvasLayer/Settings/DiscussionTime"]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 47.0
+offset_right = 160.0
+offset_bottom = 96.0
+theme_override_font_sizes/font_size = 35
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="decrease" type="Sprite2D" parent="CanvasLayer/Settings/DiscussionTime"]
+position = Vector2(60, 70)
+rotation = 3.14159
+texture = ExtResource("3_8h1ks")
+script = ExtResource("4_flmkl")
+change = -1
+
+[node name="Area2D" type="Area2D" parent="CanvasLayer/Settings/DiscussionTime/decrease"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Settings/DiscussionTime/decrease/Area2D"]
+shape = SubResource("RectangleShape2D_srou7")
+
+[node name="increase" type="Sprite2D" parent="CanvasLayer/Settings/DiscussionTime"]
+position = Vector2(180, 70)
+texture = ExtResource("3_8h1ks")
+script = ExtResource("4_flmkl")
+change = 1
+
+[node name="Area2D" type="Area2D" parent="CanvasLayer/Settings/DiscussionTime/increase"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Settings/DiscussionTime/increase/Area2D"]
+shape = SubResource("RectangleShape2D_srou7")
+
+[node name="VotingTime" type="Label" parent="CanvasLayer/Settings"]
+offset_left = 247.0
+offset_top = 315.0
+offset_right = 472.0
+offset_bottom = 357.0
+theme_override_font_sizes/font_size = 30
+text = "Voting Time"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="time text" type="Label" parent="CanvasLayer/Settings/VotingTime"]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 47.0
+offset_right = 160.0
+offset_bottom = 96.0
+theme_override_font_sizes/font_size = 35
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="decrease" type="Sprite2D" parent="CanvasLayer/Settings/VotingTime"]
+position = Vector2(60, 70)
+rotation = 3.14159
+texture = ExtResource("3_8h1ks")
+script = ExtResource("4_ntwn2")
+change = -1
+
+[node name="Area2D" type="Area2D" parent="CanvasLayer/Settings/VotingTime/decrease"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Settings/VotingTime/decrease/Area2D"]
+shape = SubResource("RectangleShape2D_srou7")
+
+[node name="increase" type="Sprite2D" parent="CanvasLayer/Settings/VotingTime"]
+position = Vector2(180, 70)
+texture = ExtResource("3_8h1ks")
+script = ExtResource("4_ntwn2")
+change = 1
+
+[node name="Area2D" type="Area2D" parent="CanvasLayer/Settings/VotingTime/increase"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Settings/VotingTime/increase/Area2D"]
+shape = SubResource("RectangleShape2D_srou7")
+
+[node name="NumPlayers" type="Label" parent="CanvasLayer/Settings"]
+offset_left = 708.0
+offset_top = 93.0
+offset_right = 933.0
+offset_bottom = 148.0
+theme_override_font_sizes/font_size = 40
+text = "Players"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Line" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers"]
+layout_mode = 0
+offset_top = 60.0
+offset_right = 230.0
+offset_bottom = 95.0
+placeholder_text = "BLAH BLAH"
+max_length = 20
+context_menu_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="Line2" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers"]
+layout_mode = 0
+offset_top = 100.0
+offset_right = 230.0
+offset_bottom = 135.0
+placeholder_text = "BLAH BLAH"
+max_length = 20
+context_menu_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="Line3" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers"]
+layout_mode = 0
+offset_top = 140.0
+offset_right = 230.0
+offset_bottom = 175.0
+placeholder_text = "BLAH BLAH"
+max_length = 20
+context_menu_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="Line4" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers"]
+layout_mode = 0
+offset_top = 180.0
+offset_right = 230.0
+offset_bottom = 215.0
+placeholder_text = "BLAH BLAH"
+max_length = 20
+context_menu_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="Line5" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers"]
+layout_mode = 0
+offset_top = 220.0
+offset_right = 230.0
+offset_bottom = 255.0
+placeholder_text = "BLAH BLAH"
+max_length = 20
+context_menu_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="Line6" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers"]
+layout_mode = 0
+offset_top = 260.0
+offset_right = 230.0
+offset_bottom = 295.0
+placeholder_text = "BLAH BLAH"
+max_length = 20
+context_menu_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="Line7" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers"]
+layout_mode = 0
+offset_top = 300.0
+offset_right = 230.0
+offset_bottom = 335.0
+placeholder_text = "BLAH BLAH"
+max_length = 20
+context_menu_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="Line8" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers"]
+layout_mode = 0
+offset_top = 340.0
+offset_right = 230.0
+offset_bottom = 375.0
+placeholder_text = "BLAH BLAH"
+max_length = 20
+context_menu_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="PlayButton" type="Button" parent="CanvasLayer/Settings"]
+offset_left = 484.0
+offset_top = 443.0
+offset_right = 684.0
+offset_bottom = 513.0
+theme_override_font_sizes/font_size = 40
+text = "PLAY"
 
 [node name="Credits" type="Node2D" parent="CanvasLayer"]
 visible = false
@@ -112,7 +319,7 @@ Brendan Trieu"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="CanvasLayer/Credits"]
+[node name="BackButton" type="Button" parent="CanvasLayer/Credits"]
 offset_left = 180.0
 offset_top = 100.0
 offset_right = 300.0
@@ -120,5 +327,16 @@ offset_bottom = 150.0
 theme_override_font_sizes/font_size = 25
 text = "Back"
 
+[connection signal="button_down" from="CanvasLayer/SettingButton" to="." method="_on_setting_button_button_down"]
 [connection signal="button_down" from="CanvasLayer/Credits Button" to="." method="_on_credits_button_down"]
-[connection signal="button_down" from="CanvasLayer/Credits/Button" to="." method="_on_back_button_down"]
+[connection signal="button_down" from="CanvasLayer/Settings/BackButton" to="." method="_on_button_button_down"]
+[connection signal="mouse_entered" from="CanvasLayer/Settings/DiscussionTime/decrease/Area2D" to="CanvasLayer/Settings/DiscussionTime/decrease" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/Settings/DiscussionTime/decrease/Area2D" to="CanvasLayer/Settings/DiscussionTime/decrease" method="_on_area_2d_mouse_exited"]
+[connection signal="mouse_entered" from="CanvasLayer/Settings/DiscussionTime/increase/Area2D" to="CanvasLayer/Settings/DiscussionTime/increase" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/Settings/DiscussionTime/increase/Area2D" to="CanvasLayer/Settings/DiscussionTime/increase" method="_on_area_2d_mouse_exited"]
+[connection signal="mouse_entered" from="CanvasLayer/Settings/VotingTime/decrease/Area2D" to="CanvasLayer/Settings/VotingTime/decrease" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/Settings/VotingTime/decrease/Area2D" to="CanvasLayer/Settings/VotingTime/decrease" method="_on_area_2d_mouse_exited"]
+[connection signal="mouse_entered" from="CanvasLayer/Settings/VotingTime/increase/Area2D" to="CanvasLayer/Settings/VotingTime/increase" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/Settings/VotingTime/increase/Area2D" to="CanvasLayer/Settings/VotingTime/increase" method="_on_area_2d_mouse_exited"]
+[connection signal="button_down" from="CanvasLayer/Settings/PlayButton" to="." method="_on_play_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Credits/BackButton" to="." method="_on_back_button_down"]

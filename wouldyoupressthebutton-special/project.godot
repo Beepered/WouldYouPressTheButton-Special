@@ -14,3 +14,7 @@ config/name="WouldYouPressTheButton-Special"
 run/main_scene="res://scenes/main_menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://sprites/icon.svg"
+
+[autoload]
+
+Global="*res://scripts/global.gd"
