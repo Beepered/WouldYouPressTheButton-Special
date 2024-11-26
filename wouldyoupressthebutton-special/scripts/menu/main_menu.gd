@@ -33,10 +33,9 @@ func _on_play_button_button_down() -> void:
 	for name in playerNames:
 		if(name.text != ""):
 			Global.playerNames.push_back(name.text)
-	print(Global.playerNames)
 	get_tree().change_scene_to_file("res://scenes/PlayScene.tscn")
 
-func checkNumPlayers():
+func checkNumPlayers(): # doesn't check if names are different if you want to do that
 	var count = 0
 	for name in playerNames:
 		if(name.text != ""):
