@@ -4,6 +4,7 @@
 extends Node
 
 var numPlayers = 0
+var numRounds = 5
 var discussTime = 30
 var voteTime = 10
 

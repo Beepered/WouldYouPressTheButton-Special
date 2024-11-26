@@ -9,6 +9,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	$CanvasLayer/Settings/Rounds/num.text = str(Global.numRounds)
 	$"CanvasLayer/Settings/DiscussionTime/time text".text = str(Global.discussTime)
 	$"CanvasLayer/Settings/VotingTime/time text".text = str(Global.voteTime)
 	if(checkNumPlayers() >= 5):

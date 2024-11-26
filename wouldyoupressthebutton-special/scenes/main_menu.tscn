@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bdyqluc1cfnb8"]
+[gd_scene load_steps=8 format=3 uid="uid://bdyqluc1cfnb8"]
 
 [ext_resource type="Texture2D" uid="uid://bgygn6ii42cpa" path="res://sprites/pixel.png" id="1_1bg67"]
 [ext_resource type="Script" path="res://scripts/menu/main_menu.gd" id="1_77ssq"]
 [ext_resource type="Texture2D" uid="uid://dve4ik6nav6mk" path="res://sprites/arrow.png" id="3_8h1ks"]
 [ext_resource type="Script" path="res://scripts/menu/discussSettingArrow.gd" id="4_flmkl"]
 [ext_resource type="Script" path="res://scripts/menu/voteSettingArrow.gd" id="4_ntwn2"]
+[ext_resource type="Script" path="res://scripts/menu/roundSettingArrow.gd" id="4_xe8hp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_srou7"]
 size = Vector2(30, 30)
@@ -83,11 +84,55 @@ offset_bottom = 150.0
 theme_override_font_sizes/font_size = 25
 text = "Back"
 
+[node name="Rounds" type="Label" parent="CanvasLayer/Settings"]
+offset_left = 193.0
+offset_top = 235.0
+offset_right = 426.0
+offset_bottom = 277.0
+theme_override_font_sizes/font_size = 30
+text = "Rounds"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="num" type="Label" parent="CanvasLayer/Settings/Rounds"]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 47.0
+offset_right = 160.0
+offset_bottom = 96.0
+theme_override_font_sizes/font_size = 35
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="decrease" type="Sprite2D" parent="CanvasLayer/Settings/Rounds"]
+position = Vector2(60, 70)
+rotation = 3.14159
+texture = ExtResource("3_8h1ks")
+script = ExtResource("4_xe8hp")
+change = -1
+
+[node name="Area2D" type="Area2D" parent="CanvasLayer/Settings/Rounds/decrease"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Settings/Rounds/decrease/Area2D"]
+shape = SubResource("RectangleShape2D_srou7")
+
+[node name="increase" type="Sprite2D" parent="CanvasLayer/Settings/Rounds"]
+position = Vector2(180, 70)
+texture = ExtResource("3_8h1ks")
+script = ExtResource("4_xe8hp")
+change = 1
+
+[node name="Area2D" type="Area2D" parent="CanvasLayer/Settings/Rounds/increase"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Settings/Rounds/increase/Area2D"]
+shape = SubResource("RectangleShape2D_srou7")
+
 [node name="DiscussionTime" type="Label" parent="CanvasLayer/Settings"]
-offset_left = 247.0
-offset_top = 181.0
-offset_right = 480.0
-offset_bottom = 223.0
+offset_left = 463.0
+offset_top = 180.0
+offset_right = 696.0
+offset_bottom = 222.0
 theme_override_font_sizes/font_size = 30
 text = "Discussion Time"
 horizontal_alignment = 1
@@ -128,10 +173,10 @@ change = 1
 shape = SubResource("RectangleShape2D_srou7")
 
 [node name="VotingTime" type="Label" parent="CanvasLayer/Settings"]
-offset_left = 247.0
-offset_top = 315.0
-offset_right = 472.0
-offset_bottom = 357.0
+offset_left = 463.0
+offset_top = 294.0
+offset_right = 688.0
+offset_bottom = 336.0
 theme_override_font_sizes/font_size = 30
 text = "Voting Time"
 horizontal_alignment = 1
@@ -172,10 +217,10 @@ change = 1
 shape = SubResource("RectangleShape2D_srou7")
 
 [node name="NumPlayers" type="Label" parent="CanvasLayer/Settings"]
-offset_left = 708.0
-offset_top = 93.0
-offset_right = 933.0
-offset_bottom = 148.0
+offset_left = 753.0
+offset_top = 96.0
+offset_right = 978.0
+offset_bottom = 151.0
 theme_override_font_sizes/font_size = 40
 text = "Players"
 horizontal_alignment = 1
@@ -330,6 +375,10 @@ text = "Back"
 [connection signal="button_down" from="CanvasLayer/SettingButton" to="." method="_on_setting_button_button_down"]
 [connection signal="button_down" from="CanvasLayer/Credits Button" to="." method="_on_credits_button_down"]
 [connection signal="button_down" from="CanvasLayer/Settings/BackButton" to="." method="_on_button_button_down"]
+[connection signal="mouse_entered" from="CanvasLayer/Settings/Rounds/decrease/Area2D" to="CanvasLayer/Settings/Rounds/decrease" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/Settings/Rounds/decrease/Area2D" to="CanvasLayer/Settings/Rounds/decrease" method="_on_area_2d_mouse_exited"]
+[connection signal="mouse_entered" from="CanvasLayer/Settings/Rounds/increase/Area2D" to="CanvasLayer/Settings/Rounds/increase" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/Settings/Rounds/increase/Area2D" to="CanvasLayer/Settings/Rounds/increase" method="_on_area_2d_mouse_exited"]
 [connection signal="mouse_entered" from="CanvasLayer/Settings/DiscussionTime/decrease/Area2D" to="CanvasLayer/Settings/DiscussionTime/decrease" method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/Settings/DiscussionTime/decrease/Area2D" to="CanvasLayer/Settings/DiscussionTime/decrease" method="_on_area_2d_mouse_exited"]
 [connection signal="mouse_entered" from="CanvasLayer/Settings/DiscussionTime/increase/Area2D" to="CanvasLayer/Settings/DiscussionTime/increase" method="_on_area_2d_mouse_entered"]
