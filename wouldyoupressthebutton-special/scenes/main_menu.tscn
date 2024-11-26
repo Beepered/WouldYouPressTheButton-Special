@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://bdyqluc1cfnb8"]
+[gd_scene load_steps=8 format=3 uid="uid://bdyqluc1cfnb8"]
 
 [ext_resource type="Texture2D" uid="uid://bgygn6ii42cpa" path="res://sprites/pixel.png" id="1_1bg67"]
 [ext_resource type="Script" path="res://scripts/menu/main_menu.gd" id="1_77ssq"]
 [ext_resource type="Texture2D" uid="uid://dve4ik6nav6mk" path="res://sprites/arrow.png" id="3_8h1ks"]
 [ext_resource type="Script" path="res://scripts/menu/discussSettingArrow.gd" id="4_flmkl"]
 [ext_resource type="Script" path="res://scripts/menu/voteSettingArrow.gd" id="4_ntwn2"]
+
+[sub_resource type="FontVariation" id="FontVariation_jeu8t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_srou7"]
 size = Vector2(30, 30)
@@ -70,7 +72,7 @@ text = "Credits"
 [node name="Settings" type="Node2D" parent="CanvasLayer"]
 
 [node name="background" type="Sprite2D" parent="CanvasLayer/Settings"]
-modulate = Color(0.605274, 0.605274, 0.605274, 1)
+modulate = Color(0.444489, 0.638216, 0.721653, 1)
 position = Vector2(588, 309.25)
 scale = Vector2(900, 470)
 texture = ExtResource("1_1bg67")
@@ -88,6 +90,7 @@ offset_left = 247.0
 offset_top = 181.0
 offset_right = 480.0
 offset_bottom = 223.0
+theme_override_fonts/font = SubResource("FontVariation_jeu8t")
 theme_override_font_sizes/font_size = 30
 text = "Discussion Time"
 horizontal_alignment = 1
@@ -289,7 +292,7 @@ text = "PLAY"
 visible = false
 
 [node name="background" type="Sprite2D" parent="CanvasLayer/Credits"]
-modulate = Color(0.605274, 0.605274, 0.605274, 1)
+modulate = Color(0.375261, 0.642828, 0.784485, 1)
 position = Vector2(588, 309.25)
 scale = Vector2(900, 470)
 texture = ExtResource("1_1bg67")
