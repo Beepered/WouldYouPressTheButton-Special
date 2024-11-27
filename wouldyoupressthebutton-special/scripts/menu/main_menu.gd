@@ -5,8 +5,8 @@ $CanvasLayer/Settings/NumPlayers/Line4, $CanvasLayer/Settings/NumPlayers/Line5, 
 $CanvasLayer/Settings/NumPlayers/Line7, $CanvasLayer/Settings/NumPlayers/Line8]
 
 func _ready() -> void:
-	pass # Replace with function body.
-
+	$CanvasLayer.visible = true;
+	$CanvasLayer/Settings.visible = false;
 
 func _process(_delta: float) -> void:
 	$CanvasLayer/Settings/Rounds/num.text = str(Global.numRounds)
