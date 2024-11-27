@@ -4,11 +4,19 @@ extends CanvasLayer
 @onready var timer = $Timer
 @onready var prompt = $prompt
 
+@export var voteButton: Button
+
 var stageNum = 1
 var currentRound = 1
 var roles_assigned = {}
+var voteCount = 0 # Total votes for the current voting phase
+var currentPlayer: String = "" # The player currently voting
+var hasVoted = [] # Tracks which players have voted
 
 func _ready() -> void:
+	# Initialize the voteButton
+	voteButton.visible = false
+	voteButton.connect("pressed", Callable(self, "on_vote_button_pressed"))
 	stage()
 
 func _process(_delta: float) -> void:
@@ -58,8 +66,18 @@ func stage() -> void:
 	timer.start()
 
 func start_voting_phase() -> void:
+	# Reset voting data
+	voteCount = 0
+	hasVoted.clear()
+	currentPlayer = "" # Reset the current player
+
+	# Show the voting button
+	voteButton.visible = true
+
+	# Each player votes in turn
 	for i in range(Global.playerNames.size()):
 		var player = Global.playerNames[i]
+		currentPlayer = player # Set the current player
 		print("Player Turn:", player) # Debugging output
 		prompt.text = "%s, press or don't" % player
 		
@@ -70,10 +88,30 @@ func start_voting_phase() -> void:
 		# Wait for the timer to finish
 		await timer.timeout
 
-	# Stop the timer to prevent residual signals
+	# Hide the voting button and stop the timer
+	voteButton.visible = false
 	timer.stop()
-	print("Voting phase complete.")
+	print("Voting phase complete. Total votes:", voteCount)
 
+func on_vote_button_pressed() -> void:
+	# If currentPlayer is null, ignore the button press
+	if currentPlayer == "":
+		print("No player is currently voting.")
+		return
+	
+	# Check if the player has already voted
+	if hasVoted.has(currentPlayer):
+		print("Player %s has already voted." % currentPlayer)
+		return
+
+	# Increment vote count and mark player as having voted
+	voteCount += 1
+	hasVoted.append(currentPlayer)
+	print("Player %s voted. Total votes: %d" % [currentPlayer, voteCount])
+
+	# After voting, reset currentPlayer to null
+	currentPlayer = ""
+	
 func assign_roles() -> void:
 	var persuader = Global.playerNames[randi() % Global.playerNames.size()]
 	var opposer = Global.playerNames[randi() % Global.playerNames.size()]
