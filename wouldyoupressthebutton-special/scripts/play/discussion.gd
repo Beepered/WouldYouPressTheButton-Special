@@ -41,6 +41,7 @@ func stage() -> void:
 		2: # Each player votes on the prompt
 			prompt.text = "Stage 1: Voting Round"
 			await start_voting_phase()
+			time = .0001
 		3: # Assign roles to players
 			assign_roles()
 			time = 5
