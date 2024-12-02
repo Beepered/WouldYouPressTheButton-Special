@@ -4,6 +4,8 @@ extends Node2D
 $CanvasLayer/Settings/NumPlayers/Line4, $CanvasLayer/Settings/NumPlayers/Line5, $CanvasLayer/Settings/NumPlayers/Line6,
 $CanvasLayer/Settings/NumPlayers/Line7, $CanvasLayer/Settings/NumPlayers/Line8]
 
+@onready var mainMenu = $"CanvasLayer/main menu"
+
 func _ready() -> void:
 	$CanvasLayer.visible = true;
 	$CanvasLayer/Settings.visible = false;
@@ -18,15 +20,15 @@ func _process(_delta: float) -> void:
 		$CanvasLayer/Settings/PlayButton.disabled = true
 
 func _on_setting_button_button_down() -> void:
+	mainMenu.visible = false
 	$CanvasLayer/Settings.visible = true;
-
-func _on_button_button_down() -> void:
-	$CanvasLayer/Settings.visible = false;
 
 func _on_credits_button_down() -> void:
 	$CanvasLayer/Credits.visible = true;
-
-func _on_back_button_down() -> void:
+	
+func _on_back_button_button_down() -> void:
+	mainMenu.visible = true
+	$CanvasLayer/Settings.visible = false;
 	$CanvasLayer/Credits.visible = false;
 
 func _on_play_button_button_down() -> void:

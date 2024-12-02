@@ -18,3 +18,7 @@ config/icon="res://sprites/icon.svg"
 [autoload]
 
 Global="*res://scripts/global.gd"
+
+[display]
+
+window/size/resizable=false

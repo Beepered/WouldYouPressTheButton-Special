@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bdyqluc1cfnb8"]
+[gd_scene load_steps=9 format=3 uid="uid://bdyqluc1cfnb8"]
 
 [ext_resource type="Texture2D" uid="uid://bgygn6ii42cpa" path="res://sprites/pixel.png" id="1_1bg67"]
 [ext_resource type="Script" path="res://scripts/menu/main_menu.gd" id="1_77ssq"]
@@ -7,23 +7,25 @@
 [ext_resource type="Script" path="res://scripts/menu/voteSettingArrow.gd" id="4_ntwn2"]
 [ext_resource type="Script" path="res://scripts/menu/roundSettingArrow.gd" id="4_xe8hp"]
 
-[sub_resource type="FontVariation" id="FontVariation_jeu8t"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_srou7"]
 size = Vector2(30, 30)
+
+[sub_resource type="FontVariation" id="FontVariation_jeu8t"]
 
 [node name="Main Menu" type="Node2D"]
 script = ExtResource("1_77ssq")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Label" type="Label" parent="CanvasLayer"]
+[node name="main menu" type="Node2D" parent="CanvasLayer"]
+
+[node name="Label" type="Label" parent="CanvasLayer/main menu"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -410.0
+offset_left = 166.0
 offset_top = 80.0
-offset_right = 410.0
+offset_right = 986.0
 offset_bottom = 180.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 60
@@ -31,13 +33,13 @@ text = "Would You Press The Button"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="CanvasLayer"]
+[node name="Label2" type="Label" parent="CanvasLayer/main menu"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -67.5
+offset_left = 508.5
 offset_top = 177.0
-offset_right = 67.5
+offset_right = 643.5
 offset_bottom = 232.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
@@ -46,25 +48,25 @@ text = "Special"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SettingButton" type="Button" parent="CanvasLayer"]
+[node name="SettingButton" type="Button" parent="CanvasLayer/main menu"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -125.0
+offset_left = 451.0
 offset_top = 324.0
-offset_right = 125.0
+offset_right = 701.0
 offset_bottom = 404.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 40
 text = "Play"
 
-[node name="Credits Button" type="Button" parent="CanvasLayer"]
+[node name="Credits Button" type="Button" parent="CanvasLayer/main menu"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -125.0
+offset_left = 451.0
 offset_top = 434.0
-offset_right = 125.0
+offset_right = 701.0
 offset_bottom = 514.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 40
@@ -87,10 +89,10 @@ theme_override_font_sizes/font_size = 25
 text = "Back"
 
 [node name="Rounds" type="Label" parent="CanvasLayer/Settings"]
-offset_left = 193.0
-offset_top = 235.0
-offset_right = 426.0
-offset_bottom = 277.0
+offset_left = 202.0
+offset_top = 239.0
+offset_right = 435.0
+offset_bottom = 281.0
 theme_override_font_sizes/font_size = 30
 text = "Rounds"
 horizontal_alignment = 1
@@ -131,10 +133,10 @@ change = 1
 shape = SubResource("RectangleShape2D_srou7")
 
 [node name="DiscussionTime" type="Label" parent="CanvasLayer/Settings"]
-offset_left = 247.0
-offset_top = 181.0
-offset_right = 480.0
-offset_bottom = 223.0
+offset_left = 469.0
+offset_top = 167.0
+offset_right = 702.0
+offset_bottom = 209.0
 theme_override_fonts/font = SubResource("FontVariation_jeu8t")
 theme_override_font_sizes/font_size = 30
 text = "Discussion Time"
@@ -176,10 +178,10 @@ change = 1
 shape = SubResource("RectangleShape2D_srou7")
 
 [node name="VotingTime" type="Label" parent="CanvasLayer/Settings"]
-offset_left = 463.0
-offset_top = 294.0
-offset_right = 688.0
-offset_bottom = 336.0
+offset_left = 468.0
+offset_top = 290.0
+offset_right = 693.0
+offset_bottom = 332.0
 theme_override_font_sizes/font_size = 30
 text = "Voting Time"
 horizontal_alignment = 1
@@ -375,9 +377,9 @@ offset_bottom = 150.0
 theme_override_font_sizes/font_size = 25
 text = "Back"
 
-[connection signal="button_down" from="CanvasLayer/SettingButton" to="." method="_on_setting_button_button_down"]
-[connection signal="button_down" from="CanvasLayer/Credits Button" to="." method="_on_credits_button_down"]
-[connection signal="button_down" from="CanvasLayer/Settings/BackButton" to="." method="_on_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/main menu/SettingButton" to="." method="_on_setting_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/main menu/Credits Button" to="." method="_on_credits_button_down"]
+[connection signal="button_down" from="CanvasLayer/Settings/BackButton" to="." method="_on_back_button_button_down"]
 [connection signal="mouse_entered" from="CanvasLayer/Settings/Rounds/decrease/Area2D" to="CanvasLayer/Settings/Rounds/decrease" method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/Settings/Rounds/decrease/Area2D" to="CanvasLayer/Settings/Rounds/decrease" method="_on_area_2d_mouse_exited"]
 [connection signal="mouse_entered" from="CanvasLayer/Settings/Rounds/increase/Area2D" to="CanvasLayer/Settings/Rounds/increase" method="_on_area_2d_mouse_entered"]
@@ -391,4 +393,4 @@ text = "Back"
 [connection signal="mouse_entered" from="CanvasLayer/Settings/VotingTime/increase/Area2D" to="CanvasLayer/Settings/VotingTime/increase" method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/Settings/VotingTime/increase/Area2D" to="CanvasLayer/Settings/VotingTime/increase" method="_on_area_2d_mouse_exited"]
 [connection signal="button_down" from="CanvasLayer/Settings/PlayButton" to="." method="_on_play_button_button_down"]
-[connection signal="button_down" from="CanvasLayer/Credits/BackButton" to="." method="_on_back_button_down"]
+[connection signal="button_down" from="CanvasLayer/Credits/BackButton" to="." method="_on_back_button_button_down"]

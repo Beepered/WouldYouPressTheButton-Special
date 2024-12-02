@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxed8hhwxeufi"]
+[gd_scene load_steps=5 format=3 uid="uid://bxed8hhwxeufi"]
 
 [ext_resource type="Script" path="res://scripts/play/discussion.gd" id="1_o8j0k"]
 
@@ -7,6 +7,9 @@ bg_color = Color(0.721569, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3lfi2"]
 bg_color = Color(1.92523e-06, 0.698328, 0.307629, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nmgo1"]
+bg_color = Color(0.992965, 0.362527, 0.163437, 1)
 
 [node name="PlayScene" type="Node2D"]
 
@@ -23,6 +26,9 @@ offset_left = 504.0
 offset_top = 294.0
 offset_right = 640.0
 offset_bottom = 411.0
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_nmgo1")
+text = "PRESS"
 
 [node name="Discussion" type="CanvasLayer" parent="." node_paths=PackedStringArray("voteButton")]
 script = ExtResource("1_o8j0k")
