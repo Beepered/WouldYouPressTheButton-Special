@@ -18,8 +18,15 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_3lfi2")
 value = 9.15
 show_percentage = false
 
-[node name="Discussion" type="CanvasLayer" parent="."]
+[node name="Button" type="Button" parent="."]
+offset_left = 504.0
+offset_top = 294.0
+offset_right = 640.0
+offset_bottom = 411.0
+
+[node name="Discussion" type="CanvasLayer" parent="." node_paths=PackedStringArray("voteButton")]
 script = ExtResource("1_o8j0k")
+voteButton = NodePath("../Button")
 
 [node name="prompt" type="Label" parent="Discussion"]
 offset_left = 112.0
