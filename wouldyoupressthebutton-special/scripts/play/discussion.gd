@@ -84,6 +84,7 @@ func start_voting_phase() -> void:
 		currentPlayer = player # Set the current player
 		print("Player Turn:", player) # Debugging output
 		prompt.text = "%s, press or don't" % player
+		voteButton.modulate = Color(1, 0, 0)
 		
 		# Set timer wait time and start
 		timer.wait_time = Global.voteTime
@@ -107,10 +108,11 @@ func on_vote_button_pressed() -> void:
 	if hasVoted.has(currentPlayer):
 		print("Player %s has already voted." % currentPlayer)
 		return
-
+	
 	# Increment vote count and mark player as having voted
 	voteCount += 1
 	hasVoted.append(currentPlayer)
+	voteButton.modulate = Color(0, 1, 0)
 	print("Player %s voted. Total votes: %d" % [currentPlayer, voteCount])
 
 	# After voting, reset currentPlayer to null
@@ -128,8 +130,8 @@ func assign_roles() -> void:
 	roles_assigned["Opposer"] = opposer
 	
 	# Update weights (decrease for selected players)
-	player_weights[persuader] -= 2
-	player_weights[opposer] -= 2
+	player_weights[persuader] -= 2.5
+	player_weights[opposer] -= 2.5
 	
 	# Update prompt
 	prompt.text = "%s must convince to press, %s must convince not to press!" % [persuader, opposer]
