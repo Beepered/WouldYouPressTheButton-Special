@@ -5,7 +5,9 @@ extends CanvasLayer
 @onready var prompt = $prompt
 
 @export var voteButton: Button
+@export var initialWeight = 10 # Default weight for each player
 
+var player_weights = {}
 var stageNum = 1
 var currentRound = 1
 var roles_assigned = {}
@@ -14,6 +16,9 @@ var currentPlayer: String = "" # The player currently voting
 var hasVoted = [] # Tracks which players have voted
 
 func _ready() -> void:
+	# Initialize player weights
+	reset_player_weights()
+	
 	# Initialize the voteButton
 	voteButton.visible = false
 	voteButton.connect("pressed", Callable(self, "on_vote_button_pressed"))
@@ -113,12 +118,21 @@ func on_vote_button_pressed() -> void:
 	currentPlayer = ""
 	
 func assign_roles() -> void:
-	var persuader = Global.playerNames[randi() % Global.playerNames.size()]
-	var opposer = Global.playerNames[randi() % Global.playerNames.size()]
-	while opposer == persuader:
-		opposer = Global.playerNames[randi() % Global.playerNames.size()]
+	# Weighted random selection for persuader
+	var persuader = weighted_random_pick()
+	
+	# Weighted random selection for opposer (ensure it's not the same as persuader)
+	var opposer = weighted_random_pick([persuader])
+	
+	# Assign roles
 	roles_assigned["Persuader"] = persuader
 	roles_assigned["Opposer"] = opposer
+	
+	# Update weights (decrease for selected players)
+	player_weights[persuader] -= 2
+	player_weights[opposer] -= 2
+	
+	# Update prompt
 	prompt.text = "%s must convince to press, %s must convince not to press!" % [persuader, opposer]
 
 func calculate_scores() -> void:
@@ -128,3 +142,32 @@ func calculate_scores() -> void:
 func end_game() -> void:
 	prompt.text = "Game Over! Thanks for playing!"
 	timer.stop()
+
+func reset_player_weights() -> void:
+	# Reset all player weights to the initial weight
+	for player in Global.playerNames:
+		player_weights[player] = initialWeight
+
+func weighted_random_pick(exclude: Array = []) -> String:
+	# Filter eligible players manually
+	var eligible_players = []
+	for player in Global.playerNames:
+		if not exclude.has(player):
+			eligible_players.append(player)
+	
+	# Create a cumulative weight list
+	var total_weight = 0
+	var cumulative_weights = []
+	for player in eligible_players:
+		total_weight += player_weights.get(player, initialWeight)
+		cumulative_weights.append(total_weight)
+	
+	# Pick a random number in the range of total weight
+	var rand_value = randi() % total_weight
+	
+	# Find the player corresponding to the random value
+	for i in range(cumulative_weights.size()):
+		if rand_value < cumulative_weights[i]:
+			return eligible_players[i]
+	
+	return eligible_players[0] # Fallback (should not occur)
