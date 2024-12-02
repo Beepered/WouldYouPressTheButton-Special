@@ -1,11 +1,18 @@
 extends Node
 
+@onready var text_file_path = "res://prompts.txt"
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+func _ready():
+	get_text_list(text_file_path)
 
+func get_text_file_content(filePath):
+	var file = FileAccess.open(filePath, FileAccess.READ)
+	var content = file.get_as_text()
+	return content
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func get_text_list(filePath):
+	var promptList = []
+	var file = FileAccess.open(filePath, FileAccess.READ)
+	while file.get_position() < file.get_length():
+		promptList.push_back(file.get_line())
+	return promptList

@@ -80,7 +80,7 @@ func start_voting_phase() -> void:
 		prompt.text = "%s, press or don't" % player
 		
 		# Set timer wait time and start
-		timer.wait_time = Global.voteTime# / Global.playerNames.size()
+		timer.wait_time = Global.voteTime
 		timer.start()
 
 		# Wait for the timer to finish
