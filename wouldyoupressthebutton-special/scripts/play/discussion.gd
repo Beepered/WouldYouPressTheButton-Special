@@ -41,7 +41,6 @@ func stage() -> void:
 		2: # Each player votes on the prompt
 			prompt.text = "Stage 1: Voting Round"
 			await start_voting_phase()
-			time = 0.0001
 		3: # Assign roles to players
 			assign_roles()
 			time = 5
@@ -51,7 +50,6 @@ func stage() -> void:
 		5: # Second voting round
 			prompt.text = "Stage 4: Final Voting Round"
 			await start_voting_phase()
-			time = 0.0001
 		6: # Scoring and preparation for the next round
 			calculate_scores()
 			currentRound += 1
@@ -87,7 +85,7 @@ func start_voting_phase() -> void:
 		prompt.text = "%s, press or don't" % player
 		
 		# Set timer wait time and start
-		timer.wait_time = Global.voteTime / Global.playerNames.size()
+		timer.wait_time = Global.voteTime
 		timer.start()
 
 		# Wait for the timer to finish

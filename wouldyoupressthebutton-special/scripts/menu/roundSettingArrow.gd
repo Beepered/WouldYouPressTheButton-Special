@@ -2,7 +2,7 @@ extends Sprite2D
 
 @export var change = 0
 
-var minRounds = 3;
+var minRounds = 1;
 var maxRounds = 20
 
 var mouseOver = false
