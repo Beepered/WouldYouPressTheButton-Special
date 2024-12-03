@@ -107,6 +107,7 @@ func start_voting_phase() -> void:
 	# Hide the voting button and stop the timer
 	voteButton.visible = false
 	timer.stop()
+	timer.emit_signal("timeout")
 	print("Voting phase complete. Total votes:", voteCount)
 
 func on_vote_button_pressed() -> void:
@@ -125,9 +126,12 @@ func on_vote_button_pressed() -> void:
 	hasVoted.append(currentPlayer)
 	voteButton.modulate = Color(0, 1, 0)
 	print("Player %s voted. Total votes: %d" % [currentPlayer, voteCount])
-
+	
 	# After voting, reset currentPlayer to null
 	currentPlayer = ""
+	timer.stop()
+	timer.emit_signal("timeout")
+	
 	
 func assign_roles() -> void:
 	# Weighted random selection for persuader

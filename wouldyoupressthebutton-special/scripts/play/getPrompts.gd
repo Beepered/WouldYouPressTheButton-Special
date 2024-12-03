@@ -2,9 +2,6 @@ extends Node
 
 @onready var text_file_path = "res://prompts.txt"
 
-func _ready():
-	get_text_list()
-
 func get_text_list():
 	var promptList = []
 	var file = FileAccess.open(text_file_path, FileAccess.READ)
