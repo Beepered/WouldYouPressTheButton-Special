@@ -10,6 +10,7 @@ extends CanvasLayer
 
 @export var voteButton: Button
 @export var initialWeight = 10 # Default weight for each player
+@onready var noButton = $"../NoButton"
 
 @export var rankTiddle: PackedScene
 
@@ -46,6 +47,9 @@ func _ready() -> void:
 	voteButton.visible = false
 	voteButton.connect("pressed", Callable(self, "on_vote_button_pressed"))
 	
+	noButton.visible = false
+	noButton.connect("pressed", Callable(self, "on_no_button_pressed"))
+	
 	#rankings()
 	stage()
 
@@ -65,7 +69,7 @@ func stage() -> void:
 			instructions.visible = false
 			chosenPrompt = prompts[currentRound - 1]
 			prompt.text = chosenPrompt
-			time = 3
+			time = 4
 		2: # Each player votes on the prompt
 			title.visible = true
 			title.text = "Stage 1: Voting Round"
@@ -109,6 +113,7 @@ func start_voting_phase() -> void:
 
 	# Show the voting button
 	voteButton.visible = true
+	noButton.visible = true
 	instructions.visible = true
 	prompt.text = chosenPrompt
 
@@ -118,7 +123,6 @@ func start_voting_phase() -> void:
 		currentPlayer = player # Set the current player
 		print("Player Turn:", player) # Debugging output
 		instructions.text = "%s, press or don't" % player
-		voteButton.modulate = Color(1, 0, 0)
 		
 		# Set timer wait time and start
 		timer.wait_time = Global.voteTime
@@ -130,6 +134,7 @@ func start_voting_phase() -> void:
 
 	# Hide the voting button and stop the timer
 	voteButton.visible = false
+	noButton.visible = false
 	timer.stop()
 	print("Voting phase complete. Total votes:", voteCount)
 
@@ -151,7 +156,6 @@ func on_vote_button_pressed() -> void:
 		finalVotes[currentPlayer] = 1
 	else:
 		initialVotes[currentPlayer] = 1
-	voteButton.modulate = Color(0, 1, 0)
 	print("Player %s voted. Total votes: %d" % [currentPlayer, voteCount])
 	
 	# After voting, reset currentPlayer to null
@@ -160,6 +164,14 @@ func on_vote_button_pressed() -> void:
 	timer.stop()
 	timer.emit_signal("timeout")
 	
+func on_no_button_pressed() -> void:
+	print("pressed")
+	if(stageNum == 2 || stageNum == 5):
+		currentPlayer = ""
+		timer.stop()
+		timer.emit_signal("timeout")
+	else:
+		print("why is this on?")
 	
 func assign_roles() -> void:
 	# Weighted random selection for persuader
@@ -177,7 +189,7 @@ func assign_roles() -> void:
 	player_weights[opposer] -= 2
 	
 	# Update prompt
-	prompt.text = "Prepare Yourselves: %s must convince to press\n%s must convince NOT to press!" % [persuader, opposer]
+	prompt.text = "Prepare Yourselves:\n%s must convince to press\n%s must convince NOT to press!" % [persuader, opposer]
 	instructions.visible = false
 
 func calculate_scores() -> void:
