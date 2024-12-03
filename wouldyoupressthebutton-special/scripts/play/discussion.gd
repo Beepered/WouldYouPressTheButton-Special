@@ -11,6 +11,8 @@ extends CanvasLayer
 @export var voteButton: Button
 @export var initialWeight = 10 # Default weight for each player
 
+@export var rankTiddle: PackedScene
+
 var player_weights = {}
 var stageNum = 1
 var currentRound = 1
@@ -44,8 +46,8 @@ func _ready() -> void:
 	voteButton.visible = false
 	voteButton.connect("pressed", Callable(self, "on_vote_button_pressed"))
 	
-	rankings()
-	#stage()
+	#rankings()
+	stage()
 
 func _process(_delta: float) -> void:
 	progressBar.value = (timer.time_left / timer.wait_time) * 100
@@ -286,8 +288,16 @@ func generate_ranking_list() -> void:
 
 func rankings():
 	var ranking = ""
+	var tiddle = rankTiddle.instantiate()
+	tiddle.position = Vector2(500, 450)
+	tiddle.get_node("bar").scale.y = get_viewport().size.y - 600
+	tiddle.get_node("score").text = "3"
+	tiddle.get_node("name").text = "boop"
+	add_child(tiddle)
+	
 	for name in Global.playerNames:
 		ranking += "%s: %d\n" % [name, points[name]]
+		# make sprite height = points / players
 	
 	# Display the ranking list
 	prompt.text = ranking

@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bxed8hhwxeufi"]
+[gd_scene load_steps=7 format=3 uid="uid://bxed8hhwxeufi"]
 
 [ext_resource type="PackedScene" uid="uid://c3fiwj01jj0ip" path="res://prefabs/prompt_reader.tscn" id="1_mfmib"]
 [ext_resource type="Script" path="res://scripts/play/discussion.gd" id="1_o8j0k"]
+[ext_resource type="PackedScene" uid="uid://db432jeviyawg" path="res://prefabs/tiddle.tscn" id="3_qt80k"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cwot8"]
 bg_color = Color(0.721569, 0, 0, 1)
@@ -17,7 +18,7 @@ bg_color = Color(1, 0.752197, 0.720927, 1)
 [node name="PromptReader" parent="." instance=ExtResource("1_mfmib")]
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
-offset_right = 1150.0
+offset_right = 1152.0
 offset_bottom = 40.0
 theme_override_styles/background = SubResource("StyleBoxFlat_cwot8")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3lfi2")
@@ -38,6 +39,7 @@ text = "PRESS"
 [node name="Discussion" type="CanvasLayer" parent="." node_paths=PackedStringArray("voteButton")]
 script = ExtResource("1_o8j0k")
 voteButton = NodePath("../Button")
+rankTiddle = ExtResource("3_qt80k")
 
 [node name="title" type="Label" parent="Discussion"]
 anchors_preset = -1
