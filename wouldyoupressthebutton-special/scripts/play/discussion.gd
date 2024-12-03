@@ -14,6 +14,9 @@ var roles_assigned = {}
 var voteCount = 0 # Total votes for the current voting phase
 var currentPlayer: String = "" # The player currently voting
 var hasVoted = [] # Tracks which players have voted
+var initialVotes = {} # Tracks players initial votes
+var finalVotes = {}
+var is_final_phase = false
 
 func _ready() -> void:
 	# Initialize player weights
@@ -36,12 +39,13 @@ func stage() -> void:
 	print("Stage Num:", stageNum)
 	match stageNum:
 		1: # Show the initial prompt
+			initialVotes.clear()
 			prompt.text = "Prompt: Would you press the button?"
 			time = 1
 		2: # Each player votes on the prompt
 			prompt.text = "Stage 1: Voting Round"
 			await start_voting_phase()
-			time = .0001
+			time = 1
 		3: # Assign roles to players
 			assign_roles()
 			time = 5
@@ -51,8 +55,10 @@ func stage() -> void:
 		5: # Second voting round
 			prompt.text = "Stage 4: Final Voting Round"
 			await start_voting_phase()
+			time = 1
 		6: # Scoring and preparation for the next round
-			calculate_scores()
+			await calculate_scores()
+			time = 3
 			currentRound += 1
 			if currentRound > Global.numRounds:
 				end_game()
@@ -60,12 +66,11 @@ func stage() -> void:
 			prompt.text = "Scoring Complete! Starting next round..."
 			time = 3 # Delay before next round
 			stageNum = 0 # Reset stage for the next round
-		_:
 			prompt.text = "Default Stage"
 			time = 2
 	stageNum += 1
 
-	timer.wait_time = time
+	timer.wait_time = max(time, 0.1)
 	timer.timeout.connect(Callable(self, "stage")) # Reconnect the signal
 	timer.start()
 
@@ -74,6 +79,8 @@ func start_voting_phase() -> void:
 	voteCount = 0
 	hasVoted.clear()
 	currentPlayer = "" # Reset the current player
+	
+	is_final_phase = stageNum == 5
 
 	# Show the voting button
 	voteButton.visible = true
@@ -92,6 +99,7 @@ func start_voting_phase() -> void:
 
 		# Wait for the timer to finish
 		await timer.timeout
+		
 
 	# Hide the voting button and stop the timer
 	voteButton.visible = false
@@ -112,6 +120,10 @@ func on_vote_button_pressed() -> void:
 	# Increment vote count and mark player as having voted
 	voteCount += 1
 	hasVoted.append(currentPlayer)
+	if is_final_phase:
+		finalVotes[currentPlayer] = 1
+	else:
+		initialVotes[currentPlayer] = 1
 	voteButton.modulate = Color(0, 1, 0)
 	print("Player %s voted. Total votes: %d" % [currentPlayer, voteCount])
 
@@ -139,6 +151,39 @@ func assign_roles() -> void:
 func calculate_scores() -> void:
 	# Placeholder for scoring logic
 	prompt.text = "Calculating scores..."
+	var pressVotes = 0
+	var dontPressVotes = 0
+	var changedVotes = {"Persuader": 0, "Opposer": 0}
+
+	# Count final votes and track changes
+	for player in Global.playerNames:
+		var initialVote = initialVotes.get(player, 0) # Default to 0 if not voted
+		var finalVote = finalVotes.get(player, 0) # Default to 0 if not voted
+		if finalVote:
+			pressVotes += 1
+		else:
+			dontPressVotes += 1
+
+		# Check if the vote changed
+		if initialVote != finalVote:
+			if finalVote:
+				changedVotes["Persuader"] += 1
+			else:
+				changedVotes["Opposer"] += 1
+
+	# Determine the winner
+	var winner = ""
+	if pressVotes > dontPressVotes:
+		winner = "Persuader"
+	elif dontPressVotes > pressVotes:
+		winner = "Opposer"
+
+	# Assign points
+
+	# Display results
+	prompt.text = "Press: %d, Don't Press: %d\nWinner: %s" % [
+		pressVotes, dontPressVotes, winner
+	]
 
 func end_game() -> void:
 	prompt.text = "Game Over! Thanks for playing!"
@@ -172,3 +217,4 @@ func weighted_random_pick(exclude: Array = []) -> String:
 			return eligible_players[i]
 	
 	return eligible_players[0] # Fallback (should not occur)
+	
