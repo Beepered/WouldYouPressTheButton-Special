@@ -142,6 +142,7 @@ func calculate_scores() -> void:
 
 func end_game() -> void:
 	prompt.text = "Game Over! Thanks for playing!"
+	generate_ranking_list()
 	timer.stop()
 
 func reset_player_weights() -> void:
@@ -172,3 +173,22 @@ func weighted_random_pick(exclude: Array = []) -> String:
 			return eligible_players[i]
 	
 	return eligible_players[0] # Fallback (should not occur)
+
+func generate_ranking_list() -> void:
+	# Sort players by their scores in descending order using a custom comparison function
+	var sorted_players = player_weights.keys()
+	sorted_players.sort_custom(Callable(self, "compare_scores"))
+	
+	# Generate the ranking list
+	var ranking_list = ""
+	for i in range(sorted_players.size()):
+		var player = sorted_players[i]
+		ranking_list += "%d. %s - %d\n" % [i + 1, player, player_weights[player]]
+	
+	# Display the ranking list
+	prompt.text = ranking_list
+	print(ranking_list)
+
+func compare_scores(a: String, b: String) -> int:
+	# Custom comparison function for sorting (descending order)
+	return player_weights[b] - player_weights[a]
