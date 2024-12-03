@@ -72,6 +72,14 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 40
 text = "Credits"
 
+[node name="Label3" type="Label" parent="CanvasLayer/main menu"]
+offset_left = 492.0
+offset_top = 562.0
+offset_right = 667.0
+offset_bottom = 613.0
+text = "5+ players required"
+horizontal_alignment = 1
+
 [node name="Settings" type="Node2D" parent="CanvasLayer"]
 
 [node name="background" type="Sprite2D" parent="CanvasLayer/Settings"]
