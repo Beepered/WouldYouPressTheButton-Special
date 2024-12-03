@@ -73,7 +73,6 @@ theme_override_font_sizes/font_size = 40
 text = "Credits"
 
 [node name="Settings" type="Node2D" parent="CanvasLayer"]
-visible = false
 
 [node name="background" type="Sprite2D" parent="CanvasLayer/Settings"]
 modulate = Color(0.444489, 0.638216, 0.721653, 1)
@@ -327,6 +326,17 @@ context_menu_enabled = false
 shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
+
+[node name="Warning" type="Label" parent="CanvasLayer/Settings/NumPlayers"]
+visible = false
+layout_mode = 0
+offset_left = 21.0
+offset_top = 383.0
+offset_right = 213.0
+offset_bottom = 409.0
+theme_override_colors/font_color = Color(0.956863, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "duplicate name found"
 
 [node name="PlayButton" type="Button" parent="CanvasLayer/Settings"]
 offset_left = 484.0
