@@ -58,7 +58,7 @@ func stage() -> void:
 			time = 1
 		6: # Scoring and preparation for the next round
 			await calculate_scores()
-			time = 3
+			time = 5
 			currentRound += 1
 			if currentRound > Global.numRounds:
 				end_game()
@@ -177,7 +177,7 @@ func calculate_scores() -> void:
 	# Assign points
 
 	# Display results
-	prompt.text = "Press: %d, Don't Press: %d\nWinner: %s" % [
+	prompt.text = "Pressed: %d, Didn't Press: %d\nWinner: %s" % [
 		pressVotes, dontPressVotes, winner
 	]
 
