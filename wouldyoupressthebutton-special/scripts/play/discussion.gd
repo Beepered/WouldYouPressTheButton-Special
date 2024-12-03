@@ -138,8 +138,8 @@ func assign_roles() -> void:
 	roles_assigned["Opposer"] = opposer
 	
 	# Update weights (decrease for selected players)
-	player_weights[persuader] -= 2.5
-	player_weights[opposer] -= 2.5
+	player_weights[persuader] -= 2
+	player_weights[opposer] -= 2
 	
 	# Update prompt
 	prompt.text = "%s must convince to press, %s must convince not to press!" % [persuader, opposer]
