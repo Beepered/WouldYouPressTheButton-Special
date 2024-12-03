@@ -43,7 +43,9 @@ func _ready() -> void:
 	# Initialize the voteButton
 	voteButton.visible = false
 	voteButton.connect("pressed", Callable(self, "on_vote_button_pressed"))
-	stage()
+	
+	rankings()
+	#stage()
 
 func _process(_delta: float) -> void:
 	progressBar.value = (timer.time_left / timer.wait_time) * 100
@@ -234,7 +236,8 @@ func calculate_scores() -> void:
 
 func end_game() -> void:
 	prompt.text = "Game Over! Thanks for playing!"
-	generate_ranking_list()
+	#generate_ranking_list()
+	rankings()
 	timer.stop()
 
 func reset_player_weights() -> void:
@@ -280,6 +283,14 @@ func generate_ranking_list() -> void:
 	# Display the ranking list
 	prompt.text = ranking_list
 	print(ranking_list)
+
+func rankings():
+	var ranking = ""
+	for name in Global.playerNames:
+		ranking += "%s: %d\n" % [name, points[name]]
+	
+	# Display the ranking list
+	prompt.text = ranking
 
 func compare_scores(a: String, b: String) -> int:
 	# Custom comparison function for sorting (descending order)
