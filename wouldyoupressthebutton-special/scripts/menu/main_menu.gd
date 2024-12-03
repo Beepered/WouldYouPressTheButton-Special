@@ -39,7 +39,12 @@ func _on_play_button_button_down() -> void:
 
 func checkNumPlayers(): # doesn't check if names are different if you want to do that
 	var count = 0
+	var nameList = []
 	for player_name in playerNames:
-		if(player_name.text != ""):
+		var name = player_name.text
+		if(name != ""):
+			if nameList.has(name):
+				return 0
 			count += 1
+		nameList.append(name)
 	return count

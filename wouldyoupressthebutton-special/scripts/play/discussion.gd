@@ -62,6 +62,7 @@ func stage() -> void:
 		5: # Second voting round
 			title.text = "Stage 4: Final Voting Round"
 			await start_voting_phase()
+			time = .0001
 		6: # Scoring and preparation for the next round
 			calculate_scores()
 			currentRound += 1
@@ -107,7 +108,6 @@ func start_voting_phase() -> void:
 	# Hide the voting button and stop the timer
 	voteButton.visible = false
 	timer.stop()
-	timer.emit_signal("timeout")
 	print("Voting phase complete. Total votes:", voteCount)
 
 func on_vote_button_pressed() -> void:
