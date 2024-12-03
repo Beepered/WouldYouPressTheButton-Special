@@ -63,11 +63,7 @@ func stage() -> void:
 			if currentRound > Global.numRounds:
 				end_game()
 				return
-			prompt.text = "Scoring Complete! Starting next round..."
-			time = 3 # Delay before next round
 			stageNum = 0 # Reset stage for the next round
-			prompt.text = "Default Stage"
-			time = 2
 	stageNum += 1
 
 	timer.wait_time = max(time, 0.1)
