@@ -301,19 +301,20 @@ func generate_ranking_list() -> void:
 func rankings():
 	var ranking = ""
 	
-	var amount = Global.playerNames.size()
-	for i in range(amount):
-		var tiddle = rankTiddle.instantiate()
-		var x = get_viewport().size.x / 2 - ((amount * 80) / 2) + i*80
-		tiddle.position = Vector2(x, 450)
-		tiddle.get_node("bar").scale.y = get_viewport().size.y - 500
-		tiddle.get_node("score").text = "3"
-		tiddle.get_node("name").text = "boop"
-		add_child(tiddle)
+	var maxTiddleHeight = get_viewport().size.y - 200
 	
+	var count = 0
 	for name in Global.playerNames:
 		ranking += "%s: %d\n" % [name, points[name]]
-		# make sprite height = points / players
+		# tiddle creation
+		var tiddle = rankTiddle.instantiate()
+		var x = get_viewport().size.x / 2 - ((Global.playerNames.size() * 90) / 2) + (count*90)
+		tiddle.position = Vector2(x, 450)
+		tiddle.get_node("bar").scale.y = maxTiddleHeight - (maxTiddleHeight - points[name] * 15)
+		tiddle.get_node("score").text = str(points[name])
+		tiddle.get_node("name").text = name
+		add_child(tiddle)
+		count += 1
 	
 	# Display the ranking list
 	prompt.text = ranking
