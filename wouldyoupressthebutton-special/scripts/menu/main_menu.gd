@@ -37,9 +37,17 @@ func _on_play_button_button_down() -> void:
 			Global.playerNames.push_back(player_name.text)
 	get_tree().change_scene_to_file("res://scenes/PlayScene.tscn")
 
-func checkNumPlayers(): # doesn't check if names are different if you want to do that
+@onready var warning = $CanvasLayer/Settings/NumPlayers/Warning
+func checkNumPlayers():
 	var count = 0
+	var nameList = []
 	for player_name in playerNames:
-		if(player_name.text != ""):
+		var name = player_name.text
+		if(name != ""):
+			if nameList.has(name):
+				warning.visible = true
+				return 0
 			count += 1
+		nameList.append(name)
+	warning.visible = false
 	return count

@@ -1,7 +1,10 @@
 extends CanvasLayer
 
+@onready var promptReader = $"../PromptReader"
+
 @onready var progressBar = $"../ProgressBar"
 @onready var timer = $Timer
+@onready var title = $title
 @onready var prompt = $prompt
 
 @export var voteButton: Button
@@ -18,7 +21,13 @@ var initialVotes = {} # Tracks players initial votes
 var finalVotes = {}
 var is_final_phase = false
 
+@onready var prompts = promptReader.get_text_list()
+
 func _ready() -> void:
+	# get randomized array of prompts
+	randomize()
+	prompts.shuffle()
+	
 	# Initialize player weights
 	reset_player_weights()
 	
@@ -39,21 +48,22 @@ func stage() -> void:
 	print("Stage Num:", stageNum)
 	match stageNum:
 		1: # Show the initial prompt
-			initialVotes.clear()
-			prompt.text = "Prompt: Would you press the button?"
-			time = 1
+			title.visible = false
+			prompt.text = prompts[currentRound - 1]
+			time = 2
 		2: # Each player votes on the prompt
-			prompt.text = "Stage 1: Voting Round"
+			title.visible = true
+			title.text = "Stage 1: Voting Round"
 			await start_voting_phase()
 			time = 1
 		3: # Assign roles to players
 			assign_roles()
 			time = 5
 		4: # Discussion phase
-			prompt.text = "Stage 3: Discussion Phase"
+			title.text = "Stage 3: Discussion Phase"
 			time = Global.discussTime
 		5: # Second voting round
-			prompt.text = "Stage 4: Final Voting Round"
+			title.text = "Stage 4: Final Voting Round"
 			await start_voting_phase()
 			time = 1
 		6: # Scoring and preparation for the next round
@@ -122,9 +132,12 @@ func on_vote_button_pressed() -> void:
 		initialVotes[currentPlayer] = 1
 	voteButton.modulate = Color(0, 1, 0)
 	print("Player %s voted. Total votes: %d" % [currentPlayer, voteCount])
-
+	
 	# After voting, reset currentPlayer to null
 	currentPlayer = ""
+	timer.stop()
+	timer.emit_signal("timeout")
+	
 	
 func assign_roles() -> void:
 	# Weighted random selection for persuader
