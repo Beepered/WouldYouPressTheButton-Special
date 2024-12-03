@@ -1,7 +1,10 @@
 extends CanvasLayer
 
+@onready var promptReader = $"../PromptReader"
+
 @onready var progressBar = $"../ProgressBar"
 @onready var timer = $Timer
+@onready var title = $title
 @onready var prompt = $prompt
 
 @export var voteButton: Button
@@ -15,7 +18,13 @@ var voteCount = 0 # Total votes for the current voting phase
 var currentPlayer: String = "" # The player currently voting
 var hasVoted = [] # Tracks which players have voted
 
+@onready var prompts = promptReader.get_text_list()
+
 func _ready() -> void:
+	# get randomized array of prompts
+	randomize()
+	prompts.shuffle()
+	
 	# Initialize player weights
 	reset_player_weights()
 	
@@ -36,20 +45,22 @@ func stage() -> void:
 	print("Stage Num:", stageNum)
 	match stageNum:
 		1: # Show the initial prompt
-			prompt.text = "Prompt: Would you press the button?"
-			time = 1
+			title.visible = false
+			prompt.text = prompts[currentRound - 1]
+			time = 2
 		2: # Each player votes on the prompt
-			prompt.text = "Stage 1: Voting Round"
+			title.visible = true
+			title.text = "Stage 1: Voting Round"
 			await start_voting_phase()
 			time = .0001
 		3: # Assign roles to players
 			assign_roles()
 			time = 5
 		4: # Discussion phase
-			prompt.text = "Stage 3: Discussion Phase"
+			title.text = "Stage 3: Discussion Phase"
 			time = Global.discussTime
 		5: # Second voting round
-			prompt.text = "Stage 4: Final Voting Round"
+			title.text = "Stage 4: Final Voting Round"
 			await start_voting_phase()
 		6: # Scoring and preparation for the next round
 			calculate_scores()
@@ -57,11 +68,11 @@ func stage() -> void:
 			if currentRound > Global.numRounds:
 				end_game()
 				return
-			prompt.text = "Scoring Complete! Starting next round..."
+			title.text = "Scoring Complete! Starting next round..."
 			time = 3 # Delay before next round
 			stageNum = 0 # Reset stage for the next round
 		_:
-			prompt.text = "Default Stage"
+			title.text = "Default Stage"
 			time = 2
 	stageNum += 1
 

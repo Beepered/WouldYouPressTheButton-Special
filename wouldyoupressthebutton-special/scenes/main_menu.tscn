@@ -73,6 +73,7 @@ theme_override_font_sizes/font_size = 40
 text = "Credits"
 
 [node name="Settings" type="Node2D" parent="CanvasLayer"]
+visible = false
 
 [node name="background" type="Sprite2D" parent="CanvasLayer/Settings"]
 modulate = Color(0.444489, 0.638216, 0.721653, 1)
