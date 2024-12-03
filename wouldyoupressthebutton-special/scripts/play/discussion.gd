@@ -50,8 +50,7 @@ func _ready() -> void:
 	noButton.visible = false
 	noButton.connect("pressed", Callable(self, "on_no_button_pressed"))
 	
-	rankings()
-	#stage()
+	stage()
 
 func _process(_delta: float) -> void:
 	progressBar.value = (timer.time_left / timer.wait_time) * 100
@@ -165,7 +164,6 @@ func on_vote_button_pressed() -> void:
 	timer.emit_signal("timeout")
 	
 func on_no_button_pressed() -> void:
-	print("pressed")
 	if(stageNum == 2 || stageNum == 5):
 		currentPlayer = ""
 		timer.stop()
@@ -302,10 +300,10 @@ func rankings():
 	var ranking = ""
 	
 	var maxTiddleHeight = get_viewport().size.y - 200
-	
+
 	var count = 0
 	for name in Global.playerNames:
-		ranking += "%s: %d\n" % [name, points[name]]
+		#ranking += "%s: %d\n" % [name, points[name]] #hiding this because I don't like it
 		# tiddle creation
 		var tiddle = rankTiddle.instantiate()
 		var x = get_viewport().size.x / 2 - ((Global.playerNames.size() * 90) / 2) + (count*90)
