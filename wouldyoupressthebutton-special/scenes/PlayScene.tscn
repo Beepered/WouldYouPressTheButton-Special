@@ -9,8 +9,8 @@ bg_color = Color(0.721569, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3lfi2"]
 bg_color = Color(1.92523e-06, 0.698328, 0.307629, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nmgo1"]
-bg_color = Color(0.992965, 0.362527, 0.163437, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lwrul"]
+bg_color = Color(1, 0.752197, 0.720927, 1)
 
 [node name="PlayScene" type="Node2D"]
 
@@ -26,11 +26,13 @@ show_percentage = false
 
 [node name="Button" type="Button" parent="."]
 offset_left = 505.0
-offset_top = 337.0
+offset_top = 412.0
 offset_right = 641.0
-offset_bottom = 454.0
+offset_bottom = 529.0
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxFlat_nmgo1")
+theme_override_styles/normal = SubResource("StyleBoxFlat_lwrul")
 text = "PRESS"
 
 [node name="Discussion" type="CanvasLayer" parent="." node_paths=PackedStringArray("voteButton")]
@@ -53,13 +55,25 @@ autowrap_mode = 2
 
 [node name="prompt" type="Label" parent="Discussion"]
 offset_left = 110.0
-offset_top = 117.0
+offset_top = 107.0
 offset_right = 1028.0
-offset_bottom = 284.0
+offset_bottom = 274.0
 theme_override_font_sizes/font_size = 30
-text = "Prompt"
+text = "prompt"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="instructions" type="Label" parent="Discussion"]
+offset_left = 170.0
+offset_top = 282.0
+offset_right = 970.0
+offset_bottom = 352.0
+theme_override_font_sizes/font_size = 20
+text = "instructions"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="Timer" type="Timer" parent="Discussion"]
 one_shot = true

@@ -6,6 +6,7 @@ extends CanvasLayer
 @onready var timer = $Timer
 @onready var title = $title
 @onready var prompt = $prompt
+@onready var instructions = $instructions
 
 @export var voteButton: Button
 @export var initialWeight = 10 # Default weight for each player
@@ -21,6 +22,10 @@ var initialVotes = {} # Tracks players initial votes
 var finalVotes = {}
 var is_final_phase = false
 
+var chosenPrompt
+var persuader; var opposer
+var points = {} # ex: [a:2, b:0, c:1, d:5, e:2], just need the player's indicies to give points
+
 @onready var prompts = promptReader.get_text_list()
 
 func _ready() -> void:
@@ -30,6 +35,10 @@ func _ready() -> void:
 	
 	# Initialize player weights
 	reset_player_weights()
+	
+	# Initialize points array
+	for i in Global.playerNames:
+		points[i] = 0
 	
 	# Initialize the voteButton
 	voteButton.visible = false
@@ -49,18 +58,23 @@ func stage() -> void:
 	match stageNum:
 		1: # Show the initial prompt
 			title.visible = false
-			prompt.text = prompts[currentRound - 1]
-			time = 2
+			instructions.visible = false
+			chosenPrompt = prompts[currentRound - 1]
+			prompt.text = chosenPrompt
+			time = 3
 		2: # Each player votes on the prompt
 			title.visible = true
 			title.text = "Stage 1: Voting Round"
 			await start_voting_phase()
 			time = 1
 		3: # Assign roles to players
+			title.text = "Stage 2: Becoming Czar"
 			assign_roles()
-			time = 5
+			time = 6
 		4: # Discussion phase
 			title.text = "Stage 3: Discussion Phase"
+			instructions.visible = true
+			instructions.text = chosenPrompt
 			time = Global.discussTime
 		5: # Second voting round
 			title.text = "Stage 4: Final Voting Round"
@@ -90,13 +104,15 @@ func start_voting_phase() -> void:
 
 	# Show the voting button
 	voteButton.visible = true
+	instructions.visible = true
+	prompt.text = chosenPrompt
 
 	# Each player votes in turn
 	for i in range(Global.playerNames.size()):
 		var player = Global.playerNames[i]
 		currentPlayer = player # Set the current player
 		print("Player Turn:", player) # Debugging output
-		prompt.text = "%s, press or don't" % player
+		instructions.text = "%s, press or don't" % player
 		voteButton.modulate = Color(1, 0, 0)
 		
 		# Set timer wait time and start
@@ -141,10 +157,10 @@ func on_vote_button_pressed() -> void:
 	
 func assign_roles() -> void:
 	# Weighted random selection for persuader
-	var persuader = weighted_random_pick()
+	persuader = weighted_random_pick()
 	
 	# Weighted random selection for opposer (ensure it's not the same as persuader)
-	var opposer = weighted_random_pick([persuader])
+	opposer = weighted_random_pick([persuader])
 	
 	# Assign roles
 	roles_assigned["Persuader"] = persuader
@@ -155,7 +171,8 @@ func assign_roles() -> void:
 	player_weights[opposer] -= 2
 	
 	# Update prompt
-	prompt.text = "%s must convince to press, %s must convince not to press!" % [persuader, opposer]
+	prompt.text = "%s must convince to press\n%s must convince not to press!" % [persuader, opposer]
+	instructions.visible = false
 
 func calculate_scores() -> void:
 	# Placeholder for scoring logic
@@ -163,6 +180,8 @@ func calculate_scores() -> void:
 	var pressVotes = 0
 	var dontPressVotes = 0
 	var changedVotes = {"Persuader": 0, "Opposer": 0}
+	
+	instructions.visible = false
 
 	# Count final votes and track changes
 	for player in Global.playerNames:
@@ -183,11 +202,12 @@ func calculate_scores() -> void:
 	# Determine the winner
 	var winner = ""
 	if pressVotes > dontPressVotes:
-		winner = "Persuader"
+		winner = persuader
 	elif dontPressVotes > pressVotes:
-		winner = "Opposer"
+		winner = opposer
 
 	# Assign points
+	points[winner] += 1; # but more
 
 	# Display results
 	prompt.text = "Pressed: %d, Didn't Press: %d\nWinner: %s" % [
