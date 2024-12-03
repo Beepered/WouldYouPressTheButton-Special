@@ -53,9 +53,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 451.0
-offset_top = 324.0
+offset_top = 300.0
 offset_right = 701.0
-offset_bottom = 404.0
+offset_bottom = 380.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 40
 text = "Play"
@@ -65,22 +65,24 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 451.0
-offset_top = 434.0
+offset_top = 410.0
 offset_right = 701.0
-offset_bottom = 514.0
+offset_bottom = 490.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 40
 text = "Credits"
 
 [node name="Label3" type="Label" parent="CanvasLayer/main menu"]
 offset_left = 492.0
-offset_top = 562.0
+offset_top = 538.0
 offset_right = 667.0
-offset_bottom = 613.0
+offset_bottom = 589.0
+theme_override_font_sizes/font_size = 20
 text = "5+ players required"
 horizontal_alignment = 1
 
 [node name="Settings" type="Node2D" parent="CanvasLayer"]
+visible = false
 
 [node name="background" type="Sprite2D" parent="CanvasLayer/Settings"]
 modulate = Color(0.444489, 0.638216, 0.721653, 1)

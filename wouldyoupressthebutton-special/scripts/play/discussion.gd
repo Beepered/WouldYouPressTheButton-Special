@@ -70,11 +70,12 @@ func stage() -> void:
 		3: # Assign roles to players
 			title.text = "Stage 2: Becoming Czar"
 			assign_roles()
-			time = 6
+			time = 5
 		4: # Discussion phase
 			title.text = "Stage 3: Discussion Phase"
 			instructions.visible = true
 			instructions.text = chosenPrompt
+			prompt.text = "%s convince to press\n%s convince NOT to press!" % [persuader, opposer]
 			time = Global.discussTime
 		5: # Second voting round
 			title.text = "Stage 4: Final Voting Round"
@@ -82,7 +83,7 @@ func stage() -> void:
 			time = 1
 		6: # Scoring and preparation for the next round
 			await calculate_scores()
-			time = 5
+			time = 3
 			currentRound += 1
 			if currentRound > Global.numRounds:
 				end_game()
@@ -151,6 +152,7 @@ func on_vote_button_pressed() -> void:
 	
 	# After voting, reset currentPlayer to null
 	currentPlayer = ""
+	
 	timer.stop()
 	timer.emit_signal("timeout")
 	
@@ -171,7 +173,7 @@ func assign_roles() -> void:
 	player_weights[opposer] -= 2
 	
 	# Update prompt
-	prompt.text = "%s must convince to press\n%s must convince not to press!" % [persuader, opposer]
+	prompt.text = "Prepare Yourselves: %s must convince to press\n%s must convince NOT to press!" % [persuader, opposer]
 	instructions.visible = false
 
 func calculate_scores() -> void:
@@ -207,7 +209,23 @@ func calculate_scores() -> void:
 		winner = opposer
 
 	# Assign points
-	points[winner] += 1; # but more
+	for i in Global.playerNames:
+		print(i)
+		var firstVote: bool = initialVotes.has(i)
+		var secondVote: bool = finalVotes.has(i)
+		if(firstVote == secondVote): # no change
+			print("no change")
+			if(secondVote):
+				print("persuaded")
+				points[persuader] += 1
+			elif(!secondVote):
+				print("opposed")
+				points[opposer] += 1
+		elif(!firstVote && secondVote):
+			points[persuader] += 2
+		elif(firstVote && !secondVote):
+			points[opposer] += 2
+	print(points)
 
 	# Display results
 	prompt.text = "Pressed: %d, Didn't Press: %d\nWinner: %s" % [
