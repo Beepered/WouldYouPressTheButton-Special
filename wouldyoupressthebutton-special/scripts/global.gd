@@ -4,7 +4,7 @@
 extends Node
 
 var numRounds = 5
-var discussTime = 20
+var discussTime = 30
 var voteTime = 5
 
 var playerNames = []
