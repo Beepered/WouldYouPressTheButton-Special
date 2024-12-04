@@ -4,13 +4,16 @@ extends CanvasLayer
 
 @onready var progressBar = $"../ProgressBar"
 @onready var timer = $Timer
-@onready var title = $title
-@onready var prompt = $prompt
-@onready var instructions = $instructions
+@onready var title = $"../title"
+@onready var prompt = $"../prompt"
+@onready var instructions = $"../instructions"
 
-@export var voteButton: Button
+@onready var skipButton = $SkipButton
+
+@onready var voteCanvas = $"../Voting"
+@onready var voteButton = $"../Voting/YesButton"
+@onready var noButton = $"../Voting/NoButton"
 @export var initialWeight = 10 # Default weight for each player
-@onready var noButton = $"../NoButton"
 
 @export var rankTiddle: PackedScene
 
@@ -18,16 +21,16 @@ var player_weights = {}
 var stageNum = 1
 var currentRound = 1
 var roles_assigned = {}
-var voteCount = 0 # Total votes for the current voting phase
-var currentPlayer: String = "" # The player currently voting
-var hasVoted = [] # Tracks which players have voted
+var voteCount = 0 # Brendan: this can just be hasVoted.size()
+var currentPlayer: String = ""
+var hasVoted = []
 var initialVotes = {} # Tracks players initial votes
 var finalVotes = {}
 var is_final_phase = false
 
 var chosenPrompt
 var persuader; var opposer
-var points = {} # ex: [a:2, b:0, c:1, d:5, e:2], just need the player's indicies to give points
+var points = {} # ex: {a:2, b:0, c:1, d:5, e:2}
 
 @onready var prompts = promptReader.get_text_list()
 
@@ -43,11 +46,12 @@ func _ready() -> void:
 	for i in Global.playerNames:
 		points[i] = 0
 	
-	# Initialize the voteButton
-	voteButton.visible = false
+	# Initialize the buttons
+	skipButton.visible = false
+	skipButton.connect("pressed", Callable(self, "on_skip_button_pressed"))
+
+	voteCanvas.visible = false
 	voteButton.connect("pressed", Callable(self, "on_vote_button_pressed"))
-	
-	noButton.visible = false
 	noButton.connect("pressed", Callable(self, "on_no_button_pressed"))
 	
 	stage()
@@ -83,9 +87,11 @@ func stage() -> void:
 			instructions.visible = true
 			instructions.text = chosenPrompt
 			prompt.text = "%s convince to press\n%s convince NOT to press!" % [persuader, opposer]
+			skipButton.visible = true
 			time = Global.discussTime
 		5: # Second voting round
 			title.text = "Stage 4: Final Voting Round"
+			skipButton.visible = false
 			await start_voting_phase()
 			time = 1
 		6: # Scoring and preparation for the next round
@@ -110,9 +116,8 @@ func start_voting_phase() -> void:
 	
 	is_final_phase = stageNum == 5
 
-	# Show the voting button
-	voteButton.visible = true
-	noButton.visible = true
+	# Show the voting canvas
+	voteCanvas.visible = true
 	instructions.visible = true
 	prompt.text = chosenPrompt
 
@@ -132,8 +137,7 @@ func start_voting_phase() -> void:
 		
 
 	# Hide the voting button and stop the timer
-	voteButton.visible = false
-	noButton.visible = false
+	voteCanvas.visible = false
 	timer.stop()
 	print("Voting phase complete. Total votes:", voteCount)
 
@@ -189,6 +193,10 @@ func assign_roles() -> void:
 	# Update prompt
 	prompt.text = "Prepare Yourselves:\n%s must convince to press\n%s must convince NOT to press!" % [persuader, opposer]
 	instructions.visible = false
+
+func on_skip_button_pressed():
+	timer.stop()
+	timer.emit_signal("timeout")
 
 func calculate_scores() -> void:
 	# Placeholder for scoring logic
@@ -304,7 +312,6 @@ func rankings():
 	var count = 0
 	for name in Global.playerNames:
 		#ranking += "%s: %d\n" % [name, points[name]] #hiding this because I don't like it
-		# tiddle creation
 		var tiddle = rankTiddle.instantiate()
 		var x = get_viewport().size.x / 2 - ((Global.playerNames.size() * 90) / 2) + (count*90)
 		tiddle.position = Vector2(x, 450)
