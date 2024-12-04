@@ -24,12 +24,20 @@ func _on_setting_button_button_down() -> void:
 	$CanvasLayer/Settings.visible = true;
 
 func _on_credits_button_down() -> void:
+	mainMenu.visible = false
 	$CanvasLayer/Credits.visible = true;
+	
+
+func _on_instructions_button_down() -> void:
+	mainMenu.visible = false
+	$CanvasLayer/Instructions.visible = true;
+
 	
 func _on_back_button_button_down() -> void:
 	mainMenu.visible = true
 	$CanvasLayer/Settings.visible = false;
 	$CanvasLayer/Credits.visible = false;
+	$CanvasLayer/Instructions.visible = false;
 
 func _on_play_button_button_down() -> void:
 	for player_name in playerNames:

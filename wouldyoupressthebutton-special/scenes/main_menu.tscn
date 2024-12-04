@@ -38,9 +38,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 508.5
-offset_top = 177.0
+offset_top = 171.0
 offset_right = 643.5
-offset_bottom = 232.0
+offset_bottom = 226.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 40
@@ -53,9 +53,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 451.0
-offset_top = 300.0
+offset_top = 240.0
 offset_right = 701.0
-offset_bottom = 380.0
+offset_bottom = 320.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 40
 text = "Play"
@@ -65,9 +65,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 451.0
-offset_top = 410.0
+offset_top = 435.0
 offset_right = 701.0
-offset_bottom = 490.0
+offset_bottom = 515.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 40
 text = "Credits"
@@ -80,6 +80,15 @@ offset_bottom = 589.0
 theme_override_font_sizes/font_size = 20
 text = "5+ players required"
 horizontal_alignment = 1
+
+[node name="Instructions" type="Button" parent="CanvasLayer/main menu"]
+custom_minimum_size = Vector2(250, 80)
+offset_left = 451.0
+offset_top = 336.0
+offset_right = 701.0
+offset_bottom = 416.0
+theme_override_font_sizes/font_size = 40
+text = "Instructions"
 
 [node name="Settings" type="Node2D" parent="CanvasLayer"]
 visible = false
@@ -398,8 +407,38 @@ offset_bottom = 150.0
 theme_override_font_sizes/font_size = 25
 text = "Back"
 
+[node name="Instructions" type="Node2D" parent="CanvasLayer"]
+visible = false
+
+[node name="background" type="Sprite2D" parent="CanvasLayer/Instructions"]
+modulate = Color(0.444489, 0.638216, 0.721653, 1)
+position = Vector2(588, 309.25)
+scale = Vector2(900, 470)
+texture = ExtResource("1_1bg67")
+
+[node name="BackButton" type="Button" parent="CanvasLayer/Instructions"]
+offset_left = 180.0
+offset_top = 100.0
+offset_right = 300.0
+offset_bottom = 150.0
+theme_override_font_sizes/font_size = 25
+text = "Back"
+
+[node name="TextEdit" type="TextEdit" parent="CanvasLayer/Instructions"]
+offset_left = 241.0
+offset_top = 197.0
+offset_right = 928.0
+offset_bottom = 478.0
+text = "How to play:
+A prompt will be displayed that will give the players the choice of either pressing the button or not.
+Next, one player will be assigned to argue why the other players SHOULD press the button meanwhile another player will be assinged to argue why other players SHOULDN'T press the button.
+Points will be awarded to the player who can convince the most other players to vote for what they are arguing for.
+Each player will get one turn opposing the prompt and one turn advocating for the prompt."
+wrap_mode = 1
+
 [connection signal="button_down" from="CanvasLayer/main menu/SettingButton" to="." method="_on_setting_button_button_down"]
 [connection signal="button_down" from="CanvasLayer/main menu/Credits Button" to="." method="_on_credits_button_down"]
+[connection signal="button_down" from="CanvasLayer/main menu/Instructions" to="." method="_on_instructions_button_down"]
 [connection signal="button_down" from="CanvasLayer/Settings/BackButton" to="." method="_on_back_button_button_down"]
 [connection signal="mouse_entered" from="CanvasLayer/Settings/Rounds/decrease/Area2D" to="CanvasLayer/Settings/Rounds/decrease" method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/Settings/Rounds/decrease/Area2D" to="CanvasLayer/Settings/Rounds/decrease" method="_on_area_2d_mouse_exited"]
@@ -415,3 +454,4 @@ text = "Back"
 [connection signal="mouse_exited" from="CanvasLayer/Settings/VotingTime/increase/Area2D" to="CanvasLayer/Settings/VotingTime/increase" method="_on_area_2d_mouse_exited"]
 [connection signal="button_down" from="CanvasLayer/Settings/PlayButton" to="." method="_on_play_button_button_down"]
 [connection signal="button_down" from="CanvasLayer/Credits/BackButton" to="." method="_on_back_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/Instructions/BackButton" to="." method="_on_back_button_button_down"]
