@@ -17,6 +17,8 @@ extends CanvasLayer
 
 @export var rankTiddle: PackedScene
 
+
+var numRounds = 2*(Global.playerNames.size())
 var player_weights = {}
 var stageNum = 1
 var currentRound = 1
@@ -38,7 +40,7 @@ func _ready() -> void:
 	# get randomized array of prompts
 	randomize()
 	prompts.shuffle()
-	
+	print(numRounds)
 	# Initialize player weights
 	reset_player_weights()
 	
@@ -98,7 +100,7 @@ func stage() -> void:
 			await calculate_scores()
 			time = 3
 			currentRound += 1
-			if currentRound > Global.numRounds:
+			if currentRound > numRounds:
 				end_game()
 				return
 			stageNum = 0 # Reset stage for the next round
