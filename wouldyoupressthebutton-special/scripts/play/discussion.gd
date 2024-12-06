@@ -26,9 +26,8 @@ var roles_assigned = {}
 var voteCount = 0 # Brendan: this can just be hasVoted.size()
 var currentPlayer: String = ""
 var hasVoted = []
-var initialVotes = {} # Tracks players initial votes
+#var initialVotes = {} # Tracks players initial votes
 var finalVotes = {}
-var is_final_phase = false
 
 var chosenPrompt
 var persuader; var opposer
@@ -75,29 +74,36 @@ func stage() -> void:
 			chosenPrompt = prompts[currentRound - 1]
 			prompt.text = chosenPrompt
 			time = 4
-		2: # Each player votes on the prompt
-			title.visible = true
-			title.text = "Stage 1: Voting Round"
-			await start_voting_phase()
-			time = 1
-		3: # Assign roles to players
+		# 2: # Each player votes on the prompt
+		# 	title.visible = true
+		# 	title.text = "Stage 1: Voting Round"
+		# 	await start_voting_phase()
+		# 	time = 1
+		2: # Assign roles to players
 			title.text = "Stage 2: Becoming Czar"
 			assign_roles()
 			time = 5
-		4: # Discussion phase
+		3: # Discussion phase
 			title.text = "Stage 3: Discussion Phase"
 			instructions.visible = true
 			instructions.text = chosenPrompt
-			prompt.text = "%s convince to press\n%s convince NOT to press!" % [persuader, opposer]
+			prompt.text = "%s, convince people to press" % [persuader]
 			skipButton.visible = true
 			time = Global.discussTime
-		5: # Second voting round
+		4:
+			title.text = "Stage 3: Discussion Phase 2"
+			instructions.visible = true
+			instructions.text = chosenPrompt
+			prompt.text = "%s, convince people NOT to press!" % [opposer]
+			skipButton.visible = true
+			time = Global.discussTime
+		5: # Only one voting stage
 			title.text = "Stage 4: Final Voting Round"
 			skipButton.visible = false
 			await start_voting_phase()
 			time = 1
 		6: # Scoring and preparation for the next round
-			await calculate_scores()
+			calculate_scores()
 			time = 3
 			currentRound += 1
 			if currentRound > numRounds:
@@ -115,8 +121,6 @@ func start_voting_phase() -> void:
 	voteCount = 0
 	hasVoted.clear()
 	currentPlayer = "" # Reset the current player
-	
-	is_final_phase = stageNum == 5
 
 	# Show the voting canvas
 	voteCanvas.visible = true
@@ -127,6 +131,8 @@ func start_voting_phase() -> void:
 	for i in range(Global.playerNames.size()):
 		var player = Global.playerNames[i]
 		currentPlayer = player # Set the current player
+		if currentPlayer == persuader or player == opposer:
+			continue
 		print("Player Turn:", player) # Debugging output
 		instructions.text = "%s, press or don't" % player
 		
@@ -157,10 +163,7 @@ func on_vote_button_pressed() -> void:
 	# Increment vote count and mark player as having voted
 	voteCount += 1
 	hasVoted.append(currentPlayer)
-	if is_final_phase:
-		finalVotes[currentPlayer] = 1
-	else:
-		initialVotes[currentPlayer] = 1
+	finalVotes[currentPlayer] = 1
 	print("Player %s voted. Total votes: %d" % [currentPlayer, voteCount])
 	
 	# After voting, reset currentPlayer to null
@@ -205,25 +208,18 @@ func calculate_scores() -> void:
 	prompt.text = "Calculating scores..."
 	var pressVotes = 0
 	var dontPressVotes = 0
-	var changedVotes = {"Persuader": 0, "Opposer": 0}
 	
 	instructions.visible = false
 
 	# Count final votes and track changes
 	for player in Global.playerNames:
-		var initialVote = initialVotes.get(player, 0) # Default to 0 if not voted
+		if player == persuader or player == opposer:
+			continue
 		var finalVote = finalVotes.get(player, 0) # Default to 0 if not voted
 		if finalVote:
 			pressVotes += 1
 		else:
 			dontPressVotes += 1
-
-		# Check if the vote changed
-		if initialVote != finalVote:
-			if finalVote:
-				changedVotes["Persuader"] += 1
-			else:
-				changedVotes["Opposer"] += 1
 
 	# Determine the winner
 	var winner = ""
@@ -231,25 +227,8 @@ func calculate_scores() -> void:
 		winner = persuader
 	elif dontPressVotes > pressVotes:
 		winner = opposer
-
-	# Assign points
-	for i in Global.playerNames:
-		print(i)
-		var firstVote: bool = initialVotes.has(i)
-		var secondVote: bool = finalVotes.has(i)
-		if(firstVote == secondVote): # no change
-			print("no change")
-			if(secondVote):
-				print("persuaded")
-				points[persuader] += 1
-			elif(!secondVote):
-				print("opposed")
-				points[opposer] += 1
-		elif(!firstVote && secondVote):
-			points[persuader] += 2
-		elif(firstVote && !secondVote):
-			points[opposer] += 2
-	print(points)
+	else:
+		winner = "Tie"
 
 	# Display results
 	prompt.text = "Pressed: %d, Didn't Press: %d\nWinner: %s" % [
