@@ -13,7 +13,6 @@ extends CanvasLayer
 @onready var voteCanvas = $"../Voting"
 @onready var voteButton = $"../Voting/YesButton"
 @onready var noButton = $"../Voting/NoButton"
-@export var initialWeight = 10 # Default weight for each player
 
 @export var rankTiddle: PackedScene
 
@@ -26,6 +25,7 @@ var roles_assigned = {}
 var currentPlayer: String = ""
 var hasVoted = []
 var finalVotes = {}
+var current_role_index = 0 # Tracks the next player to assign a role
 
 var chosenPrompt
 var persuader; var opposer
@@ -34,16 +34,9 @@ var points = {} # ex: {a:2, b:0, c:1, d:5, e:2}
 @onready var prompts = promptReader.get_text_list()
 
 func _ready() -> void:
-	# get randomized array of prompts
-	randomize()
-	prompts.shuffle()
-	print(numRounds)
-	# Initialize player weights
-	reset_player_weights()
-	
 	# Initialize points array
-	for i in Global.playerNames:
-		points[i] = 0
+	for player in Global.playerNames:
+		points[player] = 0
 	
 	# Initialize the buttons
 	skipButton.visible = false
@@ -52,6 +45,10 @@ func _ready() -> void:
 	voteCanvas.visible = false
 	voteButton.connect("pressed", Callable(self, "on_vote_button_pressed"))
 	noButton.connect("pressed", Callable(self, "on_no_button_pressed"))
+	
+	# Shuffle prompts
+	randomize()
+	prompts.shuffle()
 	
 	stage()
 
@@ -168,24 +165,18 @@ func on_no_button_pressed() -> void:
 	timer.emit_signal("timeout")
 
 func assign_roles() -> void:
-	# Weighted random selection for persuader
-	persuader = weighted_random_pick()
-	
-	# Weighted random selection for opposer (ensure it's not the same as persuader)
-	opposer = weighted_random_pick([persuader])
+	# Assign roles sequentially
+	persuader = Global.playerNames[current_role_index]
+	current_role_index = (current_role_index + 1) % Global.playerNames.size()
+	opposer = Global.playerNames[current_role_index]
+	current_role_index = (current_role_index + 1) % Global.playerNames.size()
 	
 	# Assign roles
 	roles_assigned["Persuader"] = persuader
 	roles_assigned["Opposer"] = opposer
 	
-	# Update weights (decrease for selected players)
-	player_weights[persuader] -= 2
-	player_weights[opposer] -= 2
-	
 	# Update prompt
-	prompt.text = "Prepare Yourselves:\n
-		%s must convince the group to press the button\n
-		%s must convince the group NOT to press the button" % [persuader, opposer]
+	prompt.text = "Prepare Yourselves:\n%s must convince the group to press the button\n%s must convince the group NOT to press the button" % [persuader, opposer]
 
 func on_skip_button_pressed():
 	timer.stop()
@@ -230,48 +221,19 @@ func end_game() -> void:
 	rankings()
 	timer.stop()
 
-func reset_player_weights() -> void:
-	# Reset all player weights to the initial weight
-	for player in Global.playerNames:
-		player_weights[player] = initialWeight
-
-func weighted_random_pick(exclude: Array = []) -> String:
-	# Filter eligible players manually
-	var eligible_players = []
-	for player in Global.playerNames:
-		if not exclude.has(player):
-			eligible_players.append(player)
-	
-	# Create a cumulative weight list
-	var total_weight = 0
-	var cumulative_weights = []
-	for player in eligible_players:
-		total_weight += player_weights.get(player, initialWeight)
-		cumulative_weights.append(total_weight)
-	
-	# Pick a random number in the range of total weight
-	var rand_value = randi() % total_weight
-	
-	# Find the player corresponding to the random value
-	for i in range(cumulative_weights.size()):
-		if rand_value < cumulative_weights[i]:
-			return eligible_players[i]
-	
-	return eligible_players[0] # Fallback (should not occur)
-
 func rankings():
 	var ranking = ""
 	
 	var maxTiddleHeight = get_viewport().size.y - 200
 
 	var count = 0
-	for name in Global.playerNames:
+	for player_name in Global.playerNames:
 		var tiddle = rankTiddle.instantiate()
 		var x = get_viewport().size.x / 2 - ((Global.playerNames.size() * 90) / 2) + (count*90)
 		tiddle.position = Vector2(x, 450)
-		tiddle.get_node("bar").scale.y = maxTiddleHeight - (maxTiddleHeight - points[name] * 15)
-		tiddle.get_node("score").text = str(points[name])
-		tiddle.get_node("name").text = name
+		tiddle.get_node("bar").scale.y = maxTiddleHeight - (maxTiddleHeight - points[player_name] * 15)
+		tiddle.get_node("score").text = str(points[player_name])
+		tiddle.get_node("name").text = player_name
 		add_child(tiddle)
 		count += 1
 	
