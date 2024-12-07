@@ -3,7 +3,7 @@ extends CanvasLayer
 @onready var promptReader = $"../PromptReader"
 
 @onready var progressBar = $"../ProgressBar"
-@onready var timer = $Timer
+@onready var timer = $"../Timer"
 @onready var title = $"../title"
 @onready var prompt = $"../prompt"
 @onready var instructions = $"../instructions"
@@ -23,7 +23,6 @@ var player_weights = {}
 var stageNum = 1
 var currentRound = 1
 var roles_assigned = {}
-var voteCount = 0 # Brendan: this can just be hasVoted.size()
 var currentPlayer: String = ""
 var hasVoted = []
 var finalVotes = {}
@@ -113,7 +112,6 @@ func stage() -> void:
 
 func start_voting_phase() -> void:
 	# Reset voting data
-	voteCount = 0
 	hasVoted.clear()
 	finalVotes = {}
 	currentPlayer = "" # Reset the current player
@@ -140,7 +138,7 @@ func start_voting_phase() -> void:
 	# Hide the voting button and stop the timer
 	voteCanvas.visible = false
 	timer.stop()
-	print("Voting phase complete. Total votes:", voteCount)
+	print("Voting phase complete. Total votes:", hasVoted.size())
 
 func on_vote_button_pressed() -> void:
 	# If currentPlayer is null, ignore the button press
@@ -154,10 +152,9 @@ func on_vote_button_pressed() -> void:
 		return
 	
 	# Increment vote count and mark player as having voted
-	voteCount += 1
 	hasVoted.append(currentPlayer)
 	finalVotes[currentPlayer] = 1
-	print("Player %s voted. Total votes: %d" % [currentPlayer, voteCount])
+	print("Player %s voted. Total votes: %d" % [currentPlayer, hasVoted.size()])
 	
 	# After voting, reset currentPlayer to null
 	currentPlayer = ""
