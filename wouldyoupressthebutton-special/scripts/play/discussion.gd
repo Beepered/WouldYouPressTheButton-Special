@@ -73,8 +73,8 @@ func stage() -> void:
 			prompt.text = chosenPrompt
 			time = 4
 		2: # Assign roles to players
-			title.visible = true
 			title.text = "Stage 2: Becoming Czar"
+			title.visible = true
 			assign_roles()
 			time = 5
 		3: # Discussion phase
@@ -183,8 +183,9 @@ func assign_roles() -> void:
 	player_weights[opposer] -= 2
 	
 	# Update prompt
-	prompt.text = "Prepare Yourselves:\n%s must convince to press\n%s must convince NOT to press!" % [persuader, opposer]
-	instructions.visible = false
+	prompt.text = "Prepare Yourselves:\n
+		%s must convince the group to press the button\n
+		%s must convince the group NOT to press the button" % [persuader, opposer]
 
 func on_skip_button_pressed():
 	timer.stop()
