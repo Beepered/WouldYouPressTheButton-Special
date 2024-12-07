@@ -26,7 +26,6 @@ var roles_assigned = {}
 var voteCount = 0 # Brendan: this can just be hasVoted.size()
 var currentPlayer: String = ""
 var hasVoted = []
-#var initialVotes = {} # Tracks players initial votes
 var finalVotes = {}
 
 var chosenPrompt
@@ -208,8 +207,10 @@ func calculate_scores() -> void:
 			continue
 		var finalVote = finalVotes.get(player, 0) # Default to 0 if not voted
 		if finalVote:
+			points[persuader] += 1
 			pressVotes += 1
 		else:
+			points[opposer] += 1
 			dontPressVotes += 1
 
 	# Determine the winner
@@ -284,7 +285,6 @@ func rankings():
 
 	var count = 0
 	for name in Global.playerNames:
-		#ranking += "%s: %d\n" % [name, points[name]] #hiding this because I don't like it
 		var tiddle = rankTiddle.instantiate()
 		var x = get_viewport().size.x / 2 - ((Global.playerNames.size() * 90) / 2) + (count*90)
 		tiddle.position = Vector2(x, 450)
