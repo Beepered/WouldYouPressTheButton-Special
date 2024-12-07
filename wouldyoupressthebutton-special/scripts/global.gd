@@ -3,7 +3,6 @@
 
 extends Node
 
-#var numRounds = 5
 var discussTime = 20
 var voteTime = 5
 

@@ -1,4 +1,4 @@
-Win a million dollars but you give it to someone random
+Win a million dollars but it is given to someone random
 Get a pet parrot but it will die in a week
 Free taco but a piano falls somewhere randomly in the world
 Go to the zoo but fall and scrape your knee in front of a large group of people
@@ -8,7 +8,7 @@ $10,000 but 20% chance someone in the room dies
 Fight a boxer for $1,000,000 but 15% chance of winning
 Talk to animals but they also talk to you
 You can see through walls but you can't see through glass
-Infinite knowledge but you lose 2 random senses
+Gain 100 more IQ but you lose 2 random senses
 $1,000,000 dollars but lose 1 random sense
 Free 5 day vacation but you live in the woods for 2 days afterwards
 Learn everything about Greece but forget everything about Rome
@@ -29,3 +29,5 @@ A juicy fruit appears in your kitchen but a stinky diaper also appear somewhere 
 Get a hug but from a complete stranger
 New TV but excruciating pain for 10 minutes
 Perfect teeth but imperfect feet
+Grass is always green but apples become imperceivable
+Windows are always clean but every pothole in the world becomes 15% larger
