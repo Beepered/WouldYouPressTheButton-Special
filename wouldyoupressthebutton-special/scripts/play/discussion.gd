@@ -74,12 +74,8 @@ func stage() -> void:
 			chosenPrompt = prompts[currentRound - 1]
 			prompt.text = chosenPrompt
 			time = 4
-		# 2: # Each player votes on the prompt
-		# 	title.visible = true
-		# 	title.text = "Stage 1: Voting Round"
-		# 	await start_voting_phase()
-		# 	time = 1
 		2: # Assign roles to players
+			title.visible = true
 			title.text = "Stage 2: Becoming Czar"
 			assign_roles()
 			time = 5
@@ -97,7 +93,7 @@ func stage() -> void:
 			prompt.text = "%s, convince people NOT to press!" % [opposer]
 			skipButton.visible = true
 			time = Global.discussTime
-		5: # Only one voting stage
+		5: # voting
 			title.text = "Stage 4: Final Voting Round"
 			skipButton.visible = false
 			await start_voting_phase()
@@ -120,6 +116,7 @@ func start_voting_phase() -> void:
 	# Reset voting data
 	voteCount = 0
 	hasVoted.clear()
+	finalVotes = {}
 	currentPlayer = "" # Reset the current player
 
 	# Show the voting canvas
@@ -136,13 +133,10 @@ func start_voting_phase() -> void:
 		print("Player Turn:", player) # Debugging output
 		instructions.text = "%s, press or don't" % player
 		
-		# Set timer wait time and start
 		timer.wait_time = Global.voteTime
 		timer.start()
 
-		# Wait for the timer to finish
 		await timer.timeout
-		
 
 	# Hide the voting button and stop the timer
 	voteCanvas.visible = false
@@ -173,13 +167,10 @@ func on_vote_button_pressed() -> void:
 	timer.emit_signal("timeout")
 	
 func on_no_button_pressed() -> void:
-	if(stageNum == 2 || stageNum == 5):
-		currentPlayer = ""
-		timer.stop()
-		timer.emit_signal("timeout")
-	else:
-		print("why is this on?")
-	
+	currentPlayer = ""
+	timer.stop()
+	timer.emit_signal("timeout")
+
 func assign_roles() -> void:
 	# Weighted random selection for persuader
 	persuader = weighted_random_pick()
@@ -234,6 +225,7 @@ func calculate_scores() -> void:
 	prompt.text = "Pressed: %d, Didn't Press: %d\nWinner: %s" % [
 		pressVotes, dontPressVotes, winner
 	]
+	
 
 func end_game() -> void:
 	prompt.text = "Game Over! Thanks for playing!"
