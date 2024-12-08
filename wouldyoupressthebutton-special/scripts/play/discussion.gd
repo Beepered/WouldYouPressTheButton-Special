@@ -138,31 +138,39 @@ func start_voting_phase() -> void:
 	print("Voting phase complete. Total votes:", hasVoted.size())
 
 func on_vote_button_pressed() -> void:
-	# If currentPlayer is null, ignore the button press
 	if currentPlayer == "":
 		print("No player is currently voting.")
 		return
-	
-	# Check if the player has already voted
+
 	if hasVoted.has(currentPlayer):
 		print("Player %s has already voted." % currentPlayer)
 		return
-	
-	# Increment vote count and mark player as having voted
+
 	hasVoted.append(currentPlayer)
-	finalVotes[currentPlayer] = 1
-	print("Player %s voted. Total votes: %d" % [currentPlayer, hasVoted.size()])
-	
-	# After voting, reset currentPlayer to null
+	finalVotes[currentPlayer] = 1  # Track "yes" vote
+	print("Player %s voted yes. Total votes: %d" % [currentPlayer, hasVoted.size()])
+
 	currentPlayer = ""
-	
 	timer.stop()
 	timer.emit_signal("timeout")
-	
+
 func on_no_button_pressed() -> void:
+	if currentPlayer == "":
+		print("No player is currently voting.")
+		return
+
+	if hasVoted.has(currentPlayer):
+		print("Player %s has already voted." % currentPlayer)
+		return
+
+	hasVoted.append(currentPlayer)
+	finalVotes[currentPlayer] = 0  # Track "no" vote
+	print("Player %s voted no. Total votes: %d" % [currentPlayer, hasVoted.size()])
+
 	currentPlayer = ""
 	timer.stop()
 	timer.emit_signal("timeout")
+
 
 func assign_roles() -> void:
 	# Assign roles sequentially
@@ -183,11 +191,10 @@ func on_skip_button_pressed():
 	timer.emit_signal("timeout")
 
 func calculate_scores() -> void:
-	# Placeholder for scoring logic
 	prompt.text = "Calculating scores..."
 	var pressVotes = 0
 	var dontPressVotes = 0
-	
+
 	instructions.visible = false
 
 	# Count final votes and track changes
@@ -195,15 +202,13 @@ func calculate_scores() -> void:
 		if player == persuader or player == opposer:
 			continue
 		var finalVote = finalVotes.get(player, 0) # Default to 0 if not voted
-		if finalVote:
-			points[persuader] += 1
-			pressVotes += 1
+		if finalVote == 1:
+			pressVotes += 1  # "Yes" vote
 		else:
-			points[opposer] += 1
-			dontPressVotes += 1
+			dontPressVotes += 1  # "No" vote
 
 	# Display pie chart
-	display_pie_chart(pressVotes, Global.playerNames.size() - pressVotes)
+	display_pie_chart(pressVotes, dontPressVotes)
 
 	# Determine the winner
 	var winner = ""
@@ -214,12 +219,11 @@ func calculate_scores() -> void:
 	else:
 		winner = "Tie"
 
-	# Display results
 	prompt.text = "Pressed: %d, Didn't Press: %d\nWinner: %s" % [
 		pressVotes, dontPressVotes, winner
 	]
-
-	# Hide pie chart after a short delay
+	
+		# Hide pie chart after a short delay
 	await get_tree().create_timer(3.0).timeout
 	# Remove all children from PieChart
 	for child in $PieChart.get_children():
@@ -293,13 +297,16 @@ func display_pie_chart(voted_count: int, not_voted_count: int) -> void:
 		not_voted_points.append(center + Vector2(cos(angle), sin(angle)) * radius)
 	not_voted_slice.polygon = not_voted_points
 	not_voted_slice.color = Color(0.8, 0.2, 0.2) # Red for not voted
+	print("Votes for Yes: ", voted_count)
+	print("Votes for No: ", not_voted_count)
 
+	# Add slices to the PieChartPanel (which is a Panel node)
 	$PieChart.add_child(voted_slice)
 	$PieChart.add_child(not_voted_slice)
 
 	# Position the PieChart slightly higher from the bottom
-	var pie_chart_width = 400
-	var pie_chart_height = 200
+	var pie_chart_width = 400 
+	var pie_chart_height = 200 
 	var screen_center = get_viewport().size.x / 2
 	var screen_bottom_offset = 250 # Adjust this to raise the pie chart
 
