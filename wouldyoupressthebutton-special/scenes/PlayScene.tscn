@@ -92,6 +92,12 @@ offset_bottom = 552.0
 theme_override_font_sizes/font_size = 20
 text = "skip discussion"
 
+[node name="PieChart" type="Panel" parent="Discussion"]
+
+[node name="VotedSlice" type="Polygon2D" parent="Discussion/PieChart"]
+
+[node name="NotVotedSlice" type="Polygon2D" parent="Discussion/PieChart"]
+
 [node name="Voting" type="CanvasLayer" parent="."]
 visible = false
 

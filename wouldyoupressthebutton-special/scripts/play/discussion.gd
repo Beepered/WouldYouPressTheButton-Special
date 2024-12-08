@@ -202,6 +202,9 @@ func calculate_scores() -> void:
 			points[opposer] += 1
 			dontPressVotes += 1
 
+	# Display pie chart
+	display_pie_chart(pressVotes, Global.playerNames.size() - pressVotes)
+
 	# Determine the winner
 	var winner = ""
 	if pressVotes > dontPressVotes:
@@ -215,6 +218,13 @@ func calculate_scores() -> void:
 	prompt.text = "Pressed: %d, Didn't Press: %d\nWinner: %s" % [
 		pressVotes, dontPressVotes, winner
 	]
+
+	# Hide pie chart after a short delay
+	await get_tree().create_timer(3.0).timeout
+	# Remove all children from PieChart
+	for child in $PieChart.get_children():
+		$PieChart.remove_child(child)
+		child.queue_free()  # Properly free the child nodes
 
 func end_game() -> void:
 	prompt.text = "Game Over! Thanks for playing!"
@@ -243,3 +253,55 @@ func rankings():
 func compare_scores(a: String, b: String) -> int:
 	# Custom comparison function for sorting (descending order)
 	return player_weights[b] - player_weights[a]
+	
+func display_pie_chart(voted_count: int, not_voted_count: int) -> void:
+	# Remove previous pie chart slices manually
+	for child in $PieChart.get_children():
+		$PieChart.remove_child(child)
+		child.queue_free()
+
+	# Total votes
+	var total = voted_count + not_voted_count
+	if total == 0:
+		return # Avoid division by zero
+	
+	# Calculate angles
+	var voted_angle = (voted_count / total) * TAU # TAU = 2 * PI
+	var not_voted_angle = TAU - voted_angle
+	
+	# Create polygons for pie slices
+	var voted_slice = Polygon2D.new()
+	var not_voted_slice = Polygon2D.new()
+	
+	# Define circle properties
+	var center = Vector2(200, 200) # Center of the chart
+	var radius = 100               # Radius of the chart
+	var num_segments = 32          # Smoothness of the slices
+
+	# Generate points for the voted slice
+	var voted_points = [center]
+	for i in range(num_segments + 1):
+		var angle = i * (voted_angle / num_segments)
+		voted_points.append(center + Vector2(cos(angle), sin(angle)) * radius)
+	voted_slice.polygon = voted_points
+	voted_slice.color = Color(0.2, 0.8, 0.2) # Green for voted
+
+	# Generate points for the not-voted slice
+	var not_voted_points = [center]
+	for i in range(num_segments + 1):
+		var angle = voted_angle + i * (not_voted_angle / num_segments)
+		not_voted_points.append(center + Vector2(cos(angle), sin(angle)) * radius)
+	not_voted_slice.polygon = not_voted_points
+	not_voted_slice.color = Color(0.8, 0.2, 0.2) # Red for not voted
+
+	$PieChart.add_child(voted_slice)
+	$PieChart.add_child(not_voted_slice)
+
+	# Position the PieChart slightly higher from the bottom
+	var pie_chart_width = 400
+	var pie_chart_height = 200
+	var screen_center = get_viewport().size.x / 2
+	var screen_bottom_offset = 250 # Adjust this to raise the pie chart
+
+	# Set the position of the pie chart
+	$PieChart.position = Vector2(screen_center - pie_chart_width / 2, get_viewport().size.y - pie_chart_height - screen_bottom_offset)
