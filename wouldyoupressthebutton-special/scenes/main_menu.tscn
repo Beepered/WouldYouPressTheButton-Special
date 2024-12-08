@@ -92,7 +92,6 @@ text = "5+ players required"
 horizontal_alignment = 1
 
 [node name="Settings" type="Node2D" parent="CanvasLayer"]
-visible = false
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/Settings"]
 offset_left = 129.0
@@ -221,12 +220,9 @@ vertical_scroll_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Settings/NumPlayers/ScrollContainer"]
 layout_mode = 2
 
-[node name="Line" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers"]
-visible = false
-layout_mode = 0
-offset_top = 68.0
-offset_right = 230.0
-offset_bottom = 103.0
+[node name="Line" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(230, 35)
+layout_mode = 2
 placeholder_text = "BLAH BLAH"
 max_length = 20
 context_menu_enabled = false
@@ -234,12 +230,9 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Line2" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers"]
-visible = false
-layout_mode = 0
-offset_top = 108.0
-offset_right = 230.0
-offset_bottom = 143.0
+[node name="Line2" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(230, 35)
+layout_mode = 2
 placeholder_text = "BLAH BLAH"
 max_length = 20
 context_menu_enabled = false
@@ -247,12 +240,9 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Line3" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers"]
-visible = false
-layout_mode = 0
-offset_top = 148.0
-offset_right = 230.0
-offset_bottom = 183.0
+[node name="Line3" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(230, 35)
+layout_mode = 2
 placeholder_text = "BLAH BLAH"
 max_length = 20
 context_menu_enabled = false
@@ -260,12 +250,9 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Line4" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers"]
-visible = false
-layout_mode = 0
-offset_top = 188.0
-offset_right = 230.0
-offset_bottom = 223.0
+[node name="Line4" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(230, 35)
+layout_mode = 2
 placeholder_text = "BLAH BLAH"
 max_length = 20
 context_menu_enabled = false
@@ -273,12 +260,9 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Line5" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers"]
-visible = false
-layout_mode = 0
-offset_top = 228.0
-offset_right = 230.0
-offset_bottom = 263.0
+[node name="Line5" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(230, 35)
+layout_mode = 2
 placeholder_text = "BLAH BLAH"
 max_length = 20
 context_menu_enabled = false
@@ -286,12 +270,9 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Line6" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers"]
-visible = false
-layout_mode = 0
-offset_top = 268.0
-offset_right = 230.0
-offset_bottom = 303.0
+[node name="Line6" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(230, 35)
+layout_mode = 2
 placeholder_text = "BLAH BLAH"
 max_length = 20
 context_menu_enabled = false
@@ -299,12 +280,9 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Line7" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers"]
-visible = false
-layout_mode = 0
-offset_top = 308.0
-offset_right = 230.0
-offset_bottom = 343.0
+[node name="Line7" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(230, 35)
+layout_mode = 2
 placeholder_text = "BLAH BLAH"
 max_length = 20
 context_menu_enabled = false
@@ -312,12 +290,89 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Line8" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers"]
-visible = false
-layout_mode = 0
-offset_top = 348.0
-offset_right = 230.0
-offset_bottom = 383.0
+[node name="Line8" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(230, 35)
+layout_mode = 2
+placeholder_text = "BLAH BLAH"
+max_length = 20
+context_menu_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="Line9" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(230, 35)
+layout_mode = 2
+placeholder_text = "BLAH BLAH"
+max_length = 20
+context_menu_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="Line10" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(230, 35)
+layout_mode = 2
+placeholder_text = "BLAH BLAH"
+max_length = 20
+context_menu_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="Line11" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(230, 35)
+layout_mode = 2
+placeholder_text = "BLAH BLAH"
+max_length = 20
+context_menu_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="Line12" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(230, 35)
+layout_mode = 2
+placeholder_text = "BLAH BLAH"
+max_length = 20
+context_menu_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="Line13" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(230, 35)
+layout_mode = 2
+placeholder_text = "BLAH BLAH"
+max_length = 20
+context_menu_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="Line14" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(230, 35)
+layout_mode = 2
+placeholder_text = "BLAH BLAH"
+max_length = 20
+context_menu_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="Line15" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(230, 35)
+layout_mode = 2
+placeholder_text = "BLAH BLAH"
+max_length = 20
+context_menu_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="Line16" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(230, 35)
+layout_mode = 2
 placeholder_text = "BLAH BLAH"
 max_length = 20
 context_menu_enabled = false

@@ -1,8 +1,6 @@
 extends Node2D
 
-@onready var playerNames = [$CanvasLayer/Settings/NumPlayers/Line, $CanvasLayer/Settings/NumPlayers/Line2, $CanvasLayer/Settings/NumPlayers/Line3,
-$CanvasLayer/Settings/NumPlayers/Line4, $CanvasLayer/Settings/NumPlayers/Line5, $CanvasLayer/Settings/NumPlayers/Line6,
-$CanvasLayer/Settings/NumPlayers/Line7, $CanvasLayer/Settings/NumPlayers/Line8]
+@onready var playerNames = $CanvasLayer/Settings/NumPlayers/ScrollContainer/VBoxContainer.get_children()
 
 @onready var mainMenu = $"CanvasLayer/main menu"
 
