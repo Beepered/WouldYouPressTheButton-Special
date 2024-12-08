@@ -1,13 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://db432jeviyawg"]
-
-[ext_resource type="Texture2D" uid="uid://bgygn6ii42cpa" path="res://sprites/pixel.png" id="1_i6ntm"]
+[gd_scene format=3 uid="uid://db432jeviyawg"]
 
 [node name="rank tiddle" type="Node2D"]
 
-[node name="bar" type="Sprite2D" parent="."]
-scale = Vector2(50, 10)
-texture = ExtResource("1_i6ntm")
-offset = Vector2(0, -0.5)
+[node name="bar" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -20.0
+offset_right = 25.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.14159
+pivot_offset = Vector2(25, 10)
 
 [node name="score" type="Label" parent="."]
 offset_left = -30.0

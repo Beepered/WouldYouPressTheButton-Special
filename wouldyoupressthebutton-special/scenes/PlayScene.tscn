@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bxed8hhwxeufi"]
+[gd_scene load_steps=13 format=3 uid="uid://bxed8hhwxeufi"]
 
 [ext_resource type="PackedScene" uid="uid://c3fiwj01jj0ip" path="res://prefabs/prompt_reader.tscn" id="1_mfmib"]
 [ext_resource type="Script" path="res://scripts/play/discussion.gd" id="1_o8j0k"]
 [ext_resource type="PackedScene" uid="uid://db432jeviyawg" path="res://prefabs/tiddle.tscn" id="3_qt80k"]
+[ext_resource type="Script" path="res://scripts/play/game_end.gd" id="4_aeehb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cwot8"]
 bg_color = Color(0.721569, 0, 0, 1)
@@ -32,54 +33,74 @@ bg_color = Color(0.644292, 0.853536, 0.788677, 1)
 
 [node name="PromptReader" parent="." instance=ExtResource("1_mfmib")]
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
-offset_right = 1152.0
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -576.0
+offset_right = 576.0
 offset_bottom = 40.0
+grow_horizontal = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_cwot8")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3lfi2")
 value = 9.15
 show_percentage = false
 
-[node name="title" type="Label" parent="."]
-anchors_preset = -1
+[node name="title" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.018
-offset_left = 242.0
-offset_top = 67.0
-offset_right = 892.0
-offset_bottom = 107.0
+offset_left = -300.0
+offset_top = 58.0
+offset_right = 300.0
+offset_bottom = 98.0
+grow_horizontal = 2
 theme_override_font_sizes/font_size = 20
 text = "title"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="prompt" type="Label" parent="."]
-offset_left = 110.0
-offset_top = 107.0
-offset_right = 1028.0
-offset_bottom = 274.0
+[node name="prompt" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -459.0
+offset_top = 112.0
+offset_right = 459.0
+offset_bottom = 279.0
+grow_horizontal = 2
 theme_override_font_sizes/font_size = 30
 text = "prompt"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="instructions" type="Label" parent="."]
-offset_left = 170.0
-offset_top = 282.0
-offset_right = 970.0
-offset_bottom = 352.0
+[node name="instructions" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -35.0
+offset_right = 400.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/font_size = 25
 text = "instructions"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Timer" type="Timer" parent="."]
-one_shot = true
-
 [node name="Discussion" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("1_o8j0k")
 rankTiddle = ExtResource("3_qt80k")
 
@@ -118,4 +139,54 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_uymyy")
 theme_override_styles/normal = SubResource("StyleBoxFlat_syvud")
 text = "No"
 
+[node name="Game End" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("4_aeehb")
+
+[node name="Title" type="Label" parent="Game End"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -182.5
+offset_top = 47.0
+offset_right = 182.5
+offset_bottom = 160.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "Game Finished
+Thank's for playing"
+horizontal_alignment = 1
+
+[node name="PlayAgain" type="Button" parent="Game End"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 340.0
+offset_top = -142.0
+offset_right = 540.0
+offset_bottom = -92.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 25
+text = "Play Again"
+
+[node name="BacktoMenu" type="Button" parent="Game End"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 340.0
+offset_top = -79.0
+offset_right = 540.0
+offset_bottom = -29.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 25
+text = "Back to Menu"
+
 [connection signal="timeout" from="Timer" to="Discussion" method="_on_timer_timeout"]
+[connection signal="pressed" from="Game End/PlayAgain" to="Game End" method="_on_play_again_pressed"]
+[connection signal="pressed" from="Game End/BacktoMenu" to="Game End" method="_on_backto_menu_pressed"]
