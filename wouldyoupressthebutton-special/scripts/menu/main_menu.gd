@@ -1,40 +1,42 @@
 extends Node2D
 
-@onready var playerNames = $CanvasLayer/Settings/NumPlayers/ScrollContainer/VBoxContainer.get_children()
+@onready var playerNames = $Settings/NumPlayers/ScrollContainer/VBoxContainer.get_children()
 
-@onready var mainMenu = $"CanvasLayer/main menu"
+@onready var mainMenu = $Menu
 
 func _ready() -> void:
-	$CanvasLayer.visible = true;
-	$CanvasLayer/Settings.visible = false;
+	$Menu.visible = true;
+	$Settings.visible = false;
+	$Instructions.visible = false;
+	$Credit.visible = false;
 
 func _process(_delta: float) -> void:
-	$"CanvasLayer/Settings/DiscussionTime/time text".text = str(Global.discussTime)
-	$"CanvasLayer/Settings/VotingTime/time text".text = str(Global.voteTime)
+	$"Settings/DiscussionTime/time text".text = str(Global.discussTime)
+	$"Settings/VotingTime/time text".text = str(Global.voteTime)
 	if(checkNumPlayers() >= 5):
-		$CanvasLayer/Settings/PlayButton.disabled = false
+		$Settings/PlayButton.disabled = false
 	else:
-		$CanvasLayer/Settings/PlayButton.disabled = true
+		$Settings/PlayButton.disabled = true
 
 func _on_setting_button_button_down() -> void:
 	mainMenu.visible = false
-	$CanvasLayer/Settings.visible = true;
+	$Settings.visible = true;
 
 func _on_credits_button_down() -> void:
 	mainMenu.visible = false
-	$CanvasLayer/Credits.visible = true;
+	$Credits.visible = true;
 	
 
 func _on_instructions_button_down() -> void:
 	mainMenu.visible = false
-	$CanvasLayer/Instructions.visible = true;
+	$Instructions.visible = true;
 
 	
 func _on_back_button_button_down() -> void:
 	mainMenu.visible = true
-	$CanvasLayer/Settings.visible = false;
-	$CanvasLayer/Credits.visible = false;
-	$CanvasLayer/Instructions.visible = false;
+	$Settings.visible = false;
+	$Credits.visible = false;
+	$Instructions.visible = false;
 
 func _on_play_button_button_down() -> void:
 	for player_name in playerNames:
@@ -42,7 +44,7 @@ func _on_play_button_button_down() -> void:
 			Global.playerNames.push_back(player_name.text)
 	get_tree().change_scene_to_file("res://scenes/PlayScene.tscn")
 
-@onready var warning = $CanvasLayer/Settings/NumPlayers/Warning
+@onready var warning = $Settings/NumPlayers/Warning
 func checkNumPlayers():
 	var count = 0
 	var nameList = []

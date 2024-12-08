@@ -57,7 +57,9 @@ func _ready() -> void:
 	randomize()
 	prompts.shuffle()
 	
-	stage()
+	points["a"] = 10
+	end_game()
+	#stage()
 
 func _process(_delta: float) -> void:
 	progressBar.value = (timer.time_left / timer.wait_time) * 100

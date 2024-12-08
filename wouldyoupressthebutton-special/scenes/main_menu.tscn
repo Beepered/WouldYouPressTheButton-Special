@@ -80,15 +80,23 @@ theme_override_font_sizes/font_size = 35
 text = "Credits"
 
 [node name="5Players" type="Label" parent="Menu"]
-offset_left = 492.0
-offset_top = 538.0
-offset_right = 680.0
-offset_bottom = 589.0
-theme_override_font_sizes/font_size = 20
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -103.0
+offset_top = -111.0
+offset_right = 103.0
+offset_bottom = -60.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 22
 text = "5+ players required"
 horizontal_alignment = 1
 
 [node name="Settings" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Background" type="ColorRect" parent="Settings"]
 anchors_preset = 8
@@ -383,6 +391,7 @@ theme_override_font_sizes/font_size = 40
 text = "PLAY"
 
 [node name="Instructions" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Background" type="ColorRect" parent="Instructions"]
 anchors_preset = 8
@@ -458,6 +467,7 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="Credit" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Background" type="ColorRect" parent="Credit"]
 anchors_preset = 8
@@ -516,13 +526,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -325.0
-offset_top = -139.0
-offset_right = 325.0
-offset_bottom = 122.0
+offset_left = -250.0
+offset_top = -130.5
+offset_right = 250.0
+offset_bottom = 130.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 45
+theme_override_font_sizes/font_size = 35
 text = "Carter Gruebel
 Garrett Blake
 Jacqueline Gracey
