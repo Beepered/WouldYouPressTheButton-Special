@@ -226,9 +226,9 @@ func rankings():
 	var maxTiddleHeight = get_viewport().size.y - 200
 
 	var count = 0
-	var spacing = 85
+	var spacing = 90
 	var leftSide = get_viewport().size.x / 2 - ((Global.playerNames.size()/2) * spacing)
-	var winner = Global.playerNames[0]
+	var winner = ""; var winnerTiddle;
 	for player_name in Global.playerNames:
 		var tiddle = rankTiddle.instantiate()
 		var x = leftSide + (count*spacing)
@@ -237,9 +237,14 @@ func rankings():
 		tiddle.get_node("score").text = str(points[player_name])
 		tiddle.get_node("name").text = player_name
 		add_child(tiddle)
-		if points[player_name] > points[winner]:
+		if !points.has(winner) || points[player_name] > points[winner]:
+			if(winnerTiddle != null):
+				winnerTiddle.get_node("bar").color = Color(1, 1, 1, 1)
 			winner = player_name
+			winnerTiddle = tiddle
+			winnerTiddle.get_node("bar").color = Color(0.8, 0.8, 0.15, 1)
 		count += 1
+	
 	winnerName.text = "%s\nwas the best convincer!" % [winner]
 
 func end_game() -> void:

@@ -206,9 +206,6 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 25
 text = "Back to Menu"
 
-[node name="rank tiddle" parent="Game End" instance=ExtResource("3_qt80k")]
-position = Vector2(580, 420)
-
 [connection signal="timeout" from="Timer" to="Discussion" method="_on_timer_timeout"]
 [connection signal="pressed" from="Game End/PlayAgain" to="Game End" method="_on_play_again_pressed"]
 [connection signal="pressed" from="Game End/BacktoMenu" to="Game End" method="_on_backto_menu_pressed"]
