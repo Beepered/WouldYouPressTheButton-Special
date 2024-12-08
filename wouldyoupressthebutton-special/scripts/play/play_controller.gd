@@ -230,22 +230,31 @@ func rankings():
 
 	var count = 0
 	var spacing = 90
-	var leftSide = get_viewport().size.x / 2 - ((Global.playerNames.size()/2) * spacing)
+	var totalPlayers = Global.playerNames.size()
+	var leftSide = get_viewport().size.x / 2 - ((totalPlayers / 2) * spacing)
+
+	# Adjust leftSide for even number of players so that the graph is centered
+	if totalPlayers % 2 == 0:
+		leftSide += spacing / 2  # Shift by half of the spacing to center the bars
+
 	var winner = ""; var winnerTiddle;
 	for player_name in Global.playerNames:
 		var tiddle = rankTiddle.instantiate()
-		var x = leftSide + (count*spacing)
+		var x = leftSide + (count * spacing)
 		tiddle.position = Vector2(x, 420)
 		tiddle.get_node("bar").size.y = maxTiddleHeight - (maxTiddleHeight - points[player_name] * 15)
 		tiddle.get_node("score").text = str(points[player_name])
 		tiddle.get_node("name").text = player_name
 		add_child(tiddle)
+
+		# Highlight the winner
 		if !points.has(winner) || points[player_name] > points[winner]:
 			if(winnerTiddle != null):
 				winnerTiddle.get_node("bar").color = Color(1, 1, 1, 1)
 			winner = player_name
 			winnerTiddle = tiddle
 			winnerTiddle.get_node("bar").color = Color(0.8, 0.8, 0.15, 1)
+
 		count += 1
 	
 	winnerName.text = "%s\nwas the best convincer!" % [winner]
