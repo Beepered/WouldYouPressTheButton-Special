@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://bxed8hhwxeufi"]
 
 [ext_resource type="PackedScene" uid="uid://c3fiwj01jj0ip" path="res://prefabs/prompt_reader.tscn" id="1_mfmib"]
-[ext_resource type="Script" path="res://scripts/play/discussion.gd" id="1_o8j0k"]
+[ext_resource type="Script" path="res://scripts/play/play_controller.gd" id="1_o8j0k"]
 [ext_resource type="PackedScene" uid="uid://db432jeviyawg" path="res://prefabs/tiddle.tscn" id="3_qt80k"]
 [ext_resource type="Script" path="res://scripts/play/game_end.gd" id="4_aeehb"]
 
@@ -30,15 +30,17 @@ bg_color = Color(0.283514, 0.481123, 0.423717, 1)
 bg_color = Color(0.644292, 0.853536, 0.788677, 1)
 
 [node name="PlayScene" type="Node2D"]
+script = ExtResource("1_o8j0k")
+rankTiddle = ExtResource("3_qt80k")
 
 [node name="PromptReader" parent="." instance=ExtResource("1_mfmib")]
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="MainCanvas" type="CanvasLayer" parent="."]
 
-[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
+[node name="ProgressBar" type="ProgressBar" parent="MainCanvas"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -51,7 +53,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_3lfi2")
 value = 9.15
 show_percentage = false
 
-[node name="title" type="Label" parent="CanvasLayer"]
+[node name="title" type="Label" parent="MainCanvas"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -66,7 +68,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="prompt" type="Label" parent="CanvasLayer"]
+[node name="prompt" type="Label" parent="MainCanvas"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -81,7 +83,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="instructions" type="Label" parent="CanvasLayer"]
+[node name="instructions" type="Label" parent="MainCanvas"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -101,8 +103,6 @@ autowrap_mode = 3
 
 [node name="Discussion" type="CanvasLayer" parent="."]
 visible = false
-script = ExtResource("1_o8j0k")
-rankTiddle = ExtResource("3_qt80k")
 
 [node name="SkipButton" type="Button" parent="Discussion"]
 visible = false
@@ -140,7 +140,6 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_syvud")
 text = "No"
 
 [node name="Game End" type="CanvasLayer" parent="."]
-visible = false
 script = ExtResource("4_aeehb")
 
 [node name="Title" type="Label" parent="Game End"]
@@ -157,16 +156,36 @@ text = "Game Finished
 Thank's for playing"
 horizontal_alignment = 1
 
+[node name="winner" type="Label" parent="Game End"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -148.0
+offset_right = 300.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.781364, 0.703021, 0.371483, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "X
+was the best convincer"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="PlayAgain" type="Button" parent="Game End"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 340.0
-offset_top = -142.0
-offset_right = 540.0
-offset_bottom = -92.0
+offset_left = 347.0
+offset_top = -145.0
+offset_right = 547.0
+offset_bottom = -95.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 25
@@ -178,14 +197,17 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 340.0
-offset_top = -79.0
-offset_right = 540.0
-offset_bottom = -29.0
+offset_left = 347.0
+offset_top = -82.0
+offset_right = 547.0
+offset_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 25
 text = "Back to Menu"
+
+[node name="rank tiddle" parent="Game End" instance=ExtResource("3_qt80k")]
+position = Vector2(580, 420)
 
 [connection signal="timeout" from="Timer" to="Discussion" method="_on_timer_timeout"]
 [connection signal="pressed" from="Game End/PlayAgain" to="Game End" method="_on_play_again_pressed"]

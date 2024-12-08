@@ -1,22 +1,23 @@
-extends CanvasLayer
+extends Node2D
 
-@onready var promptReader = $"../PromptReader"
+@onready var promptReader = $PromptReader
 
-@onready var timer = $"../Timer"
+@onready var timer = $Timer
 
-@onready var mainCanvas = $"../CanvasLayer"
-@onready var progressBar = $"../CanvasLayer/ProgressBar"
-@onready var title = $"../CanvasLayer/title"
-@onready var prompt = $"../CanvasLayer/prompt"
-@onready var instructions = $"../CanvasLayer/instructions"
+@onready var mainCanvas = $MainCanvas
+@onready var progressBar = $MainCanvas/ProgressBar
+@onready var title = $"MainCanvas/title"
+@onready var prompt = $"MainCanvas/prompt"
+@onready var instructions = $"MainCanvas/instructions"
 
-@onready var skipButton = $SkipButton
+@onready var skipButton = $Discussion/SkipButton
 
-@onready var voteCanvas = $"../Voting"
-@onready var voteButton = $"../Voting/YesButton"
-@onready var noButton = $"../Voting/NoButton"
+@onready var voteCanvas = $Voting
+@onready var voteButton = $Voting/YesButton
+@onready var noButton = $"Voting/NoButton"
 
-@onready var endCanvas = $"../Game End"
+@onready var endCanvas = $"Game End"
+@onready var winnerName = $"Game End/winner"
 
 @export var rankTiddle: PackedScene
 
@@ -55,10 +56,7 @@ func _ready() -> void:
 	randomize()
 	prompts.shuffle()
 	
-	points["a"] = 10
-	points["s"] = 3
-	end_game()
-	#stage()
+	stage()
 
 func _process(_delta: float) -> void:
 	progressBar.value = (timer.time_left / timer.wait_time) * 100
@@ -225,27 +223,27 @@ func calculate_scores() -> void:
 	]
 
 func rankings():
-	var ranking = ""
-	
 	var maxTiddleHeight = get_viewport().size.y - 200
 
 	var count = 0
 	var spacing = 85
+	var leftSide = get_viewport().size.x / 2 - ((Global.playerNames.size()/2) * spacing)
+	var winner = Global.playerNames[0]
 	for player_name in Global.playerNames:
 		var tiddle = rankTiddle.instantiate()
-		var x = (get_viewport().size.x / 2 - ((Global.playerNames.size() / 2) * spacing)) + (count*spacing)
+		var x = leftSide + (count*spacing)
 		tiddle.position = Vector2(x, 420)
 		tiddle.get_node("bar").size.y = maxTiddleHeight - (maxTiddleHeight - points[player_name] * 15)
 		tiddle.get_node("score").text = str(points[player_name])
 		tiddle.get_node("name").text = player_name
 		add_child(tiddle)
+		if points[player_name] > points[winner]:
+			winner = player_name
 		count += 1
-	
-	# Display the ranking list
-	prompt.text = ranking
+	winnerName.text = "%s\nwas the best convincer!" % [winner]
 
 func end_game() -> void:
-	rankings()
 	mainCanvas.visible = false
 	endCanvas.visible = true
+	rankings()
 	timer.stop()
