@@ -2,7 +2,7 @@ extends Sprite2D
 
 @export var change = 0
 
-var minTime = 10;
+var minTime = 20;
 var maxTime = 120
 
 var mouseOver = false

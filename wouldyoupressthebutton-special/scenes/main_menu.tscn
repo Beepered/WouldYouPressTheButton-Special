@@ -1,6 +1,5 @@
-[gd_scene load_steps=9 format=3 uid="uid://bdyqluc1cfnb8"]
+[gd_scene load_steps=8 format=3 uid="uid://bdyqluc1cfnb8"]
 
-[ext_resource type="Texture2D" uid="uid://bgygn6ii42cpa" path="res://sprites/pixel.png" id="1_1bg67"]
 [ext_resource type="Script" path="res://scripts/menu/main_menu.gd" id="1_77ssq"]
 [ext_resource type="Texture2D" uid="uid://dve4ik6nav6mk" path="res://sprites/arrow.png" id="3_8h1ks"]
 [ext_resource type="Script" path="res://scripts/menu/discussSettingArrow.gd" id="4_flmkl"]
@@ -16,31 +15,29 @@ size = Vector2(30, 30)
 [node name="Main Menu" type="Node2D"]
 script = ExtResource("1_77ssq")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Menu" type="CanvasLayer" parent="."]
 
-[node name="main menu" type="Node2D" parent="CanvasLayer"]
-
-[node name="Label" type="Label" parent="CanvasLayer/main menu"]
+[node name="Title" type="Label" parent="Menu"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 166.0
-offset_top = 50.0
-offset_right = 986.0
-offset_bottom = 150.0
+offset_left = -410.0
+offset_top = 66.0
+offset_right = 410.0
+offset_bottom = 149.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 60
 text = "Would You Press The Button"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="CanvasLayer/main menu"]
+[node name="Subtitle" type="Label" parent="Menu"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 508.5
+offset_left = -67.5
 offset_top = 141.0
-offset_right = 643.5
+offset_right = 67.5
 offset_bottom = 196.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
@@ -49,19 +46,19 @@ text = "Special"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SettingButton" type="Button" parent="CanvasLayer/main menu"]
+[node name="SettingButton" type="Button" parent="Menu"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 451.0
+offset_left = -125.0
 offset_top = 240.0
-offset_right = 701.0
+offset_right = 125.0
 offset_bottom = 310.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 35
 text = "Play"
 
-[node name="Instructions" type="Button" parent="CanvasLayer/main menu"]
+[node name="Instructions" type="Button" parent="Menu"]
 custom_minimum_size = Vector2(250, 70)
 offset_left = 451.0
 offset_top = 336.0
@@ -70,19 +67,19 @@ offset_bottom = 416.0
 theme_override_font_sizes/font_size = 35
 text = "Instructions"
 
-[node name="Credits Button" type="Button" parent="CanvasLayer/main menu"]
+[node name="Credits Button" type="Button" parent="Menu"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 451.0
+offset_left = -125.0
 offset_top = 435.0
-offset_right = 701.0
+offset_right = 125.0
 offset_bottom = 505.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 35
 text = "Credits"
 
-[node name="Label3" type="Label" parent="CanvasLayer/main menu"]
+[node name="5Players" type="Label" parent="Menu"]
 offset_left = 492.0
 offset_top = 538.0
 offset_right = 680.0
@@ -91,36 +88,46 @@ theme_override_font_sizes/font_size = 20
 text = "5+ players required"
 horizontal_alignment = 1
 
-[node name="Settings" type="Node2D" parent="CanvasLayer"]
-visible = false
+[node name="Settings" type="CanvasLayer" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Settings"]
-offset_left = 129.0
-offset_top = 75.0
-offset_right = 1029.0
-offset_bottom = 555.0
+[node name="Background" type="ColorRect" parent="Settings"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -460.0
+offset_top = -250.0
+offset_right = 460.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.443137, 0.639216, 0.721569, 1)
 
-[node name="BackButton" type="Button" parent="CanvasLayer/Settings"]
-offset_left = 180.0
-offset_top = 100.0
-offset_right = 300.0
-offset_bottom = 150.0
+[node name="BackButton" type="Button" parent="Settings"]
+offset_left = 165.0
+offset_top = 105.0
+offset_right = 285.0
+offset_bottom = 155.0
 theme_override_font_sizes/font_size = 25
 text = "Back"
 
-[node name="DiscussionTime" type="Label" parent="CanvasLayer/Settings"]
-offset_left = 422.0
-offset_top = 157.0
-offset_right = 655.0
-offset_bottom = 199.0
+[node name="DiscussionTime" type="Label" parent="Settings"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -116.5
+offset_top = 183.0
+offset_right = 116.5
+offset_bottom = 225.0
+grow_horizontal = 2
 theme_override_fonts/font = SubResource("FontVariation_jeu8t")
 theme_override_font_sizes/font_size = 30
 text = "Discussion Time"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="time text" type="Label" parent="CanvasLayer/Settings/DiscussionTime"]
+[node name="time text" type="Label" parent="Settings/DiscussionTime"]
 layout_mode = 0
 offset_left = 70.0
 offset_top = 47.0
@@ -131,40 +138,44 @@ text = "10"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="decrease" type="Sprite2D" parent="CanvasLayer/Settings/DiscussionTime"]
+[node name="decrease" type="Sprite2D" parent="Settings/DiscussionTime"]
 position = Vector2(60, 70)
 rotation = 3.14159
 texture = ExtResource("3_8h1ks")
 script = ExtResource("4_flmkl")
 change = -1
 
-[node name="Area2D" type="Area2D" parent="CanvasLayer/Settings/DiscussionTime/decrease"]
+[node name="Area2D" type="Area2D" parent="Settings/DiscussionTime/decrease"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Settings/DiscussionTime/decrease/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Settings/DiscussionTime/decrease/Area2D"]
 shape = SubResource("RectangleShape2D_srou7")
 
-[node name="increase" type="Sprite2D" parent="CanvasLayer/Settings/DiscussionTime"]
+[node name="increase" type="Sprite2D" parent="Settings/DiscussionTime"]
 position = Vector2(180, 70)
 texture = ExtResource("3_8h1ks")
 script = ExtResource("4_flmkl")
 change = 1
 
-[node name="Area2D" type="Area2D" parent="CanvasLayer/Settings/DiscussionTime/increase"]
+[node name="Area2D" type="Area2D" parent="Settings/DiscussionTime/increase"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Settings/DiscussionTime/increase/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Settings/DiscussionTime/increase/Area2D"]
 shape = SubResource("RectangleShape2D_srou7")
 
-[node name="VotingTime" type="Label" parent="CanvasLayer/Settings"]
-offset_left = 421.0
-offset_top = 290.0
-offset_right = 646.0
-offset_bottom = 332.0
+[node name="VotingTime" type="Label" parent="Settings"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -112.5
+offset_top = 308.0
+offset_right = 112.5
+offset_bottom = 350.0
+grow_horizontal = 2
 theme_override_font_sizes/font_size = 30
 text = "Voting Time"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="time text" type="Label" parent="CanvasLayer/Settings/VotingTime"]
+[node name="time text" type="Label" parent="Settings/VotingTime"]
 layout_mode = 0
 offset_left = 70.0
 offset_top = 47.0
@@ -175,53 +186,57 @@ text = "10"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="decrease" type="Sprite2D" parent="CanvasLayer/Settings/VotingTime"]
+[node name="decrease" type="Sprite2D" parent="Settings/VotingTime"]
 position = Vector2(60, 70)
 rotation = 3.14159
 texture = ExtResource("3_8h1ks")
 script = ExtResource("4_ntwn2")
 change = -1
 
-[node name="Area2D" type="Area2D" parent="CanvasLayer/Settings/VotingTime/decrease"]
+[node name="Area2D" type="Area2D" parent="Settings/VotingTime/decrease"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Settings/VotingTime/decrease/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Settings/VotingTime/decrease/Area2D"]
 shape = SubResource("RectangleShape2D_srou7")
 
-[node name="increase" type="Sprite2D" parent="CanvasLayer/Settings/VotingTime"]
+[node name="increase" type="Sprite2D" parent="Settings/VotingTime"]
 position = Vector2(180, 70)
 texture = ExtResource("3_8h1ks")
 script = ExtResource("4_ntwn2")
 change = 1
 
-[node name="Area2D" type="Area2D" parent="CanvasLayer/Settings/VotingTime/increase"]
+[node name="Area2D" type="Area2D" parent="Settings/VotingTime/increase"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Settings/VotingTime/increase/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Settings/VotingTime/increase/Area2D"]
 shape = SubResource("RectangleShape2D_srou7")
 
-[node name="NumPlayers" type="Label" parent="CanvasLayer/Settings"]
-offset_left = 726.0
-offset_top = 104.0
-offset_right = 951.0
-offset_bottom = 159.0
+[node name="NumPlayers" type="Label" parent="Settings"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 174.0
+offset_top = 118.0
+offset_right = 399.0
+offset_bottom = 173.0
+grow_horizontal = 2
 theme_override_font_sizes/font_size = 40
 text = "Players"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Settings/NumPlayers"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Settings/NumPlayers"]
 layout_mode = 0
 offset_left = -12.0
 offset_top = 59.0
-offset_right = 258.0
+offset_right = 248.0
 offset_bottom = 409.0
 theme = SubResource("Theme_1foon")
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Settings/NumPlayers/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/NumPlayers/ScrollContainer"]
 layout_mode = 2
 
-[node name="Line" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+[node name="Line" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(230, 35)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
@@ -231,7 +246,7 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Line2" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+[node name="Line2" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(230, 35)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
@@ -241,7 +256,7 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Line3" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+[node name="Line3" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(230, 35)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
@@ -251,7 +266,7 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Line4" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+[node name="Line4" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(230, 35)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
@@ -261,7 +276,7 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Line5" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+[node name="Line5" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(230, 35)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
@@ -271,7 +286,7 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Line6" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+[node name="Line6" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(230, 35)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
@@ -281,7 +296,7 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Line7" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+[node name="Line7" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(230, 35)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
@@ -291,7 +306,7 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Line8" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+[node name="Line8" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(230, 35)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
@@ -301,7 +316,7 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Line9" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+[node name="Line9" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(230, 35)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
@@ -311,7 +326,7 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Line10" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+[node name="Line10" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(230, 35)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
@@ -321,7 +336,7 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Line11" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+[node name="Line11" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(230, 35)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
@@ -331,7 +346,7 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Line12" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+[node name="Line12" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(230, 35)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
@@ -341,105 +356,97 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Warning" type="Label" parent="CanvasLayer/Settings/NumPlayers"]
+[node name="Warning" type="Label" parent="Settings/NumPlayers"]
 visible = false
 layout_mode = 0
 offset_left = 21.0
-offset_top = 383.0
+offset_top = 414.0
 offset_right = 213.0
-offset_bottom = 409.0
+offset_bottom = 440.0
 theme_override_colors/font_color = Color(0.956863, 0, 0, 1)
 theme_override_font_sizes/font_size = 18
 text = "duplicate name found"
 
-[node name="PlayButton" type="Button" parent="CanvasLayer/Settings"]
-offset_left = 443.0
-offset_top = 427.0
-offset_right = 643.0
-offset_bottom = 497.0
+[node name="PlayButton" type="Button" parent="Settings"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -214.0
+offset_right = 100.0
+offset_bottom = -144.0
+grow_horizontal = 2
+grow_vertical = 0
 theme_override_font_sizes/font_size = 40
 text = "PLAY"
 
-[node name="Credits" type="Node2D" parent="CanvasLayer"]
-visible = false
+[node name="Instructions" type="CanvasLayer" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Credits"]
-offset_left = 129.0
-offset_top = 75.0
-offset_right = 1029.0
-offset_bottom = 555.0
+[node name="Background" type="ColorRect" parent="Instructions"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -460.0
+offset_top = -250.0
+offset_right = 460.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.443137, 0.639216, 0.721569, 1)
 
-[node name="Credits" type="Label" parent="CanvasLayer/Credits"]
+[node name="BackButton" type="Button" parent="Instructions"]
+offset_left = 165.0
+offset_top = 105.0
+offset_right = 285.0
+offset_bottom = 155.0
+theme_override_font_sizes/font_size = 25
+text = "Back"
+
+[node name="Title" type="Label" parent="Instructions"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 496.0
-offset_top = 111.0
-offset_right = 655.0
-offset_bottom = 166.0
+offset_left = -114.5
+offset_top = 115.0
+offset_right = 114.5
+offset_bottom = 170.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 45
-text = "CREDITS"
-
-[node name="Names" type="Label" parent="CanvasLayer/Credits"]
-offset_left = 258.0
-offset_top = 192.0
-offset_right = 908.0
-offset_bottom = 442.0
-theme_override_font_sizes/font_size = 30
-text = "Carter Gruebel
-Garrett Blake
-Jacqueline Gracey
-Brendan Trieu"
+theme_override_font_sizes/font_size = 40
+text = "How to play"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BackButton" type="Button" parent="CanvasLayer/Credits"]
-offset_left = 180.0
-offset_top = 100.0
-offset_right = 300.0
-offset_bottom = 150.0
-theme_override_font_sizes/font_size = 25
-text = "Back"
+[node name="instructions" type="ColorRect" parent="Instructions"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -410.0
+offset_top = -137.0
+offset_right = 410.0
+offset_bottom = 193.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.313726)
 
-[node name="Instructions" type="Node2D" parent="CanvasLayer"]
-visible = false
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Instructions"]
-offset_left = 129.0
-offset_top = 75.0
-offset_right = 1029.0
-offset_bottom = 555.0
-color = Color(0.443137, 0.639216, 0.721569, 1)
-
-[node name="BackButton" type="Button" parent="CanvasLayer/Instructions"]
-offset_left = 180.0
-offset_top = 100.0
-offset_right = 300.0
-offset_bottom = 150.0
-theme_override_font_sizes/font_size = 25
-text = "Back"
-
-[node name="Title" type="Label" parent="CanvasLayer/Instructions"]
-offset_left = 472.0
-offset_top = 127.0
-offset_right = 701.0
-offset_bottom = 182.0
-theme_override_font_sizes/font_size = 40
-text = "How to play"
-
-[node name="text background" type="Sprite2D" parent="CanvasLayer/Instructions"]
-modulate = Color(0, 0, 0, 0.294118)
-position = Vector2(584, 354)
-scale = Vector2(820, 330)
-texture = ExtResource("1_1bg67")
-
-[node name="Label" type="Label" parent="CanvasLayer/Instructions"]
-offset_left = 184.0
-offset_top = 217.0
-offset_right = 981.0
-offset_bottom = 486.0
+[node name="text" type="Label" parent="Instructions/instructions"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -398.5
+offset_top = -137.0
+offset_right = 398.5
+offset_bottom = 132.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 22
 text = "First a choice will be displayed.
@@ -450,18 +457,91 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[connection signal="button_down" from="CanvasLayer/main menu/SettingButton" to="." method="_on_setting_button_button_down"]
-[connection signal="button_down" from="CanvasLayer/main menu/Instructions" to="." method="_on_instructions_button_down"]
-[connection signal="button_down" from="CanvasLayer/main menu/Credits Button" to="." method="_on_credits_button_down"]
-[connection signal="button_down" from="CanvasLayer/Settings/BackButton" to="." method="_on_back_button_button_down"]
-[connection signal="mouse_entered" from="CanvasLayer/Settings/DiscussionTime/decrease/Area2D" to="CanvasLayer/Settings/DiscussionTime/decrease" method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="CanvasLayer/Settings/DiscussionTime/decrease/Area2D" to="CanvasLayer/Settings/DiscussionTime/decrease" method="_on_area_2d_mouse_exited"]
-[connection signal="mouse_entered" from="CanvasLayer/Settings/DiscussionTime/increase/Area2D" to="CanvasLayer/Settings/DiscussionTime/increase" method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="CanvasLayer/Settings/DiscussionTime/increase/Area2D" to="CanvasLayer/Settings/DiscussionTime/increase" method="_on_area_2d_mouse_exited"]
-[connection signal="mouse_entered" from="CanvasLayer/Settings/VotingTime/decrease/Area2D" to="CanvasLayer/Settings/VotingTime/decrease" method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="CanvasLayer/Settings/VotingTime/decrease/Area2D" to="CanvasLayer/Settings/VotingTime/decrease" method="_on_area_2d_mouse_exited"]
-[connection signal="mouse_entered" from="CanvasLayer/Settings/VotingTime/increase/Area2D" to="CanvasLayer/Settings/VotingTime/increase" method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="CanvasLayer/Settings/VotingTime/increase/Area2D" to="CanvasLayer/Settings/VotingTime/increase" method="_on_area_2d_mouse_exited"]
-[connection signal="button_down" from="CanvasLayer/Settings/PlayButton" to="." method="_on_play_button_button_down"]
-[connection signal="button_down" from="CanvasLayer/Credits/BackButton" to="." method="_on_back_button_button_down"]
-[connection signal="button_down" from="CanvasLayer/Instructions/BackButton" to="." method="_on_back_button_button_down"]
+[node name="Credit" type="CanvasLayer" parent="."]
+
+[node name="Background" type="ColorRect" parent="Credit"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -460.0
+offset_top = -250.0
+offset_right = 460.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.443137, 0.639216, 0.721569, 1)
+
+[node name="BackButton" type="Button" parent="Credit"]
+offset_left = 165.0
+offset_top = 105.0
+offset_right = 285.0
+offset_bottom = 155.0
+theme_override_font_sizes/font_size = 25
+text = "Back"
+
+[node name="Title" type="Label" parent="Credit"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -89.5
+offset_top = 115.0
+offset_right = 89.5
+offset_bottom = 178.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 45
+text = "Credits"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Names" type="ColorRect" parent="Credit"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -325.0
+offset_top = -122.0
+offset_right = 325.0
+offset_bottom = 178.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.313726)
+
+[node name="text" type="Label" parent="Credit/Names"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -325.0
+offset_top = -139.0
+offset_right = 325.0
+offset_bottom = 122.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 45
+text = "Carter Gruebel
+Garrett Blake
+Jacqueline Gracey
+Brendan Trieu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_down" from="Menu/SettingButton" to="." method="_on_setting_button_button_down"]
+[connection signal="button_down" from="Menu/Instructions" to="." method="_on_instructions_button_down"]
+[connection signal="button_down" from="Menu/Credits Button" to="." method="_on_credits_button_down"]
+[connection signal="button_down" from="Settings/BackButton" to="." method="_on_back_button_button_down"]
+[connection signal="mouse_entered" from="Settings/DiscussionTime/decrease/Area2D" to="Settings/DiscussionTime/decrease" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Settings/DiscussionTime/decrease/Area2D" to="Settings/DiscussionTime/decrease" method="_on_area_2d_mouse_exited"]
+[connection signal="mouse_entered" from="Settings/DiscussionTime/increase/Area2D" to="Settings/DiscussionTime/increase" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Settings/DiscussionTime/increase/Area2D" to="Settings/DiscussionTime/increase" method="_on_area_2d_mouse_exited"]
+[connection signal="mouse_entered" from="Settings/VotingTime/decrease/Area2D" to="Settings/VotingTime/decrease" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Settings/VotingTime/decrease/Area2D" to="Settings/VotingTime/decrease" method="_on_area_2d_mouse_exited"]
+[connection signal="mouse_entered" from="Settings/VotingTime/increase/Area2D" to="Settings/VotingTime/increase" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Settings/VotingTime/increase/Area2D" to="Settings/VotingTime/increase" method="_on_area_2d_mouse_exited"]
+[connection signal="button_down" from="Settings/PlayButton" to="." method="_on_play_button_button_down"]
+[connection signal="button_down" from="Instructions/BackButton" to="." method="_on_back_button_button_down"]
+[connection signal="button_down" from="Credit/BackButton" to="." method="_on_back_button_button_down"]
