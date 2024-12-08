@@ -96,10 +96,10 @@ text = "skip discussion"
 visible = false
 
 [node name="YesButton" type="Button" parent="Voting"]
-offset_left = 504.0
-offset_top = 396.0
-offset_right = 640.0
-offset_bottom = 513.0
+offset_left = 514.0
+offset_top = 395.0
+offset_right = 624.0
+offset_bottom = 505.0
 theme_override_font_sizes/font_size = 30
 theme_override_styles/hover = SubResource("StyleBoxFlat_qnjcf")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_yswfn")

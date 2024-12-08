@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bdyqluc1cfnb8"]
+[gd_scene load_steps=9 format=3 uid="uid://bdyqluc1cfnb8"]
 
 [ext_resource type="Texture2D" uid="uid://bgygn6ii42cpa" path="res://sprites/pixel.png" id="1_1bg67"]
 [ext_resource type="Script" path="res://scripts/menu/main_menu.gd" id="1_77ssq"]
@@ -10,6 +10,8 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_srou7"]
 size = Vector2(30, 30)
+
+[sub_resource type="Theme" id="Theme_1foon"]
 
 [node name="Main Menu" type="Node2D"]
 script = ExtResource("1_77ssq")
@@ -23,9 +25,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 166.0
-offset_top = 80.0
+offset_top = 50.0
 offset_right = 986.0
-offset_bottom = 180.0
+offset_bottom = 150.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 60
 text = "Would You Press The Button"
@@ -37,9 +39,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 508.5
-offset_top = 171.0
+offset_top = 141.0
 offset_right = 643.5
-offset_bottom = 226.0
+offset_bottom = 196.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 40
@@ -54,10 +56,19 @@ anchor_right = 0.5
 offset_left = 451.0
 offset_top = 240.0
 offset_right = 701.0
-offset_bottom = 320.0
+offset_bottom = 310.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 35
 text = "Play"
+
+[node name="Instructions" type="Button" parent="CanvasLayer/main menu"]
+custom_minimum_size = Vector2(250, 70)
+offset_left = 451.0
+offset_top = 336.0
+offset_right = 701.0
+offset_bottom = 416.0
+theme_override_font_sizes/font_size = 35
+text = "Instructions"
 
 [node name="Credits Button" type="Button" parent="CanvasLayer/main menu"]
 anchors_preset = 5
@@ -66,36 +77,29 @@ anchor_right = 0.5
 offset_left = 451.0
 offset_top = 435.0
 offset_right = 701.0
-offset_bottom = 515.0
+offset_bottom = 505.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 35
 text = "Credits"
 
 [node name="Label3" type="Label" parent="CanvasLayer/main menu"]
 offset_left = 492.0
 offset_top = 538.0
-offset_right = 667.0
+offset_right = 680.0
 offset_bottom = 589.0
 theme_override_font_sizes/font_size = 20
 text = "5+ players required"
 horizontal_alignment = 1
 
-[node name="Instructions" type="Button" parent="CanvasLayer/main menu"]
-custom_minimum_size = Vector2(250, 80)
-offset_left = 451.0
-offset_top = 336.0
-offset_right = 701.0
-offset_bottom = 416.0
-theme_override_font_sizes/font_size = 40
-text = "Instructions"
-
 [node name="Settings" type="Node2D" parent="CanvasLayer"]
+visible = false
 
-[node name="background" type="Sprite2D" parent="CanvasLayer/Settings"]
-modulate = Color(0.444489, 0.638216, 0.721653, 1)
-position = Vector2(588, 309.25)
-scale = Vector2(900, 470)
-texture = ExtResource("1_1bg67")
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Settings"]
+offset_left = 129.0
+offset_top = 75.0
+offset_right = 1029.0
+offset_bottom = 555.0
+color = Color(0.443137, 0.639216, 0.721569, 1)
 
 [node name="BackButton" type="Button" parent="CanvasLayer/Settings"]
 offset_left = 180.0
@@ -107,9 +111,9 @@ text = "Back"
 
 [node name="DiscussionTime" type="Label" parent="CanvasLayer/Settings"]
 offset_left = 422.0
-offset_top = 166.0
+offset_top = 157.0
 offset_right = 655.0
-offset_bottom = 208.0
+offset_bottom = 199.0
 theme_override_fonts/font = SubResource("FontVariation_jeu8t")
 theme_override_font_sizes/font_size = 30
 text = "Discussion Time"
@@ -195,20 +199,34 @@ change = 1
 shape = SubResource("RectangleShape2D_srou7")
 
 [node name="NumPlayers" type="Label" parent="CanvasLayer/Settings"]
-offset_left = 732.0
-offset_top = 122.0
-offset_right = 957.0
-offset_bottom = 177.0
+offset_left = 726.0
+offset_top = 104.0
+offset_right = 951.0
+offset_bottom = 159.0
 theme_override_font_sizes/font_size = 40
 text = "Players"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Line" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers"]
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Settings/NumPlayers"]
 layout_mode = 0
-offset_top = 60.0
+offset_left = -12.0
+offset_top = 59.0
+offset_right = 258.0
+offset_bottom = 409.0
+theme = SubResource("Theme_1foon")
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Settings/NumPlayers/ScrollContainer"]
+layout_mode = 2
+
+[node name="Line" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers"]
+visible = false
+layout_mode = 0
+offset_top = 68.0
 offset_right = 230.0
-offset_bottom = 95.0
+offset_bottom = 103.0
 placeholder_text = "BLAH BLAH"
 max_length = 20
 context_menu_enabled = false
@@ -217,10 +235,11 @@ middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
 [node name="Line2" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers"]
+visible = false
 layout_mode = 0
-offset_top = 100.0
+offset_top = 108.0
 offset_right = 230.0
-offset_bottom = 135.0
+offset_bottom = 143.0
 placeholder_text = "BLAH BLAH"
 max_length = 20
 context_menu_enabled = false
@@ -229,10 +248,11 @@ middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
 [node name="Line3" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers"]
+visible = false
 layout_mode = 0
-offset_top = 140.0
+offset_top = 148.0
 offset_right = 230.0
-offset_bottom = 175.0
+offset_bottom = 183.0
 placeholder_text = "BLAH BLAH"
 max_length = 20
 context_menu_enabled = false
@@ -241,10 +261,11 @@ middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
 [node name="Line4" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers"]
+visible = false
 layout_mode = 0
-offset_top = 180.0
+offset_top = 188.0
 offset_right = 230.0
-offset_bottom = 215.0
+offset_bottom = 223.0
 placeholder_text = "BLAH BLAH"
 max_length = 20
 context_menu_enabled = false
@@ -253,10 +274,11 @@ middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
 [node name="Line5" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers"]
+visible = false
 layout_mode = 0
-offset_top = 220.0
+offset_top = 228.0
 offset_right = 230.0
-offset_bottom = 255.0
+offset_bottom = 263.0
 placeholder_text = "BLAH BLAH"
 max_length = 20
 context_menu_enabled = false
@@ -265,10 +287,11 @@ middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
 [node name="Line6" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers"]
+visible = false
 layout_mode = 0
-offset_top = 260.0
+offset_top = 268.0
 offset_right = 230.0
-offset_bottom = 295.0
+offset_bottom = 303.0
 placeholder_text = "BLAH BLAH"
 max_length = 20
 context_menu_enabled = false
@@ -277,10 +300,11 @@ middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
 [node name="Line7" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers"]
+visible = false
 layout_mode = 0
-offset_top = 300.0
+offset_top = 308.0
 offset_right = 230.0
-offset_bottom = 335.0
+offset_bottom = 343.0
 placeholder_text = "BLAH BLAH"
 max_length = 20
 context_menu_enabled = false
@@ -289,10 +313,11 @@ middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
 [node name="Line8" type="LineEdit" parent="CanvasLayer/Settings/NumPlayers"]
+visible = false
 layout_mode = 0
-offset_top = 340.0
+offset_top = 348.0
 offset_right = 230.0
-offset_bottom = 375.0
+offset_bottom = 383.0
 placeholder_text = "BLAH BLAH"
 max_length = 20
 context_menu_enabled = false
@@ -322,11 +347,12 @@ text = "PLAY"
 [node name="Credits" type="Node2D" parent="CanvasLayer"]
 visible = false
 
-[node name="background" type="Sprite2D" parent="CanvasLayer/Credits"]
-modulate = Color(0.375261, 0.642828, 0.784485, 1)
-position = Vector2(588, 309.25)
-scale = Vector2(900, 470)
-texture = ExtResource("1_1bg67")
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Credits"]
+offset_left = 129.0
+offset_top = 75.0
+offset_right = 1029.0
+offset_bottom = 555.0
+color = Color(0.443137, 0.639216, 0.721569, 1)
 
 [node name="Credits" type="Label" parent="CanvasLayer/Credits"]
 anchors_preset = 5
@@ -364,11 +390,12 @@ text = "Back"
 [node name="Instructions" type="Node2D" parent="CanvasLayer"]
 visible = false
 
-[node name="background" type="Sprite2D" parent="CanvasLayer/Instructions"]
-modulate = Color(0.444489, 0.638216, 0.721653, 1)
-position = Vector2(588, 309.25)
-scale = Vector2(900, 470)
-texture = ExtResource("1_1bg67")
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Instructions"]
+offset_left = 129.0
+offset_top = 75.0
+offset_right = 1029.0
+offset_bottom = 555.0
+color = Color(0.443137, 0.639216, 0.721569, 1)
 
 [node name="BackButton" type="Button" parent="CanvasLayer/Instructions"]
 offset_left = 180.0
@@ -378,21 +405,38 @@ offset_bottom = 150.0
 theme_override_font_sizes/font_size = 25
 text = "Back"
 
-[node name="TextEdit" type="TextEdit" parent="CanvasLayer/Instructions"]
-offset_left = 241.0
-offset_top = 197.0
-offset_right = 928.0
-offset_bottom = 478.0
-text = "How to play:
-A prompt will be displayed that will give the players the choice of either pressing the button or not.
-Next, one player will be assigned to argue why the other players SHOULD press the button meanwhile another player will be assinged to argue why other players SHOULDN'T press the button.
-Points will be awarded to the player who can convince the most other players to vote for what they are arguing for.
-Each player will get one turn opposing the prompt and one turn advocating for the prompt."
-wrap_mode = 1
+[node name="Title" type="Label" parent="CanvasLayer/Instructions"]
+offset_left = 472.0
+offset_top = 127.0
+offset_right = 701.0
+offset_bottom = 182.0
+theme_override_font_sizes/font_size = 40
+text = "How to play"
+
+[node name="text background" type="Sprite2D" parent="CanvasLayer/Instructions"]
+modulate = Color(0, 0, 0, 0.294118)
+position = Vector2(584, 354)
+scale = Vector2(820, 330)
+texture = ExtResource("1_1bg67")
+
+[node name="Label" type="Label" parent="CanvasLayer/Instructions"]
+offset_left = 184.0
+offset_top = 217.0
+offset_right = 981.0
+offset_bottom = 486.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 22
+text = "First a choice will be displayed.
+Next, one player will be assigned the task of arguing to the other players why they SHOULD press the button, while another player will argue why they should NOT press the button.
+Points will be awarded to players based on how many people votes for their side.
+Each player will get one turn advocating the prompt and one turn opposing it."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 
 [connection signal="button_down" from="CanvasLayer/main menu/SettingButton" to="." method="_on_setting_button_button_down"]
-[connection signal="button_down" from="CanvasLayer/main menu/Credits Button" to="." method="_on_credits_button_down"]
 [connection signal="button_down" from="CanvasLayer/main menu/Instructions" to="." method="_on_instructions_button_down"]
+[connection signal="button_down" from="CanvasLayer/main menu/Credits Button" to="." method="_on_credits_button_down"]
 [connection signal="button_down" from="CanvasLayer/Settings/BackButton" to="." method="_on_back_button_button_down"]
 [connection signal="mouse_entered" from="CanvasLayer/Settings/DiscussionTime/decrease/Area2D" to="CanvasLayer/Settings/DiscussionTime/decrease" method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/Settings/DiscussionTime/decrease/Area2D" to="CanvasLayer/Settings/DiscussionTime/decrease" method="_on_area_2d_mouse_exited"]
