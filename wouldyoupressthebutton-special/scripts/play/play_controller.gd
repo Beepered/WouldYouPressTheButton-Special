@@ -10,6 +10,7 @@ extends Node2D
 @onready var prompt = $"MainCanvas/prompt"
 @onready var instructions = $"MainCanvas/instructions"
 
+@onready var discussCanvas = $Discussion
 @onready var skipButton = $Discussion/SkipButton
 
 @onready var voteCanvas = $Voting
@@ -43,7 +44,7 @@ func _ready() -> void:
 	
 	mainCanvas.visible = true
 	
-	skipButton.visible = false
+	discussCanvas.visible = false
 	skipButton.connect("pressed", Callable(self, "on_skip_button_pressed"))
 
 	voteCanvas.visible = false
@@ -74,29 +75,29 @@ func stage() -> void:
 			instructions.visible = false
 			chosenPrompt = prompts[currentRound - 1]
 			prompt.text = chosenPrompt
-			time = 4
+			time = 8
 		2: # Assign roles to players
 			title.text = "Stage 2: Becoming Czar"
 			title.visible = true
 			assign_roles()
-			time = 5
+			time = 8
 		3: # Discussion phase
 			title.text = "Stage 3: Discussion Phase"
 			instructions.visible = true
 			instructions.text = chosenPrompt
 			prompt.text = "%s, convince people to press" % [persuader]
-			skipButton.visible = true
+			discussCanvas.visible = true
 			time = Global.discussTime
 		4:
 			title.text = "Stage 3: Discussion Phase 2"
 			instructions.visible = true
 			instructions.text = chosenPrompt
 			prompt.text = "%s, convince people NOT to press!" % [opposer]
-			skipButton.visible = true
+			discussCanvas.visible = true
 			time = Global.discussTime
 		5: # voting
 			title.text = "Stage 4: Final Voting Round"
-			skipButton.visible = false
+			discussCanvas.visible = false
 			await start_voting_phase()
 			time = 1
 		6: # Scoring and preparation for the next round

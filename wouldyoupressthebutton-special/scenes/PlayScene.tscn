@@ -105,7 +105,6 @@ autowrap_mode = 3
 visible = false
 
 [node name="SkipButton" type="Button" parent="Discussion"]
-visible = false
 offset_left = 471.0
 offset_top = 507.0
 offset_right = 671.0
@@ -140,6 +139,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_syvud")
 text = "No"
 
 [node name="Game End" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("4_aeehb")
 
 [node name="Title" type="Label" parent="Game End"]

@@ -3,7 +3,7 @@
 
 extends Node
 
-var discussTime = 20
-var voteTime = 5
+var discussTime = 40
+var voteTime = 10
 
 var playerNames = []
