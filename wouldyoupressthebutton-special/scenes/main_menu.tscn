@@ -12,19 +12,13 @@ size = Vector2(40, 40)
 
 [sub_resource type="Theme" id="Theme_1foon"]
 
-[node name="Control" type="Control"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-mouse_filter = 1
-
-[node name="Main Menu" type="Node2D" parent="."]
+[node name="Main Menu" type="Node2D"]
 script = ExtResource("1_77ssq")
 
-[node name="Menu" type="CanvasLayer" parent="Main Menu"]
+[node name="Menu" type="CanvasLayer" parent="."]
+visible = false
 
-[node name="Title" type="Label" parent="Main Menu/Menu"]
+[node name="Title" type="Label" parent="Menu"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -38,7 +32,7 @@ text = "Would You Press The Button"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Subtitle" type="Label" parent="Main Menu/Menu"]
+[node name="Subtitle" type="Label" parent="Menu"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -53,7 +47,7 @@ text = "Special"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SettingButton" type="Button" parent="Main Menu/Menu"]
+[node name="SettingButton" type="Button" parent="Menu"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -65,7 +59,7 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 35
 text = "Play"
 
-[node name="Instructions" type="Button" parent="Main Menu/Menu"]
+[node name="Instructions" type="Button" parent="Menu"]
 custom_minimum_size = Vector2(250, 70)
 offset_left = 451.0
 offset_top = 336.0
@@ -74,7 +68,7 @@ offset_bottom = 416.0
 theme_override_font_sizes/font_size = 35
 text = "Instructions"
 
-[node name="Credits Button" type="Button" parent="Main Menu/Menu"]
+[node name="Credits Button" type="Button" parent="Menu"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -86,7 +80,7 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 35
 text = "Credits"
 
-[node name="5Players" type="Label" parent="Main Menu/Menu"]
+[node name="5Players" type="Label" parent="Menu"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -102,10 +96,9 @@ theme_override_font_sizes/font_size = 22
 text = "5+ players required"
 horizontal_alignment = 1
 
-[node name="Settings" type="CanvasLayer" parent="Main Menu"]
-visible = false
+[node name="Settings" type="CanvasLayer" parent="."]
 
-[node name="Background" type="ColorRect" parent="Main Menu/Settings"]
+[node name="Background" type="ColorRect" parent="Settings"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -117,9 +110,10 @@ offset_right = 460.0
 offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 color = Color(0.443137, 0.639216, 0.721569, 1)
 
-[node name="BackButton" type="Button" parent="Main Menu/Settings"]
+[node name="BackButton" type="Button" parent="Settings"]
 offset_left = 165.0
 offset_top = 105.0
 offset_right = 285.0
@@ -127,7 +121,7 @@ offset_bottom = 155.0
 theme_override_font_sizes/font_size = 25
 text = "Back"
 
-[node name="DiscussionTime" type="Label" parent="Main Menu/Settings"]
+[node name="DiscussionTime" type="Label" parent="Settings"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -142,7 +136,7 @@ text = "Discussion Time"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="time text" type="Label" parent="Main Menu/Settings/DiscussionTime"]
+[node name="time text" type="Label" parent="Settings/DiscussionTime"]
 layout_mode = 0
 offset_left = 70.0
 offset_top = 47.0
@@ -153,30 +147,30 @@ text = "10"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="decrease" type="Sprite2D" parent="Main Menu/Settings/DiscussionTime"]
+[node name="decrease" type="Sprite2D" parent="Settings/DiscussionTime"]
 position = Vector2(60, 70)
 rotation = 3.14159
 texture = ExtResource("3_8h1ks")
 script = ExtResource("4_flmkl")
 change = -1
 
-[node name="Area2D" type="Area2D" parent="Main Menu/Settings/DiscussionTime/decrease"]
+[node name="Area2D" type="Area2D" parent="Settings/DiscussionTime/decrease"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Main Menu/Settings/DiscussionTime/decrease/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Settings/DiscussionTime/decrease/Area2D"]
 shape = SubResource("RectangleShape2D_srou7")
 
-[node name="increase" type="Sprite2D" parent="Main Menu/Settings/DiscussionTime"]
+[node name="increase" type="Sprite2D" parent="Settings/DiscussionTime"]
 position = Vector2(180, 70)
 texture = ExtResource("3_8h1ks")
 script = ExtResource("4_flmkl")
 change = 1
 
-[node name="Area2D" type="Area2D" parent="Main Menu/Settings/DiscussionTime/increase"]
+[node name="Area2D" type="Area2D" parent="Settings/DiscussionTime/increase"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Main Menu/Settings/DiscussionTime/increase/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Settings/DiscussionTime/increase/Area2D"]
 shape = SubResource("RectangleShape2D_srou7")
 
-[node name="VotingTime" type="Label" parent="Main Menu/Settings"]
+[node name="VotingTime" type="Label" parent="Settings"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -190,7 +184,7 @@ text = "Voting Time"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="time text" type="Label" parent="Main Menu/Settings/VotingTime"]
+[node name="time text" type="Label" parent="Settings/VotingTime"]
 layout_mode = 0
 offset_left = 70.0
 offset_top = 47.0
@@ -201,30 +195,30 @@ text = "10"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="decrease" type="Sprite2D" parent="Main Menu/Settings/VotingTime"]
+[node name="decrease" type="Sprite2D" parent="Settings/VotingTime"]
 position = Vector2(60, 70)
 rotation = 3.14159
 texture = ExtResource("3_8h1ks")
 script = ExtResource("4_ntwn2")
 change = -1
 
-[node name="Area2D" type="Area2D" parent="Main Menu/Settings/VotingTime/decrease"]
+[node name="Area2D" type="Area2D" parent="Settings/VotingTime/decrease"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Main Menu/Settings/VotingTime/decrease/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Settings/VotingTime/decrease/Area2D"]
 shape = SubResource("RectangleShape2D_srou7")
 
-[node name="increase" type="Sprite2D" parent="Main Menu/Settings/VotingTime"]
+[node name="increase" type="Sprite2D" parent="Settings/VotingTime"]
 position = Vector2(180, 70)
 texture = ExtResource("3_8h1ks")
 script = ExtResource("4_ntwn2")
 change = 1
 
-[node name="Area2D" type="Area2D" parent="Main Menu/Settings/VotingTime/increase"]
+[node name="Area2D" type="Area2D" parent="Settings/VotingTime/increase"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Main Menu/Settings/VotingTime/increase/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Settings/VotingTime/increase/Area2D"]
 shape = SubResource("RectangleShape2D_srou7")
 
-[node name="NumPlayers" type="Label" parent="Main Menu/Settings"]
+[node name="NumPlayers" type="Label" parent="Settings"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -238,7 +232,7 @@ text = "Players"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Main Menu/Settings/NumPlayers"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Settings/NumPlayers"]
 layout_mode = 0
 offset_left = -12.0
 offset_top = 59.0
@@ -248,10 +242,10 @@ theme = SubResource("Theme_1foon")
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Main Menu/Settings/NumPlayers/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/NumPlayers/ScrollContainer"]
 layout_mode = 2
 
-[node name="Line" type="LineEdit" parent="Main Menu/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+[node name="Line" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(230, 35)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
@@ -261,7 +255,7 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Line2" type="LineEdit" parent="Main Menu/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+[node name="Line2" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(230, 35)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
@@ -271,7 +265,7 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Line3" type="LineEdit" parent="Main Menu/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+[node name="Line3" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(230, 35)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
@@ -281,7 +275,7 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Line4" type="LineEdit" parent="Main Menu/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+[node name="Line4" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(230, 35)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
@@ -291,7 +285,7 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Line5" type="LineEdit" parent="Main Menu/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+[node name="Line5" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(230, 35)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
@@ -301,7 +295,7 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Line6" type="LineEdit" parent="Main Menu/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+[node name="Line6" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(230, 35)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
@@ -311,7 +305,7 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Line7" type="LineEdit" parent="Main Menu/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+[node name="Line7" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(230, 35)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
@@ -321,7 +315,7 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Line8" type="LineEdit" parent="Main Menu/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+[node name="Line8" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(230, 35)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
@@ -331,7 +325,7 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Line9" type="LineEdit" parent="Main Menu/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+[node name="Line9" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(230, 35)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
@@ -341,7 +335,7 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Line10" type="LineEdit" parent="Main Menu/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+[node name="Line10" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(230, 35)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
@@ -351,7 +345,7 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Line11" type="LineEdit" parent="Main Menu/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+[node name="Line11" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(230, 35)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
@@ -361,7 +355,7 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Line12" type="LineEdit" parent="Main Menu/Settings/NumPlayers/ScrollContainer/VBoxContainer"]
+[node name="Line12" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(230, 35)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
@@ -371,7 +365,7 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Warning" type="Label" parent="Main Menu/Settings/NumPlayers"]
+[node name="Warning" type="Label" parent="Settings/NumPlayers"]
 visible = false
 layout_mode = 0
 offset_left = 21.0
@@ -382,7 +376,7 @@ theme_override_colors/font_color = Color(0.956863, 0, 0, 1)
 theme_override_font_sizes/font_size = 18
 text = "duplicate name found"
 
-[node name="PlayButton" type="Button" parent="Main Menu/Settings"]
+[node name="PlayButton" type="Button" parent="Settings"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -397,10 +391,10 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 40
 text = "PLAY"
 
-[node name="Instructions" type="CanvasLayer" parent="Main Menu"]
+[node name="Instructions" type="CanvasLayer" parent="."]
 visible = false
 
-[node name="Background" type="ColorRect" parent="Main Menu/Instructions"]
+[node name="Background" type="ColorRect" parent="Instructions"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -414,7 +408,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.443137, 0.639216, 0.721569, 1)
 
-[node name="BackButton" type="Button" parent="Main Menu/Instructions"]
+[node name="BackButton" type="Button" parent="Instructions"]
 offset_left = 165.0
 offset_top = 105.0
 offset_right = 285.0
@@ -422,7 +416,7 @@ offset_bottom = 155.0
 theme_override_font_sizes/font_size = 25
 text = "Back"
 
-[node name="Title" type="Label" parent="Main Menu/Instructions"]
+[node name="Title" type="Label" parent="Instructions"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -436,7 +430,7 @@ text = "How to play"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="instructions" type="ColorRect" parent="Main Menu/Instructions"]
+[node name="instructions" type="ColorRect" parent="Instructions"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -450,7 +444,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.313726)
 
-[node name="text" type="Label" parent="Main Menu/Instructions/instructions"]
+[node name="text" type="Label" parent="Instructions/instructions"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -473,10 +467,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Credits" type="CanvasLayer" parent="Main Menu"]
+[node name="Credits" type="CanvasLayer" parent="."]
 visible = false
 
-[node name="Background" type="ColorRect" parent="Main Menu/Credits"]
+[node name="Background" type="ColorRect" parent="Credits"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -490,7 +484,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.443137, 0.639216, 0.721569, 1)
 
-[node name="BackButton" type="Button" parent="Main Menu/Credits"]
+[node name="BackButton" type="Button" parent="Credits"]
 offset_left = 165.0
 offset_top = 105.0
 offset_right = 285.0
@@ -498,7 +492,7 @@ offset_bottom = 155.0
 theme_override_font_sizes/font_size = 25
 text = "Back"
 
-[node name="Title" type="Label" parent="Main Menu/Credits"]
+[node name="Title" type="Label" parent="Credits"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -512,7 +506,7 @@ text = "Credits"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Names" type="ColorRect" parent="Main Menu/Credits"]
+[node name="Names" type="ColorRect" parent="Credits"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -526,7 +520,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.313726)
 
-[node name="text" type="Label" parent="Main Menu/Credits/Names"]
+[node name="text" type="Label" parent="Credits/Names"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -547,18 +541,18 @@ Brendan Trieu"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="button_down" from="Main Menu/Menu/SettingButton" to="Main Menu" method="_on_setting_button_button_down"]
-[connection signal="button_down" from="Main Menu/Menu/Instructions" to="Main Menu" method="_on_instructions_button_down"]
-[connection signal="button_down" from="Main Menu/Menu/Credits Button" to="Main Menu" method="_on_credits_button_down"]
-[connection signal="button_down" from="Main Menu/Settings/BackButton" to="Main Menu" method="_on_back_button_button_down"]
-[connection signal="mouse_entered" from="Main Menu/Settings/DiscussionTime/decrease/Area2D" to="Main Menu/Settings/DiscussionTime/decrease" method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="Main Menu/Settings/DiscussionTime/decrease/Area2D" to="Main Menu/Settings/DiscussionTime/decrease" method="_on_area_2d_mouse_exited"]
-[connection signal="mouse_entered" from="Main Menu/Settings/DiscussionTime/increase/Area2D" to="Main Menu/Settings/DiscussionTime/increase" method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="Main Menu/Settings/DiscussionTime/increase/Area2D" to="Main Menu/Settings/DiscussionTime/increase" method="_on_area_2d_mouse_exited"]
-[connection signal="mouse_entered" from="Main Menu/Settings/VotingTime/decrease/Area2D" to="Main Menu/Settings/VotingTime/decrease" method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="Main Menu/Settings/VotingTime/decrease/Area2D" to="Main Menu/Settings/VotingTime/decrease" method="_on_area_2d_mouse_exited"]
-[connection signal="mouse_entered" from="Main Menu/Settings/VotingTime/increase/Area2D" to="Main Menu/Settings/VotingTime/increase" method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="Main Menu/Settings/VotingTime/increase/Area2D" to="Main Menu/Settings/VotingTime/increase" method="_on_area_2d_mouse_exited"]
-[connection signal="button_down" from="Main Menu/Settings/PlayButton" to="Main Menu" method="_on_play_button_button_down"]
-[connection signal="button_down" from="Main Menu/Instructions/BackButton" to="Main Menu" method="_on_back_button_button_down"]
-[connection signal="button_down" from="Main Menu/Credits/BackButton" to="Main Menu" method="_on_back_button_button_down"]
+[connection signal="button_down" from="Menu/SettingButton" to="." method="_on_setting_button_button_down"]
+[connection signal="button_down" from="Menu/Instructions" to="." method="_on_instructions_button_down"]
+[connection signal="button_down" from="Menu/Credits Button" to="." method="_on_credits_button_down"]
+[connection signal="button_down" from="Settings/BackButton" to="." method="_on_back_button_button_down"]
+[connection signal="mouse_entered" from="Settings/DiscussionTime/decrease/Area2D" to="Settings/DiscussionTime/decrease" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Settings/DiscussionTime/decrease/Area2D" to="Settings/DiscussionTime/decrease" method="_on_area_2d_mouse_exited"]
+[connection signal="mouse_entered" from="Settings/DiscussionTime/increase/Area2D" to="Settings/DiscussionTime/increase" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Settings/DiscussionTime/increase/Area2D" to="Settings/DiscussionTime/increase" method="_on_area_2d_mouse_exited"]
+[connection signal="mouse_entered" from="Settings/VotingTime/decrease/Area2D" to="Settings/VotingTime/decrease" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Settings/VotingTime/decrease/Area2D" to="Settings/VotingTime/decrease" method="_on_area_2d_mouse_exited"]
+[connection signal="mouse_entered" from="Settings/VotingTime/increase/Area2D" to="Settings/VotingTime/increase" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Settings/VotingTime/increase/Area2D" to="Settings/VotingTime/increase" method="_on_area_2d_mouse_exited"]
+[connection signal="button_down" from="Settings/PlayButton" to="." method="_on_play_button_button_down"]
+[connection signal="button_down" from="Instructions/BackButton" to="." method="_on_back_button_button_down"]
+[connection signal="button_down" from="Credits/BackButton" to="." method="_on_back_button_button_down"]

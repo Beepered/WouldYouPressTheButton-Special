@@ -3,12 +3,15 @@ extends Node2D
 @onready var playerNames = $Settings/NumPlayers/ScrollContainer/VBoxContainer.get_children()
 
 @onready var mainMenu = $Menu
+@onready var settings = $Settings
+@onready var instructions = $Instructions
+@onready var credits = $Credits
 
 func _ready() -> void:
-	$Menu.visible = true;
-	$Settings.visible = false;
-	$Instructions.visible = false;
-	$Credits.visible = false;
+	mainMenu.visible = true;
+	settings.visible = false;
+	instructions.visible = false;
+	credits.visible = false;
 
 func _process(_delta: float) -> void:
 	$"Settings/DiscussionTime/time text".text = str(Global.discussTime)
@@ -20,23 +23,21 @@ func _process(_delta: float) -> void:
 
 func _on_setting_button_button_down() -> void:
 	mainMenu.visible = false
-	$Settings.visible = true;
+	settings.visible = true;
 
 func _on_credits_button_down() -> void:
 	mainMenu.visible = false
-	$Credits.visible = true;
-	
+	credits.visible = true;
 
 func _on_instructions_button_down() -> void:
 	mainMenu.visible = false
-	$Instructions.visible = true;
+	instructions.visible = true;
 
-	
 func _on_back_button_button_down() -> void:
 	mainMenu.visible = true
-	$Settings.visible = false;
-	$Credits.visible = false;
-	$Instructions.visible = false;
+	settings.visible = false;
+	credits.visible = false;
+	instructions.visible = false;
 
 func _on_play_button_button_down() -> void:
 	for player_name in playerNames:
