@@ -14,6 +14,7 @@ extends Node2D
 @onready var skipButton = $Discussion/SkipButton
 
 @onready var voteCanvas = $Voting
+@onready var countdownText = $Voting/Countdown
 @onready var voteButton = $Voting/YesButton
 @onready var noButton = $"Voting/NoButton"
 
@@ -57,9 +58,7 @@ func _ready() -> void:
 	randomize()
 	prompts.shuffle()
 	
-	points["a"] = 10
-	end_game()
-	#stage()
+	stage()
 
 func _process(_delta: float) -> void:
 	progressBar.value = (timer.time_left / timer.wait_time) * 100
@@ -121,9 +120,27 @@ func start_voting_phase() -> void:
 	hasVoted.clear()
 	finalVotes = {}
 	currentPlayer = "" # Reset the current player
-
-	# Show the voting canvas
+	
 	voteCanvas.visible = true
+	prompt.visible = false
+	instructions.visible = false
+	countdownText.visible = true
+	
+	# 3-2-1
+	var countdownTime = 3
+	var time = countdownTime
+	countdownText.text = str(ceil(time))
+	for i in range(countdownTime):
+		await get_tree().create_timer(1.0).timeout
+		time -= 1
+		countdownText.text = str((time))
+		countdownText.scale *= 1.2
+	countdownText.visible = false
+	
+	# Show the voting canvas
+	voteButton.visible = true
+	noButton.visible = true
+	prompt.visible = true
 	instructions.visible = true
 	prompt.text = chosenPrompt
 
@@ -143,6 +160,8 @@ func start_voting_phase() -> void:
 
 	# Hide the voting button and stop the timer
 	voteCanvas.visible = false
+	voteButton.visible = false
+	noButton.visible = false
 	timer.stop()
 	print("Voting phase complete. Total votes:", hasVoted.size())
 

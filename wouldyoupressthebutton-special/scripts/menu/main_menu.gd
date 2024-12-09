@@ -8,7 +8,7 @@ func _ready() -> void:
 	$Menu.visible = true;
 	$Settings.visible = false;
 	$Instructions.visible = false;
-	$Credit.visible = false;
+	$Credits.visible = false;
 
 func _process(_delta: float) -> void:
 	$"Settings/DiscussionTime/time text".text = str(Global.discussTime)

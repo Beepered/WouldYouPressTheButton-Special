@@ -113,9 +113,24 @@ theme_override_font_sizes/font_size = 20
 text = "skip discussion"
 
 [node name="Voting" type="CanvasLayer" parent="."]
-visible = false
+
+[node name="Countdown" type="Label" parent="Voting"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -18.0
+offset_right = 20.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(20, 82.5)
+theme_override_font_sizes/font_size = 120
 
 [node name="YesButton" type="Button" parent="Voting"]
+visible = false
 offset_left = 514.0
 offset_top = 395.0
 offset_right = 624.0
@@ -127,6 +142,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_lwrul")
 text = "PRESS"
 
 [node name="NoButton" type="Button" parent="Voting"]
+visible = false
 offset_left = 459.0
 offset_top = 534.0
 offset_right = 679.0
