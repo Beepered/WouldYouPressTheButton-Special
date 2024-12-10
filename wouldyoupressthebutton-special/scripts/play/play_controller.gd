@@ -1,5 +1,7 @@
 extends Node2D
 
+signal beginMenu
+
 @onready var promptReader = $PromptReader
 
 @onready var timer = $Timer

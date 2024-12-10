@@ -1,5 +1,7 @@
 extends Node2D
 
+signal beginPlay
+
 @onready var playerNames = $Settings/NumPlayers/ScrollContainer/VBoxContainer.get_children()
 
 @onready var mainMenu = $Menu
@@ -43,7 +45,7 @@ func _on_play_button_button_down() -> void:
 	for player_name in playerNames:
 		if(player_name.text != ""):
 			Global.playerNames.push_back(player_name.text)
-	get_tree().change_scene_to_file("res://scenes/PlayScene.tscn")
+	beginPlay.emit()
 
 @onready var warning = $Settings/NumPlayers/Warning
 func checkNumPlayers():

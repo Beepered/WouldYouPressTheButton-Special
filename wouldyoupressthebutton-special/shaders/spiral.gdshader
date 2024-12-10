@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-uniform vec2 resolution = vec2(1280, 1024);
+uniform vec2 resolution = vec2(1280, 800);
 uniform vec3 spiralColor: source_color = vec3(0.2, 0.6, 0.3);
 uniform float frequency: hint_range(1.0, 10.0, 0.1) = 8;
 uniform float speed: hint_range(0.1, 1, 0.1) = 0.2;

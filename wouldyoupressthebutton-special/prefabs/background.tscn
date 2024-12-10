@@ -6,11 +6,11 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1jmgw"]
 shader = ExtResource("3_8hk8y")
-shader_parameter/resolution = Vector2(1280, 1024)
+shader_parameter/resolution = Vector2(1280, 800)
 shader_parameter/spiralColor = Color(0.485043, 0.37967, 1, 1)
 shader_parameter/frequency = 8.4
 shader_parameter/speed = 0.4
-shader_parameter/brightness = 2.5
+shader_parameter/brightness = 3.0
 shader_parameter/balance = 1.0
 shader_parameter/octaves = 3.0
 
@@ -23,7 +23,7 @@ material = SubResource("ShaderMaterial_1jmgw")
 offset_left = -1.0
 offset_top = -1.0
 offset_right = 1279.0
-offset_bottom = 1023.0
+offset_bottom = 799.0
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

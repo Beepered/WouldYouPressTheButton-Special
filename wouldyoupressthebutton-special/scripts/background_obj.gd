@@ -17,4 +17,3 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	rotation += 0.07 * delta
 	position.x += xMove * delta
-	print(position.x)
