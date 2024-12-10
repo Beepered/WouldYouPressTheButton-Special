@@ -7,3 +7,5 @@ var discussTime = 40
 var voteTime = 10
 
 var playerNames = []
+
+var file_path = "res://prompts/prompts.txt"

@@ -38,7 +38,7 @@ var chosenPrompt
 var persuader; var opposer
 var points = {} # ex: {a:2, b:0, c:1, d:5, e:2}
 
-@onready var prompts = promptReader.get_text_list()
+@onready var prompts = promptReader.get_text_list(Global.file_path)
 
 func _ready() -> void:
 	# Initialize points array
