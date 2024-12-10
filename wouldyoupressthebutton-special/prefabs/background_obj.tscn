@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://j2bolesia06k"]
+
+[ext_resource type="Script" path="res://scripts/background_obj.gd" id="1_lbnen"]
+
+[node name="BackgroundObj" type="ColorRect"]
+offset_right = 20.0
+offset_bottom = 20.0
+script = ExtResource("1_lbnen")

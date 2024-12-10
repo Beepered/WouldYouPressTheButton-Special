@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://tcc1u6bbctds"]
+
+[ext_resource type="Script" path="res://scripts/background.gd" id="1_4ryoy"]
+[ext_resource type="PackedScene" uid="uid://j2bolesia06k" path="res://prefabs/background_obj.tscn" id="2_aekbl"]
+[ext_resource type="Shader" path="res://shaders/spiral.gdshader" id="3_8hk8y"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1jmgw"]
+shader = ExtResource("3_8hk8y")
+shader_parameter/resolution = Vector2(1280, 1024)
+shader_parameter/spiralColor = Color(0.485043, 0.37967, 1, 1)
+shader_parameter/frequency = 8.4
+shader_parameter/speed = 0.4
+shader_parameter/brightness = 2.5
+shader_parameter/balance = 1.0
+shader_parameter/octaves = 3.0
+
+[node name="Background" type="Node2D"]
+script = ExtResource("1_4ryoy")
+backgroundObj = ExtResource("2_aekbl")
+
+[node name="Spiral" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_1jmgw")
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 1279.0
+offset_bottom = 1023.0
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
