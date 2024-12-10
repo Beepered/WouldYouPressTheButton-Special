@@ -109,7 +109,6 @@ text = "5+ players required"
 horizontal_alignment = 1
 
 [node name="Settings" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="Background" type="ColorRect" parent="Settings"]
 anchors_preset = 8
@@ -138,10 +137,10 @@ text = "Back"
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -155.5
-offset_top = 237.0
-offset_right = 164.5
-offset_bottom = 297.0
+offset_left = -307.0
+offset_top = 245.0
+offset_right = 13.0
+offset_bottom = 305.0
 grow_horizontal = 2
 pivot_offset = Vector2(160, 30)
 theme_override_fonts/font = SubResource("FontVariation_jeu8t")
@@ -151,22 +150,29 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="time text" type="Label" parent="Settings/DiscussionTime"]
-layout_mode = 0
-offset_left = 105.5
-offset_top = 50.0
-offset_right = 195.5
-offset_bottom = 99.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -45.0
+offset_top = -10.0
+offset_right = 45.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 0
 theme_override_font_sizes/font_size = 35
 text = "10"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="decrease" type="Sprite2D" parent="Settings/DiscussionTime"]
-position = Vector2(90, 75)
+position = Vector2(100, 75)
 rotation = 3.14159
 texture = ExtResource("3_8h1ks")
 script = ExtResource("4_flmkl")
-change = -1
+change = -2
 
 [node name="Area2D" type="Area2D" parent="Settings/DiscussionTime/decrease"]
 
@@ -174,10 +180,10 @@ change = -1
 shape = SubResource("RectangleShape2D_srou7")
 
 [node name="increase" type="Sprite2D" parent="Settings/DiscussionTime"]
-position = Vector2(210, 75)
+position = Vector2(220, 75)
 texture = ExtResource("3_8h1ks")
 script = ExtResource("4_flmkl")
-change = 1
+change = 2
 
 [node name="Area2D" type="Area2D" parent="Settings/DiscussionTime/increase"]
 
@@ -188,9 +194,9 @@ shape = SubResource("RectangleShape2D_srou7")
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -114.5
+offset_left = -266.0
 offset_top = 398.0
-offset_right = 114.5
+offset_right = -37.0
 offset_bottom = 453.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 40
@@ -199,11 +205,18 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="time text" type="Label" parent="Settings/VotingTime"]
-layout_mode = 0
-offset_left = 70.0
-offset_top = 47.0
-offset_right = 160.0
-offset_bottom = 96.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -45.0
+offset_top = -5.0
+offset_right = 45.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 0
 theme_override_font_sizes/font_size = 35
 text = "10"
 horizontal_alignment = 1
@@ -214,7 +227,7 @@ position = Vector2(60, 75)
 rotation = 3.14159
 texture = ExtResource("3_8h1ks")
 script = ExtResource("4_ntwn2")
-change = -2
+change = -1
 
 [node name="Area2D" type="Area2D" parent="Settings/VotingTime/decrease"]
 
@@ -225,7 +238,7 @@ shape = SubResource("RectangleShape2D_srou7")
 position = Vector2(180, 75)
 texture = ExtResource("3_8h1ks")
 script = ExtResource("4_ntwn2")
-change = 2
+change = 1
 
 [node name="Area2D" type="Area2D" parent="Settings/VotingTime/increase"]
 
@@ -236,12 +249,12 @@ shape = SubResource("RectangleShape2D_srou7")
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 229.0
-offset_top = 187.0
-offset_right = 454.0
-offset_bottom = 242.0
+offset_left = 157.0
+offset_top = 159.0
+offset_right = 382.0
+offset_bottom = 222.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 45
 text = "Players"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -250,8 +263,8 @@ vertical_alignment = 1
 layout_mode = 0
 offset_left = -12.0
 offset_top = 59.0
-offset_right = 248.0
-offset_bottom = 409.0
+offset_right = 258.0
+offset_bottom = 459.0
 theme = SubResource("Theme_1foon")
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
@@ -260,7 +273,7 @@ vertical_scroll_mode = 2
 layout_mode = 2
 
 [node name="Line" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(230, 35)
+custom_minimum_size = Vector2(250, 40)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
 max_length = 20
@@ -270,7 +283,7 @@ middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
 [node name="Line2" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(230, 35)
+custom_minimum_size = Vector2(250, 40)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
 max_length = 20
@@ -280,7 +293,7 @@ middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
 [node name="Line3" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(230, 35)
+custom_minimum_size = Vector2(250, 40)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
 max_length = 20
@@ -290,7 +303,7 @@ middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
 [node name="Line4" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(230, 35)
+custom_minimum_size = Vector2(250, 40)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
 max_length = 20
@@ -300,7 +313,7 @@ middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
 [node name="Line5" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(230, 35)
+custom_minimum_size = Vector2(250, 40)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
 max_length = 20
@@ -310,7 +323,7 @@ middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
 [node name="Line6" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(230, 35)
+custom_minimum_size = Vector2(250, 40)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
 max_length = 20
@@ -320,7 +333,7 @@ middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
 [node name="Line7" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(230, 35)
+custom_minimum_size = Vector2(250, 40)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
 max_length = 20
@@ -330,7 +343,7 @@ middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
 [node name="Line8" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(230, 35)
+custom_minimum_size = Vector2(250, 40)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
 max_length = 20
@@ -340,7 +353,7 @@ middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
 [node name="Line9" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(230, 35)
+custom_minimum_size = Vector2(250, 40)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
 max_length = 20
@@ -350,7 +363,7 @@ middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
 [node name="Line10" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(230, 35)
+custom_minimum_size = Vector2(250, 40)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
 max_length = 20
@@ -360,7 +373,7 @@ middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
 [node name="Line11" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(230, 35)
+custom_minimum_size = Vector2(250, 40)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
 max_length = 20
@@ -370,7 +383,7 @@ middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
 [node name="Line12" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(230, 35)
+custom_minimum_size = Vector2(250, 40)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
 max_length = 20
@@ -380,7 +393,7 @@ middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
 [node name="Line13" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(230, 35)
+custom_minimum_size = Vector2(250, 40)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
 max_length = 20
@@ -390,7 +403,7 @@ middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
 [node name="Line14" type="LineEdit" parent="Settings/NumPlayers/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(230, 35)
+custom_minimum_size = Vector2(250, 40)
 layout_mode = 2
 placeholder_text = "BLAH BLAH"
 max_length = 20
@@ -416,10 +429,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -100.0
-offset_top = -229.0
-offset_right = 100.0
-offset_bottom = -159.0
+offset_left = -251.5
+offset_top = -246.0
+offset_right = -51.5
+offset_bottom = -176.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 40
