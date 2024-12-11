@@ -13,11 +13,9 @@ func _input(event):
 			if(Global.discussTime + change >= minTime && Global.discussTime + change <= maxTime):
 				Global.discussTime += change;
 
-
 func _on_area_2d_mouse_entered() -> void:
 	mouseOver = true
 	modulate = Color(0, 0, 1)
-
 
 func _on_area_2d_mouse_exited() -> void:
 	mouseOver = false

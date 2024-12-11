@@ -1,9 +1,5 @@
 extends CanvasLayer
 
-@onready var ideaText = $"idea/idea text"
-var ideas = ["lemon", "skateboard"]
-var ideaIndex = 0
-
 func _on_save_pressed() -> void:
 	if($name.text):
 		var path = "res://prompts/" + $name.text
@@ -21,10 +17,4 @@ func _load_path(path):
 		var content = file.get_as_text()
 		$name.text = path
 		$prompts.text = content
-
-func _on_generate_idea_pressed() -> void:
-	var newIdea = randi_range(0, ideas.size() - 1)
-	while(ideaIndex == newIdea):
-		newIdea = randi_range(0, ideas.size() - 1)
-	ideaIndex = newIdea
-	ideaText.text = ideas[ideaIndex]
+		file.close()

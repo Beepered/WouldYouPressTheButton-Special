@@ -2,6 +2,8 @@ extends Node2D
 
 signal beginPlay
 
+@export var customSelectionMenu: PackedScene
+
 @onready var playerNames = $Settings/NumPlayers/ScrollContainer/VBoxContainer.get_children()
 
 @onready var mainMenu = $Menu
@@ -27,13 +29,22 @@ func _on_setting_button_button_down() -> void:
 	mainMenu.visible = false
 	settings.visible = true;
 
-func _on_credits_button_down() -> void:
-	mainMenu.visible = false
-	credits.visible = true;
-
 func _on_instructions_button_down() -> void:
 	mainMenu.visible = false
 	instructions.visible = true;
+
+func _on_custom_button_pressed() -> void:
+	mainMenu.visible = false
+	var customMenu = customSelectionMenu.instantiate()
+	add_child(customMenu)
+	customMenu.connect("CustomFinished", custom_finished)
+
+func custom_finished():
+	mainMenu.visible = true
+
+func _on_credits_button_down() -> void:
+	mainMenu.visible = false
+	credits.visible = true;
 
 func _on_back_button_button_down() -> void:
 	mainMenu.visible = true
