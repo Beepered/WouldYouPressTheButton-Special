@@ -1,6 +1,6 @@
 extends ColorRect
 
-signal editPath
+signal editItem(pathName)
 
 @export var pathName = ""
 
@@ -8,10 +8,9 @@ func _ready() -> void:
 	$Name.text = pathName
 
 func _on_edit_pressed() -> void:
-	editPath.emit()
+	editItem.emit(pathName)
 
 func _on_delete_pressed() -> void:
-	print("delete cutosmsoifjiojioj")
-	var path = "res://prompts/custom" + pathName
+	var path = "res://prompts/custom/" + pathName + ".txt"
 	DirAccess.remove_absolute(path)
 	queue_free()

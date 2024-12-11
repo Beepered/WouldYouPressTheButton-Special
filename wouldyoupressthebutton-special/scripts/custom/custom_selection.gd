@@ -28,11 +28,17 @@ func _on_main_back_pressed() -> void:
 
 @export var customItem: PackedScene
 func create_item(pathName):
+	var shortName = pathName.substr(0, pathName.find(".txt"))
 	var item = customItem.instantiate()
-	item.pathName = pathName
+	item.pathName = shortName
+	item.editItem.connect(edit_item)
 	$"choice menu/ScrollContainer/VBoxContainer".add_child(item)
 
-func fill_choices():
+func edit_item(path):
+	_on_create_select_pressed()
+	$"create menu"._load_path(path)
+
+func fill_choices(): # fill from custom folder
 	var dir = DirAccess.open("res://prompts/custom")
 	if dir:
 		dir.list_dir_begin()

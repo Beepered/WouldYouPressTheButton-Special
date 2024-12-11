@@ -49,6 +49,7 @@ theme_override_font_sizes/font_size = 50
 text = "Custom Settings"
 
 [node name="choice menu" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="create select" type="Button" parent="choice menu"]
 anchors_preset = 5
@@ -81,7 +82,6 @@ horizontal_scroll_mode = 0
 layout_mode = 2
 
 [node name="create menu" type="CanvasLayer" parent="."]
-visible = false
 script = ExtResource("1_k86w4")
 
 [node name="back" type="Button" parent="create menu"]
@@ -151,6 +151,16 @@ theme_override_font_sizes/font_size = 60
 text = "Name Required"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="saved message" type="Label" parent="create menu"]
+visible = false
+offset_left = 899.0
+offset_top = 227.0
+offset_right = 950.0
+offset_bottom = 253.0
+theme_override_colors/font_color = Color(0.717593, 0.75168, 0.170692, 1)
+theme_override_font_sizes/font_size = 18
+text = "saved"
 
 [connection signal="pressed" from="main/MainBack" to="." method="_on_main_back_pressed"]
 [connection signal="pressed" from="choice menu/create select" to="." method="_on_create_select_pressed"]

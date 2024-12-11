@@ -44,6 +44,10 @@ func set_prompt_choice(path):
 	$"UseCustom/choice name".text = path
 	Global.file_path = "res://prompts/custom" + path
 
+func _on_choose_default_pressed() -> void:
+	Global.file_path = "res://prompts/prompts.txt"
+	$"UseCustom/choice name".text = "default"
+
 func _on_play_button_button_down() -> void:
 	for player_name in playerNames:
 		if(player_name.text != ""):
