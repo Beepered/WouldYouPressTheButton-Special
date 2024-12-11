@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=3 uid="uid://bxed8hhwxeufi"]
 
-[ext_resource type="PackedScene" uid="uid://c3fiwj01jj0ip" path="res://prefabs/prompt_reader.tscn" id="1_mfmib"]
+[ext_resource type="PackedScene" uid="uid://c3fiwj01jj0ip" path="res://prefabs/play/prompt_reader.tscn" id="1_mfmib"]
 [ext_resource type="Script" path="res://scripts/play/play_controller.gd" id="1_o8j0k"]
-[ext_resource type="PackedScene" uid="uid://db432jeviyawg" path="res://prefabs/tiddle.tscn" id="3_qt80k"]
+[ext_resource type="PackedScene" uid="uid://db432jeviyawg" path="res://prefabs/play/tiddle.tscn" id="3_qt80k"]
 [ext_resource type="Script" path="res://scripts/play/game_end.gd" id="4_aeehb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cwot8"]

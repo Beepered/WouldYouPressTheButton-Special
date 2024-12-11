@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/custom/custom_selection.gd" id="1_ajl7c"]
 [ext_resource type="Script" path="res://scripts/custom/create.gd" id="1_k86w4"]
-[ext_resource type="PackedScene" uid="uid://capggth7ryx3d" path="res://prefabs/custom_item.tscn" id="3_eddu3"]
+[ext_resource type="PackedScene" uid="uid://capggth7ryx3d" path="res://prefabs/menu/custom_item.tscn" id="3_eddu3"]
 
 [sub_resource type="Theme" id="Theme_wda7e"]
 

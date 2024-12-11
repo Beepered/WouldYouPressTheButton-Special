@@ -1,10 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://bdyqluc1cfnb8"]
+[gd_scene load_steps=11 format=3 uid="uid://bdyqluc1cfnb8"]
 
 [ext_resource type="Script" path="res://scripts/menu/main_menu.gd" id="1_77ssq"]
 [ext_resource type="PackedScene" uid="uid://bnt4e3i3svop0" path="res://scenes/custom_selection.tscn" id="2_qn2u8"]
 [ext_resource type="Texture2D" uid="uid://dve4ik6nav6mk" path="res://sprites/arrow.png" id="3_8h1ks"]
+[ext_resource type="Script" path="res://scripts/menu/settingsMenu.gd" id="3_mpylp"]
 [ext_resource type="Script" path="res://scripts/menu/discussSettingArrow.gd" id="4_flmkl"]
 [ext_resource type="Script" path="res://scripts/menu/voteSettingArrow.gd" id="4_ntwn2"]
+
+[sub_resource type="Theme" id="Theme_32jrn"]
 
 [sub_resource type="FontVariation" id="FontVariation_jeu8t"]
 
@@ -127,7 +130,7 @@ text = "5+ players required"
 horizontal_alignment = 1
 
 [node name="Settings" type="CanvasLayer" parent="."]
-visible = false
+script = ExtResource("3_mpylp")
 
 [node name="Background" type="ColorRect" parent="Settings"]
 anchors_preset = 8
@@ -151,6 +154,80 @@ offset_right = 260.0
 offset_bottom = 180.0
 theme_override_font_sizes/font_size = 25
 text = "Back"
+
+[node name="UseCustom" type="Label" parent="Settings"]
+offset_left = 194.0
+offset_top = 213.0
+offset_right = 396.0
+offset_bottom = 248.0
+theme_override_font_sizes/font_size = 25
+text = "Custom Prompts"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="currently using" type="Label" parent="Settings/UseCustom"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.5
+offset_top = 16.5
+offset_right = 58.5
+offset_bottom = 39.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.237539, 0.237539, 0.237539, 1)
+text = "currently using"
+
+[node name="choice name" type="Label" parent="Settings/UseCustom"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -115.0
+offset_top = 54.0
+offset_right = 115.0
+offset_bottom = 80.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "default"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="choose default" type="Button" parent="Settings/UseCustom"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -70.0
+offset_top = 84.0
+offset_right = 70.0
+offset_bottom = 114.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 15
+text = "default"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Settings/UseCustom"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.0
+offset_top = 100.5
+offset_right = 140.0
+offset_bottom = 420.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_32jrn")
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/UseCustom/ScrollContainer"]
+layout_mode = 2
 
 [node name="DiscussionTime" type="Label" parent="Settings"]
 anchors_preset = 5
@@ -620,6 +697,6 @@ vertical_alignment = 1
 [connection signal="mouse_exited" from="Settings/VotingTime/decrease/Area2D" to="Settings/VotingTime/decrease" method="_on_area_2d_mouse_exited"]
 [connection signal="mouse_entered" from="Settings/VotingTime/increase/Area2D" to="Settings/VotingTime/increase" method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Settings/VotingTime/increase/Area2D" to="Settings/VotingTime/increase" method="_on_area_2d_mouse_exited"]
-[connection signal="button_down" from="Settings/PlayButton" to="." method="_on_play_button_button_down"]
+[connection signal="button_down" from="Settings/PlayButton" to="Settings" method="_on_play_button_button_down"]
 [connection signal="button_down" from="Instructions/BackButton" to="." method="_on_back_button_button_down"]
 [connection signal="button_down" from="Credits/BackButton" to="." method="_on_back_button_button_down"]

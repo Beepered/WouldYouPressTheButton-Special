@@ -10,6 +10,7 @@ signal CustomFinished
 func _ready() -> void:
 	choiceMenu.visible = true
 	createMenu.visible = false
+	fill_choices()
 
 func _on_create_select_pressed() -> void:
 	choiceMenu.visible = false
@@ -26,7 +27,19 @@ func _on_main_back_pressed() -> void:
 	queue_free()
 
 @export var customItem: PackedScene
-func createPath(pathName):
+func create_item(pathName):
 	var item = customItem.instantiate()
 	item.pathName = pathName
 	$"choice menu/ScrollContainer/VBoxContainer".add_child(item)
+
+func fill_choices():
+	var dir = DirAccess.open("res://prompts/custom")
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				print("Found directory: " + file_name)
+			else:
+				create_item(file_name)
+			file_name = dir.get_next()

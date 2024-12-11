@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://tcc1u6bbctds"]
 
 [ext_resource type="Script" path="res://scripts/background.gd" id="1_4ryoy"]
-[ext_resource type="PackedScene" uid="uid://j2bolesia06k" path="res://prefabs/background_obj.tscn" id="2_aekbl"]
+[ext_resource type="PackedScene" uid="uid://j2bolesia06k" path="res://prefabs/menu/background_obj.tscn" id="2_aekbl"]
 [ext_resource type="Shader" path="res://shaders/spiral.gdshader" id="3_8hk8y"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1jmgw"]
