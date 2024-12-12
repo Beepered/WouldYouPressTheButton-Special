@@ -38,7 +38,23 @@ var chosenPrompt
 var persuader; var opposer
 var points = {} # ex: {a:2, b:0, c:1, d:5, e:2}
 
-@onready var prompts = promptReader.get_text_list(Global.file_path)
+@onready var prompts = get_prompts()
+
+func get_prompts():
+	var mainList = promptReader.get_text_list(Global.file_path)
+	print(mainList)
+	print("before ", mainList.size())
+	if(mainList.size() < Global.playerNames.size() * 2):
+		var list = FileAccess.open("res://prompts/prompts.txt", FileAccess.READ)
+		while (!list.eof_reached() && mainList.size() < Global.playerNames.size() * 2):
+			var x = list.get_line()
+			if(randi_range(0, 2) == 0):
+				print(x)
+				mainList.append(x)
+	print("after ", mainList.size())
+	randomize()
+	mainList.shuffle()
+	return mainList
 
 func _ready() -> void:
 	# Initialize points array

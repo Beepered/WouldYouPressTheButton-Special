@@ -133,6 +133,30 @@ theme_override_font_sizes/font_size = 20
 placeholder_text = "put stuff here
 you can have multiple lines"
 
+[node name="saved message" type="Label" parent="create menu"]
+visible = false
+offset_left = 895.0
+offset_top = 227.0
+offset_right = 946.0
+offset_bottom = 253.0
+theme_override_colors/font_color = Color(0.717593, 0.75168, 0.170692, 1)
+theme_override_font_sizes/font_size = 18
+text = "saved"
+
+[node name="name exists" type="Label" parent="create menu"]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -87.0
+offset_top = 194.0
+offset_right = 87.0
+offset_bottom = 220.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.815686, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "name already exists"
+
 [node name="warning" type="Label" parent="create menu"]
 visible = false
 anchors_preset = 8
@@ -152,17 +176,8 @@ text = "Name Required"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="saved message" type="Label" parent="create menu"]
-visible = false
-offset_left = 899.0
-offset_top = 227.0
-offset_right = 950.0
-offset_bottom = 253.0
-theme_override_colors/font_color = Color(0.717593, 0.75168, 0.170692, 1)
-theme_override_font_sizes/font_size = 18
-text = "saved"
-
 [connection signal="pressed" from="main/MainBack" to="." method="_on_main_back_pressed"]
 [connection signal="pressed" from="choice menu/create select" to="." method="_on_create_select_pressed"]
 [connection signal="pressed" from="create menu/back" to="." method="_on_back_pressed"]
+[connection signal="text_changed" from="create menu/name" to="create menu" method="_on_name_text_changed"]
 [connection signal="pressed" from="create menu/save" to="create menu" method="_on_save_pressed"]

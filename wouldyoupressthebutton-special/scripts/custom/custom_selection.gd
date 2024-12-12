@@ -16,6 +16,7 @@ func _on_create_select_pressed() -> void:
 	choiceMenu.visible = false
 	createMenu.visible = true
 	mainBack.visible = false
+	createMenu.creating = true
 
 func _on_back_pressed() -> void:
 	choiceMenu.visible = true
@@ -36,7 +37,8 @@ func create_item(pathName):
 
 func edit_item(path):
 	_on_create_select_pressed()
-	$"create menu"._load_path(path)
+	createMenu.creating = false
+	createMenu._load_path(path)
 
 func fill_choices(): # fill from custom folder
 	var dir = DirAccess.open("res://prompts/custom")
