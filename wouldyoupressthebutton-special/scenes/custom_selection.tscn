@@ -49,7 +49,6 @@ theme_override_font_sizes/font_size = 50
 text = "Custom Settings"
 
 [node name="choice menu" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="create select" type="Button" parent="choice menu"]
 anchors_preset = 5
@@ -82,6 +81,7 @@ horizontal_scroll_mode = 0
 layout_mode = 2
 
 [node name="create menu" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("1_k86w4")
 
 [node name="back" type="Button" parent="create menu"]
