@@ -42,16 +42,14 @@ var points = {} # ex: {a:2, b:0, c:1, d:5, e:2}
 
 func get_prompts():
 	var mainList = promptReader.get_text_list(Global.file_path)
-	print(mainList)
-	print("before ", mainList.size())
-	if(mainList.size() < Global.playerNames.size() * 2):
-		var list = FileAccess.open("res://prompts/prompts.txt", FileAccess.READ)
-		while (!list.eof_reached() && mainList.size() < Global.playerNames.size() * 2):
+	if(mainList.size() < numRounds):
+		var list = FileAccess.open(Global.default_file, FileAccess.READ)
+		while (mainList.size() < numRounds):
 			var x = list.get_line()
-			if(randi_range(0, 2) == 0):
-				print(x)
+			if(randi_range(0, 3) == 0):
 				mainList.append(x)
-	print("after ", mainList.size())
+			if(list.eof_reached()):
+				list.seek(0)
 	randomize()
 	mainList.shuffle()
 	return mainList

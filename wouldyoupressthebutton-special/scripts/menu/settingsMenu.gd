@@ -25,7 +25,7 @@ func checkNumPlayers():
 	return count
 
 func fill_custom_container():
-	var dir = DirAccess.open("res://prompts/custom")
+	var dir = DirAccess.open(Global.custom_folder_path)
 	if dir:
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
@@ -37,16 +37,16 @@ func fill_custom_container():
 				var shortName = file_name.substr(0, file_name.find(".txt"))
 				b.text = shortName
 				b.set_custom_minimum_size(Vector2(270, 30))
-				b.pressed.connect(set_prompt_choice.bind(shortName))
+				b.pressed.connect(set_prompt_choice.bind(file_name))
 				$UseCustom/ScrollContainer/VBoxContainer.add_child(b)
 			file_name = dir.get_next()
 
 func set_prompt_choice(path):
-	Global.file_path = "res://prompts/custom/" + path + ".txt"
-	$"UseCustom/choice name".text = path
+	Global.file_path = Global.custom_folder_path + path
+	$"UseCustom/choice name".text = path.substr(0, path.find(".txt"))
 
 func _on_choose_default_pressed() -> void:
-	Global.file_path = "res://prompts/prompts.txt"
+	Global.file_path = Global.default_file
 	$"UseCustom/choice name".text = "default"
 
 func _on_play_button_button_down() -> void:

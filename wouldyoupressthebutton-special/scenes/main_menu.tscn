@@ -130,6 +130,7 @@ text = "5+ players required"
 horizontal_alignment = 1
 
 [node name="Settings" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("3_mpylp")
 
 [node name="Background" type="ColorRect" parent="Settings"]
