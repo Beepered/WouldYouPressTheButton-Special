@@ -41,7 +41,7 @@ var points = {} # ex: {a:2, b:0, c:1, d:5, e:2}
 @onready var prompts = really_get_prompts()
 
 func really_get_prompts():
-	var load = promptReader.initialize_save("test") # get dictionary
+	var load = promptReader.initialize_save(Global.file_path) # get dictionary
 	var prompts = []
 	if(load.keys().size() < numRounds): # if too few keys then get all custom prompt and then take from default
 		for i in load.keys():
