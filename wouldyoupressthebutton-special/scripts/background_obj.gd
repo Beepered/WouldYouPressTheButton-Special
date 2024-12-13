@@ -1,7 +1,8 @@
 extends ColorRect
 
 @onready var direction = randi_range(0, 1) # 0 left, 1 right
-@onready var xMove = randf_range(10, 20)
+@onready var xMove = randf_range(15, 25)
+@onready var rotationSpeed = randf_range(0.05, 0.1)
 
 func _ready() -> void:
 	var _size = randi_range(300, 500)
@@ -15,5 +16,7 @@ func _ready() -> void:
 		xMove *= -1
 
 func _process(delta: float) -> void:
-	rotation += 0.07 * delta
+	rotation += rotationSpeed * delta
 	position.x += xMove * delta
+	if(position.x > get_viewport().size.x + size.x || position.x < -size.x):
+		queue_free()
