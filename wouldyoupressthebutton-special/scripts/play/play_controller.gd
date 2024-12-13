@@ -38,9 +38,9 @@ var chosenPrompt
 var persuader; var opposer
 var points = {} # ex: {a:2, b:0, c:1, d:5, e:2}
 
-@onready var prompts = really_get_prompts()
+@onready var prompts = get_prompts()
 
-func really_get_prompts():
+func get_prompts():
 	var load = promptReader.initialize_save(Global.file_path) # get dictionary
 	var prompts = []
 	if(load.keys().size() < numRounds): # if too few keys then get all custom prompt and then take from default
@@ -97,9 +97,8 @@ func stage() -> void:
 	# Disconnect the signal to prevent duplicate connections
 	if timer.is_connected("timeout", Callable(self, "stage")):
 		timer.disconnect("timeout", Callable(self, "stage"))
-
+	
 	var time = 0
-	print("Stage Num:", stageNum)
 	match stageNum:
 		1: # Show the initial prompt
 			title.visible = false
@@ -108,30 +107,35 @@ func stage() -> void:
 			prompt.text = chosenPrompt
 			time = 8
 		2: # Assign roles to players
-			title.text = "Stage 2: Becoming Czar"
+			title.text = "Stage 2: Assigning Roles"
 			title.visible = true
 			assign_roles()
-			time = 8
+			time = 7
 		3: # Discussion phase
-			title.text = "Stage 3: Discussion Phase"
+			title.text = "Stage 3: Discussion Phase 1"
+			prompt.text = chosenPrompt
 			instructions.visible = true
-			instructions.text = chosenPrompt
-			prompt.text = "%s, convince people to press" % [persuader]
+			instructions.text = "%s, convince the group to press" % [persuader]
 			discussCanvas.visible = true
 			time = Global.discussTime
 		4:
 			title.text = "Stage 3: Discussion Phase 2"
+			prompt.text = chosenPrompt
 			instructions.visible = true
-			instructions.text = chosenPrompt
-			prompt.text = "%s, convince people NOT to press!" % [opposer]
+			instructions.text = "%s, convince the group NOT to press!" % [opposer]
 			discussCanvas.visible = true
 			time = Global.discussTime
 		5: # voting
 			title.text = "Stage 4: Final Voting Round"
 			discussCanvas.visible = false
 			await start_voting_phase()
-			time = 2 # somehow call time out here
+			title.visible = false
+			prompt.text = "Calculating Scores"
+			instructions.visible = false
+			time = 1
 		6: # Scoring and preparation for the next round
+			title.text + "Stage 5: Revealing Scores"
+			title.visible = true
 			calculate_scores()
 			time = 3
 			currentRound += 1
@@ -154,26 +158,15 @@ func start_voting_phase() -> void:
 	voteCanvas.visible = true
 	prompt.visible = false
 	instructions.visible = false
-	countdownText.visible = true
 	
-	# 3-2-1
-	countdownText.scale = Vector2(1, 1)
-	var countdownTime = 3
-	var time = countdownTime
-	countdownText.text = str(ceil(time))
-	for i in range(countdownTime):
-		await get_tree().create_timer(1.0).timeout
-		time -= 1
-		countdownText.text = str((time))
-		countdownText.scale *= 1.5
-	countdownText.visible = false
+	await countdown()
 	
-	# Show the voting canvas
+	# Show voting canvas
 	voteButton.visible = true
 	noButton.visible = true
 	prompt.visible = true
-	instructions.visible = true
 	prompt.text = chosenPrompt
+	instructions.visible = true
 
 	# Each player votes in turn
 	for i in range(Global.playerNames.size()):
@@ -193,6 +186,19 @@ func start_voting_phase() -> void:
 	voteButton.visible = false
 	noButton.visible = false
 	print("Voting phase complete. Total votes:", hasVoted.size())
+
+func countdown():
+	countdownText.visible = true
+	countdownText.scale = Vector2(1, 1)
+	var countdownTime = 3
+	var time = countdownTime
+	countdownText.text = str(ceil(time))
+	for i in range(countdownTime):
+		await get_tree().create_timer(0.8).timeout
+		time -= 1
+		countdownText.text = str((time))
+		countdownText.scale *= 1.5
+	countdownText.visible = false
 
 func on_vote_button_pressed() -> void:
 	# If currentPlayer is null, ignore the button press
@@ -241,6 +247,7 @@ func on_skip_button_pressed():
 
 func calculate_scores() -> void:
 	# Placeholder for scoring logic
+	prompt.visible = true
 	prompt.text = "Calculating scores..."
 	var pressVotes = 0
 	var dontPressVotes = 0
