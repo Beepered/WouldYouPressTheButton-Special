@@ -20,19 +20,20 @@ func _on_save_pressed() -> void:
 		$warning.visible = false
 
 func _load_path(path):
-	var file = FileAccess.open(Global.custom_folder_path + path, FileAccess.READ)
+	var file = FileAccess.open(Global.custom_folder_path + path + ".txt", FileAccess.READ)
 	if(file):
 		var content = file.get_as_text()
 		$name.text = path
 		$prompts.text = content
 		file.close()
 	else:
-		print("can't find file: ", file)
-
+		print("Create TXT: can't find file: ", file)
+		$name.text = ""
+		$prompts.text = ""
 
 func _on_name_text_changed(new_text: String) -> void:
-	var path = Global.custom_folder_path + new_text
-	if(creating && FileAccess.open(path, FileAccess.READ)): # if file didn't exist
+	var path = Global.custom_folder_path + new_text + ".txt"
+	if(creating && FileAccess.open(path, FileAccess.READ) || new_text == "default"): # if file didn't exist
 		$"name exists".visible = true
 		$save.disabled = true
 	else:

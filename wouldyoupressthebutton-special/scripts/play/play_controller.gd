@@ -25,7 +25,7 @@ signal beginMenu
 
 @export var rankTiddle: PackedScene
 
-var numRounds = 2*(Global.playerNames.size())
+var numRounds = Global.playerNames.size()
 var stageNum = 1
 var currentRound = 1
 var roles_assigned = {}
@@ -38,7 +38,7 @@ var chosenPrompt
 var persuader; var opposer
 var points = {} # ex: {a:2, b:0, c:1, d:5, e:2}
 
-@onready var prompts = get_prompts()
+@onready var prompts = really_get_prompts()
 
 func get_prompts():
 	var mainList = promptReader.get_text_list(Global.file_path)
@@ -53,6 +53,28 @@ func get_prompts():
 	randomize()
 	mainList.shuffle()
 	return mainList
+
+func really_get_prompts():
+	var load
+	load = promptReader.load_game(Global.chance_folder_path + Global.file_path + ".save")
+	if(!load):
+		promptReader.create_basic_save(Global.file_path)
+		load = promptReader.load_game(Global.chance_folder_path + Global.file_path + ".save")
+	
+	var data = load.data
+	var prompts = []
+	if(data.keys().size() < numRounds):
+		pass # if custom prompts is smaller than num rounds then take from default after getting everything
+	while(prompts.size() < numRounds):
+		for i in data.keys():
+			if(data[i].chance >= randf_range(0, 1)):
+				prompts.append(data[i].prompt)
+				data[i].chance = 0.1
+			else:
+				data[i].chance += 0.1
+	promptReader.save_game(Global.file_path, data)
+	return prompts
+	
 
 func _ready() -> void:
 	# Initialize points array
@@ -83,7 +105,7 @@ func stage() -> void:
 	# Disconnect the signal to prevent duplicate connections
 	if timer.is_connected("timeout", Callable(self, "stage")):
 		timer.disconnect("timeout", Callable(self, "stage"))
-	
+
 	var time = 0
 	print("Stage Num:", stageNum)
 	match stageNum:
@@ -116,7 +138,7 @@ func stage() -> void:
 			title.text = "Stage 4: Final Voting Round"
 			discussCanvas.visible = false
 			await start_voting_phase()
-			time = 1
+			time = 2 # somehow call time out here
 		6: # Scoring and preparation for the next round
 			calculate_scores()
 			time = 3
@@ -126,8 +148,8 @@ func stage() -> void:
 				return
 			stageNum = 0 # Reset stage for the next round
 	stageNum += 1
-
-	timer.wait_time = max(time, 0.1)
+	
+	timer.wait_time = time
 	timer.timeout.connect(Callable(self, "stage")) # Reconnect the signal
 	timer.start()
 
@@ -143,6 +165,7 @@ func start_voting_phase() -> void:
 	countdownText.visible = true
 	
 	# 3-2-1
+	countdownText.scale = Vector2(1, 1)
 	var countdownTime = 3
 	var time = countdownTime
 	countdownText.text = str(ceil(time))
@@ -150,7 +173,7 @@ func start_voting_phase() -> void:
 		await get_tree().create_timer(1.0).timeout
 		time -= 1
 		countdownText.text = str((time))
-		countdownText.scale *= 1.2
+		countdownText.scale *= 1.5
 	countdownText.visible = false
 	
 	# Show the voting canvas
@@ -163,22 +186,20 @@ func start_voting_phase() -> void:
 	# Each player votes in turn
 	for i in range(Global.playerNames.size()):
 		var player = Global.playerNames[i]
+		print(player)
 		currentPlayer = player # Set the current player
 		if currentPlayer == persuader or player == opposer:
 			continue
-		print("Player Turn:", player) # Debugging output
 		instructions.text = "%s, press or don't" % player
 		
 		timer.wait_time = Global.voteTime
 		timer.start()
-
 		await timer.timeout
-
+	
 	# Hide the voting button and stop the timer
 	voteCanvas.visible = false
 	voteButton.visible = false
 	noButton.visible = false
-	timer.stop()
 	print("Voting phase complete. Total votes:", hasVoted.size())
 
 func on_vote_button_pressed() -> void:

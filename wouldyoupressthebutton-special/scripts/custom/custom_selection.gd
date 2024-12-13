@@ -17,6 +17,7 @@ func _on_create_select_pressed() -> void:
 	createMenu.visible = true
 	mainBack.visible = false
 	createMenu.creating = true
+	createMenu._load_path("")
 
 func _on_back_pressed() -> void:
 	choiceMenu.visible = true
@@ -30,7 +31,7 @@ func _on_main_back_pressed() -> void:
 @export var customItem: PackedScene
 func create_item(pathName):
 	var item = customItem.instantiate()
-	item.pathName = pathName
+	item.pathName = pathName.substr(0, pathName.find(".txt"))
 	item.editItem.connect(edit_item)
 	$"choice menu/ScrollContainer/VBoxContainer".add_child(item)
 

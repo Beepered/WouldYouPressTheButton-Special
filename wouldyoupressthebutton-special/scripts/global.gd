@@ -9,5 +9,6 @@ var voteTime = 10
 var playerNames = []
 
 var custom_folder_path = OS.get_executable_path().get_base_dir() + "/custom-prompts/"
-var file_path = "res://prompts/prompts.txt"
-var default_file = "res://prompts/prompts.txt"
+var chance_folder_path = OS.get_executable_path().get_base_dir() + "/prompt chances/"
+var file_path = "default"
+var default_file_path = "res://prompts/prompts.txt"

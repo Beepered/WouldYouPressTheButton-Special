@@ -37,16 +37,16 @@ func fill_custom_container():
 				var shortName = file_name.substr(0, file_name.find(".txt"))
 				b.text = shortName
 				b.set_custom_minimum_size(Vector2(270, 30))
-				b.pressed.connect(set_prompt_choice.bind(file_name))
+				b.pressed.connect(set_prompt_choice.bind(shortName))
 				$UseCustom/ScrollContainer/VBoxContainer.add_child(b)
 			file_name = dir.get_next()
 
 func set_prompt_choice(path):
-	Global.file_path = Global.custom_folder_path + path
-	$"UseCustom/choice name".text = path.substr(0, path.find(".txt"))
+	Global.file_path = path
+	$"UseCustom/choice name".text = path
 
 func _on_choose_default_pressed() -> void:
-	Global.file_path = Global.default_file
+	Global.file_path = "default"
 	$"UseCustom/choice name".text = "default"
 
 func _on_play_button_button_down() -> void:

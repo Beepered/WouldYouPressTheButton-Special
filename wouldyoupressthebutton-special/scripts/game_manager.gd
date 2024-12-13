@@ -6,10 +6,12 @@ extends Node2D
 var scenePointer
 
 func _ready() -> void:
-	# create folder for user prompts
+	# folder for user prompts
 	var dir = DirAccess.open(OS.get_executable_path().get_base_dir())
 	dir.make_dir("custom-prompts")
-	
+	# folder for prompt chances
+	dir = DirAccess.open(OS.get_executable_path().get_base_dir())
+	dir.make_dir("prompt chances")
 	begin_menu()
 
 func begin_menu():
