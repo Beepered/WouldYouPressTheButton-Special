@@ -10,7 +10,7 @@ func _on_save_pressed() -> void:
 		var file = FileAccess.open(path, FileAccess.WRITE)
 		file.store_string($prompts.text)
 		file.close()
-		
+
 		$"saved message".visible = true
 		await get_tree().create_timer(0.7).timeout
 		$"saved message".visible = false
