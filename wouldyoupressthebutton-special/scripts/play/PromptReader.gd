@@ -34,12 +34,13 @@ func create_basic_save(path): # get TXT file
 	else:
 		var file
 		if path == "default":
-			file = Global.default_file_path
+			file = FileAccess.open(Global.default_file_path, FileAccess.READ)
 		else:
-			file = Global.custom_folder_path + path + ".txt"
-		if(FileAccess.file_exists(file)):
+			file = FileAccess.open(Global.custom_folder_path + path + ".txt", FileAccess.READ)
+		if(file):
 			var save_dict = {}
 			var position = 1
+			
 			while file.get_position() < file.get_length():
 				save_dict[position] = {"prompt": file.get_line(), "chance": 0.5}
 				position += 1

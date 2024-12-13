@@ -63,15 +63,33 @@ func really_get_prompts():
 	
 	var data = load.data
 	var prompts = []
-	if(data.keys().size() < numRounds):
-		pass # if custom prompts is smaller than num rounds then take from default after getting everything
-	while(prompts.size() < numRounds):
+	if(data.keys().size() < numRounds): # if too few keys then get all custom prompt and then take from default
 		for i in data.keys():
-			if(data[i].chance >= randf_range(0, 1)):
-				prompts.append(data[i].prompt)
-				data[i].chance = 0.1
-			else:
-				data[i].chance += 0.1
+			prompts.append(data[i].prompt)
+			data[i].chance = 0.1
+		print(prompts)
+		var defaultLoad = promptReader.load_game(Global.chance_folder_path + "default.save")
+		if(!defaultLoad):
+			promptReader.create_basic_save("default")
+			load = promptReader.load_game(Global.chance_folder_path + "default.save")
+		var defaultData = defaultLoad.data
+		while(prompts.size() < numRounds):
+			for i in defaultData.keys():
+				if(defaultData[i].chance >= randf_range(0, 1)):
+					prompts.append(defaultData[i].prompt)
+					defaultData[i].chance = 0.1
+				else:
+					defaultData[i].chance += 0.1
+		print(prompts)
+		promptReader.save_game("default", defaultData)
+	else:
+		while(prompts.size() < numRounds):
+			for i in data.keys():
+				if(data[i].chance >= randf_range(0, 1)):
+					prompts.append(data[i].prompt)
+					data[i].chance = 0.1
+				else:
+					data[i].chance += 0.1
 	promptReader.save_game(Global.file_path, data)
 	return prompts
 	
