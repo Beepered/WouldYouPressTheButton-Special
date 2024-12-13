@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bnt4e3i3svop0"]
+[gd_scene load_steps=7 format=3 uid="uid://bnt4e3i3svop0"]
 
 [ext_resource type="Script" path="res://scripts/custom/custom_selection.gd" id="1_ajl7c"]
 [ext_resource type="Script" path="res://scripts/custom/create.gd" id="1_k86w4"]
 [ext_resource type="PackedScene" uid="uid://capggth7ryx3d" path="res://prefabs/menu/custom_item.tscn" id="3_eddu3"]
+[ext_resource type="FontFile" uid="uid://c1xyljigb0kk4" path="res://fonts/GL-Nummernschild-Eng.otf" id="3_tnsgm"]
+[ext_resource type="FontFile" uid="uid://w144d1ljncmu" path="res://fonts/Typography times.ttf" id="4_7djx7"]
 
 [sub_resource type="Theme" id="Theme_wda7e"]
 
@@ -32,7 +34,8 @@ offset_left = 240.0
 offset_top = 105.0
 offset_right = 340.0
 offset_bottom = 155.0
-theme_override_font_sizes/font_size = 20
+theme_override_fonts/font = ExtResource("3_tnsgm")
+theme_override_font_sizes/font_size = 30
 text = "back"
 
 [node name="Title" type="Label" parent="main"]
@@ -45,10 +48,14 @@ offset_right = 196.0
 offset_bottom = 198.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
+theme_override_fonts/font = ExtResource("4_7djx7")
+theme_override_font_sizes/font_size = 60
 text = "Custom Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="choice menu" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="create select" type="Button" parent="choice menu"]
 anchors_preset = 5
@@ -59,7 +66,8 @@ offset_top = 210.0
 offset_right = 100.0
 offset_bottom = 260.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 25
+theme_override_fonts/font = ExtResource("3_tnsgm")
+theme_override_font_sizes/font_size = 30
 text = "create"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="choice menu"]
@@ -89,7 +97,8 @@ offset_left = 240.0
 offset_top = 105.0
 offset_right = 340.0
 offset_bottom = 155.0
-theme_override_font_sizes/font_size = 20
+theme_override_fonts/font = ExtResource("3_tnsgm")
+theme_override_font_sizes/font_size = 30
 text = "back"
 
 [node name="name" type="LineEdit" parent="create menu"]
@@ -114,7 +123,8 @@ offset_top = 220.0
 offset_right = 250.0
 offset_bottom = 260.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 20
+theme_override_fonts/font = ExtResource("3_tnsgm")
+theme_override_font_sizes/font_size = 25
 text = "save"
 
 [node name="prompts" type="TextEdit" parent="create menu"]
@@ -135,12 +145,13 @@ you can have multiple lines"
 
 [node name="saved message" type="Label" parent="create menu"]
 visible = false
-offset_left = 895.0
-offset_top = 227.0
-offset_right = 946.0
-offset_bottom = 253.0
-theme_override_colors/font_color = Color(0.717593, 0.75168, 0.170692, 1)
-theme_override_font_sizes/font_size = 18
+offset_left = 897.0
+offset_top = 226.0
+offset_right = 956.0
+offset_bottom = 256.0
+theme_override_colors/font_color = Color(0.766504, 0.80754, 0, 1)
+theme_override_fonts/font = ExtResource("3_tnsgm")
+theme_override_font_sizes/font_size = 30
 text = "saved"
 
 [node name="name exists" type="Label" parent="create menu"]
@@ -171,7 +182,8 @@ offset_bottom = 41.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.815686, 0, 0, 1)
-theme_override_font_sizes/font_size = 60
+theme_override_fonts/font = ExtResource("3_tnsgm")
+theme_override_font_sizes/font_size = 80
 text = "Name Required"
 horizontal_alignment = 1
 vertical_alignment = 1

@@ -1,20 +1,20 @@
-[gd_scene load_steps=11 format=3 uid="uid://bdyqluc1cfnb8"]
+[gd_scene load_steps=12 format=3 uid="uid://bdyqluc1cfnb8"]
 
 [ext_resource type="Script" path="res://scripts/menu/main_menu.gd" id="1_77ssq"]
 [ext_resource type="PackedScene" uid="uid://bnt4e3i3svop0" path="res://scenes/custom_selection.tscn" id="2_qn2u8"]
 [ext_resource type="Texture2D" uid="uid://dve4ik6nav6mk" path="res://sprites/arrow.png" id="3_8h1ks"]
 [ext_resource type="Script" path="res://scripts/menu/settingsMenu.gd" id="3_mpylp"]
+[ext_resource type="FontFile" uid="uid://w144d1ljncmu" path="res://fonts/Typography times.ttf" id="3_qbnwm"]
 [ext_resource type="Script" path="res://scripts/menu/discussSettingArrow.gd" id="4_flmkl"]
 [ext_resource type="Script" path="res://scripts/menu/voteSettingArrow.gd" id="4_ntwn2"]
+[ext_resource type="FontFile" uid="uid://c1xyljigb0kk4" path="res://fonts/GL-Nummernschild-Eng.otf" id="6_ggwyi"]
 
 [sub_resource type="Theme" id="Theme_32jrn"]
 
-[sub_resource type="Theme" id="Theme_1foon"]
-
-[sub_resource type="FontVariation" id="FontVariation_jeu8t"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_srou7"]
 size = Vector2(40, 40)
+
+[sub_resource type="Theme" id="Theme_1foon"]
 
 [node name="Main Menu" type="Node2D"]
 script = ExtResource("1_77ssq")
@@ -26,12 +26,13 @@ customSelectionMenu = ExtResource("2_qn2u8")
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -444.5
-offset_top = 122.0
-offset_right = 444.5
-offset_bottom = 212.0
+offset_left = -558.0
+offset_top = 136.0
+offset_right = 558.0
+offset_bottom = 226.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 65
+theme_override_fonts/font = ExtResource("3_qbnwm")
+theme_override_font_sizes/font_size = 80
 text = "Would You Press The Button"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -40,13 +41,14 @@ vertical_alignment = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -76.0
-offset_top = 199.0
-offset_right = 76.0
-offset_bottom = 262.0
+offset_left = -97.5
+offset_top = 213.0
+offset_right = 97.5
+offset_bottom = 276.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_font_sizes/font_size = 45
+theme_override_fonts/font = ExtResource("3_qbnwm")
+theme_override_font_sizes/font_size = 55
 text = "Special"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -57,60 +59,65 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -125.0
-offset_top = -91.0
-offset_right = 125.0
-offset_bottom = -21.0
+offset_left = -140.0
+offset_top = -59.0
+offset_right = 140.0
+offset_bottom = 31.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 35
+theme_override_fonts/font = ExtResource("6_ggwyi")
+theme_override_font_sizes/font_size = 60
 text = "Play"
 
 [node name="Instructions" type="Button" parent="Menu"]
-custom_minimum_size = Vector2(250, 70)
+custom_minimum_size = Vector2(250, 60)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -125.0
-offset_top = -1.0
+offset_top = 46.0
 offset_right = 125.0
-offset_bottom = 79.0
+offset_bottom = 126.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 35
+theme_override_fonts/font = ExtResource("6_ggwyi")
+theme_override_font_sizes/font_size = 45
 text = "Instructions"
 
 [node name="Custom Button" type="Button" parent="Menu"]
-custom_minimum_size = Vector2(250, 80)
+custom_minimum_size = Vector2(250, 60)
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -125.0
-offset_top = -301.0
+offset_top = -259.0
 offset_right = 125.0
-offset_bottom = -221.0
+offset_bottom = -179.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_font_sizes/font_size = 35
+theme_override_fonts/font = ExtResource("6_ggwyi")
+theme_override_font_sizes/font_size = 45
 text = "Custom"
 
 [node name="Credits Button" type="Button" parent="Menu"]
+custom_minimum_size = Vector2(0, 60)
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -125.0
-offset_top = -201.0
+offset_top = -159.0
 offset_right = 125.0
-offset_bottom = -131.0
+offset_bottom = -89.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_font_sizes/font_size = 35
+theme_override_fonts/font = ExtResource("6_ggwyi")
+theme_override_font_sizes/font_size = 45
 text = "Credits"
 
 [node name="5Players" type="Label" parent="Menu"]
@@ -120,12 +127,13 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -103.0
-offset_top = -110.0
+offset_top = -75.0
 offset_right = 103.0
-offset_bottom = -59.0
+offset_bottom = -24.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_font_sizes/font_size = 22
+theme_override_fonts/font = ExtResource("6_ggwyi")
+theme_override_font_sizes/font_size = 25
 text = "5+ players required"
 horizontal_alignment = 1
 
@@ -153,15 +161,32 @@ offset_left = 140.0
 offset_top = 130.0
 offset_right = 260.0
 offset_bottom = 180.0
-theme_override_font_sizes/font_size = 25
+theme_override_fonts/font = ExtResource("6_ggwyi")
+theme_override_font_sizes/font_size = 30
 text = "Back"
+
+[node name="Title" type="Label" parent="Settings"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -174.0
+offset_top = 140.0
+offset_right = 174.0
+offset_bottom = 209.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_qbnwm")
+theme_override_font_sizes/font_size = 50
+text = "Game Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="UseCustom" type="Label" parent="Settings"]
 offset_left = 199.0
-offset_top = 222.0
+offset_top = 256.0
 offset_right = 401.0
-offset_bottom = 257.0
-theme_override_font_sizes/font_size = 22
+offset_bottom = 291.0
+theme_override_fonts/font = ExtResource("6_ggwyi")
+theme_override_font_sizes/font_size = 30
 text = "Custom Prompts"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -180,7 +205,11 @@ offset_bottom = 39.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.237539, 0.237539, 0.237539, 1)
+theme_override_fonts/font = ExtResource("6_ggwyi")
+theme_override_font_sizes/font_size = 18
 text = "currently using"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="choice name" type="Label" parent="Settings/UseCustom"]
 layout_mode = 1
@@ -193,7 +222,8 @@ offset_right = 115.0
 offset_bottom = 79.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 20
+theme_override_fonts/font = ExtResource("6_ggwyi")
+theme_override_font_sizes/font_size = 25
 text = "default"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -221,7 +251,7 @@ anchor_bottom = 0.5
 offset_left = -140.0
 offset_top = 94.5
 offset_right = 140.0
-offset_bottom = 374.5
+offset_bottom = 324.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_32jrn")
@@ -229,6 +259,121 @@ horizontal_scroll_mode = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Settings/UseCustom/ScrollContainer"]
 layout_mode = 2
+
+[node name="DiscussionTime" type="Label" parent="Settings"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -167.0
+offset_top = 245.0
+offset_right = 153.0
+offset_bottom = 305.0
+grow_horizontal = 2
+pivot_offset = Vector2(160, 30)
+theme_override_fonts/font = ExtResource("6_ggwyi")
+theme_override_font_sizes/font_size = 50
+text = "Discussion Time"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="time text" type="Label" parent="Settings/DiscussionTime"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -45.0
+offset_top = -10.0
+offset_right = 45.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("6_ggwyi")
+theme_override_font_sizes/font_size = 40
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="decrease" type="Sprite2D" parent="Settings/DiscussionTime"]
+position = Vector2(100, 75)
+rotation = 3.14159
+texture = ExtResource("3_8h1ks")
+script = ExtResource("4_flmkl")
+change = -2
+
+[node name="Area2D" type="Area2D" parent="Settings/DiscussionTime/decrease"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Settings/DiscussionTime/decrease/Area2D"]
+shape = SubResource("RectangleShape2D_srou7")
+
+[node name="increase" type="Sprite2D" parent="Settings/DiscussionTime"]
+position = Vector2(220, 75)
+texture = ExtResource("3_8h1ks")
+script = ExtResource("4_flmkl")
+change = 2
+
+[node name="Area2D" type="Area2D" parent="Settings/DiscussionTime/increase"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Settings/DiscussionTime/increase/Area2D"]
+shape = SubResource("RectangleShape2D_srou7")
+
+[node name="VotingTime" type="Label" parent="Settings"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -126.0
+offset_top = 398.0
+offset_right = 103.0
+offset_bottom = 453.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("6_ggwyi")
+theme_override_font_sizes/font_size = 50
+text = "Voting Time"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="time text" type="Label" parent="Settings/VotingTime"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -45.0
+offset_top = -5.0
+offset_right = 45.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("6_ggwyi")
+theme_override_font_sizes/font_size = 40
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="decrease" type="Sprite2D" parent="Settings/VotingTime"]
+position = Vector2(60, 75)
+rotation = 3.14159
+texture = ExtResource("3_8h1ks")
+script = ExtResource("4_ntwn2")
+change = -1
+
+[node name="Area2D" type="Area2D" parent="Settings/VotingTime/decrease"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Settings/VotingTime/decrease/Area2D"]
+shape = SubResource("RectangleShape2D_srou7")
+
+[node name="increase" type="Sprite2D" parent="Settings/VotingTime"]
+position = Vector2(180, 75)
+texture = ExtResource("3_8h1ks")
+script = ExtResource("4_ntwn2")
+change = 1
+
+[node name="Area2D" type="Area2D" parent="Settings/VotingTime/increase"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Settings/VotingTime/increase/Area2D"]
+shape = SubResource("RectangleShape2D_srou7")
 
 [node name="NumPlayers" type="Label" parent="Settings"]
 anchors_preset = 5
@@ -239,7 +384,8 @@ offset_top = 171.0
 offset_right = 454.0
 offset_bottom = 234.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 45
+theme_override_fonts/font = ExtResource("6_ggwyi")
+theme_override_font_sizes/font_size = 50
 text = "Players"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -408,118 +554,6 @@ theme_override_colors/font_color = Color(0.956863, 0, 0, 1)
 theme_override_font_sizes/font_size = 18
 text = "duplicate name found"
 
-[node name="DiscussionTime" type="Label" parent="Settings"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -167.0
-offset_top = 245.0
-offset_right = 153.0
-offset_bottom = 305.0
-grow_horizontal = 2
-pivot_offset = Vector2(160, 30)
-theme_override_fonts/font = SubResource("FontVariation_jeu8t")
-theme_override_font_sizes/font_size = 40
-text = "Discussion Time"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="time text" type="Label" parent="Settings/DiscussionTime"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -45.0
-offset_top = -10.0
-offset_right = 45.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_font_sizes/font_size = 35
-text = "10"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="decrease" type="Sprite2D" parent="Settings/DiscussionTime"]
-position = Vector2(100, 75)
-rotation = 3.14159
-texture = ExtResource("3_8h1ks")
-script = ExtResource("4_flmkl")
-change = -2
-
-[node name="Area2D" type="Area2D" parent="Settings/DiscussionTime/decrease"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Settings/DiscussionTime/decrease/Area2D"]
-shape = SubResource("RectangleShape2D_srou7")
-
-[node name="increase" type="Sprite2D" parent="Settings/DiscussionTime"]
-position = Vector2(220, 75)
-texture = ExtResource("3_8h1ks")
-script = ExtResource("4_flmkl")
-change = 2
-
-[node name="Area2D" type="Area2D" parent="Settings/DiscussionTime/increase"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Settings/DiscussionTime/increase/Area2D"]
-shape = SubResource("RectangleShape2D_srou7")
-
-[node name="VotingTime" type="Label" parent="Settings"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -126.0
-offset_top = 398.0
-offset_right = 103.0
-offset_bottom = 453.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 40
-text = "Voting Time"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="time text" type="Label" parent="Settings/VotingTime"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -45.0
-offset_top = -5.0
-offset_right = 45.0
-offset_bottom = 45.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_font_sizes/font_size = 35
-text = "10"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="decrease" type="Sprite2D" parent="Settings/VotingTime"]
-position = Vector2(60, 75)
-rotation = 3.14159
-texture = ExtResource("3_8h1ks")
-script = ExtResource("4_ntwn2")
-change = -1
-
-[node name="Area2D" type="Area2D" parent="Settings/VotingTime/decrease"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Settings/VotingTime/decrease/Area2D"]
-shape = SubResource("RectangleShape2D_srou7")
-
-[node name="increase" type="Sprite2D" parent="Settings/VotingTime"]
-position = Vector2(180, 75)
-texture = ExtResource("3_8h1ks")
-script = ExtResource("4_ntwn2")
-change = 1
-
-[node name="Area2D" type="Area2D" parent="Settings/VotingTime/increase"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Settings/VotingTime/increase/Area2D"]
-shape = SubResource("RectangleShape2D_srou7")
-
 [node name="PlayButton" type="Button" parent="Settings"]
 anchors_preset = 7
 anchor_left = 0.5
@@ -557,7 +591,8 @@ offset_left = 140.0
 offset_top = 130.0
 offset_right = 260.0
 offset_bottom = 180.0
-theme_override_font_sizes/font_size = 25
+theme_override_fonts/font = ExtResource("6_ggwyi")
+theme_override_font_sizes/font_size = 30
 text = "Back"
 
 [node name="Title" type="Label" parent="Instructions"]
@@ -565,10 +600,11 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -143.0
-offset_top = 165.0
+offset_top = 140.0
 offset_right = 143.0
-offset_bottom = 234.0
+offset_bottom = 209.0
 grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_qbnwm")
 theme_override_font_sizes/font_size = 50
 text = "How to play"
 horizontal_alignment = 1
@@ -602,7 +638,8 @@ offset_bottom = 175.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 25
+theme_override_fonts/font = ExtResource("6_ggwyi")
+theme_override_font_sizes/font_size = 35
 text = "First a choice will be displayed.
 Next, one player will be assigned the task of arguing to the other players why they SHOULD press the button, while another player will argue why they should NOT press the button.
 Points will be awarded to players based on how many people votes for their side.
@@ -633,7 +670,8 @@ offset_left = 140.0
 offset_top = 130.0
 offset_right = 260.0
 offset_bottom = 180.0
-theme_override_font_sizes/font_size = 25
+theme_override_fonts/font = ExtResource("6_ggwyi")
+theme_override_font_sizes/font_size = 30
 text = "Back"
 
 [node name="Title" type="Label" parent="Credits"]
@@ -641,48 +679,70 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -89.5
-offset_top = 165.0
+offset_top = 140.0
 offset_right = 89.5
-offset_bottom = 234.0
+offset_bottom = 209.0
 grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_qbnwm")
 theme_override_font_sizes/font_size = 50
 text = "Credits"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Names" type="ColorRect" parent="Credits"]
+[node name="background" type="ColorRect" parent="Credits"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -350.0
-offset_top = -122.0
+offset_top = -140.0
 offset_right = 350.0
-offset_bottom = 178.0
+offset_bottom = 240.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.313726)
 
-[node name="text" type="Label" parent="Credits/Names"]
+[node name="names" type="Label" parent="Credits/background"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -250.0
-offset_top = -130.5
-offset_right = 250.0
-offset_bottom = 130.5
+offset_left = -200.0
+offset_top = -161.0
+offset_right = 200.0
+offset_bottom = 44.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 40
+theme_override_fonts/font = ExtResource("6_ggwyi")
+theme_override_font_sizes/font_size = 45
 text = "Carter Gruebel
 Garrett Blake
 Jacqueline Gracey
 Brendan Trieu"
 horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="misc" type="Label" parent="Credits/background"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -273.5
+offset_top = 80.0
+offset_right = 273.5
+offset_bottom = 145.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_ggwyi")
+theme_override_font_sizes/font_size = 25
+text = "font: Geometric by abstrkt
+font: Typography Times by Tipografia Leone Firenze
+font: GL-Nummernschild-Eng by Gutenberg Labo"
 vertical_alignment = 1
 
 [connection signal="button_down" from="Menu/SettingButton" to="." method="_on_setting_button_button_down"]

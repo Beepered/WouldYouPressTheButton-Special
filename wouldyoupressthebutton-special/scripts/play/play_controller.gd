@@ -88,7 +88,8 @@ func _ready() -> void:
 	randomize()
 	prompts.shuffle()
 	
-	stage()
+	countdown()
+	#stage()
 
 func _process(_delta: float) -> void:
 	progressBar.value = (timer.time_left / timer.wait_time) * 100
@@ -101,7 +102,8 @@ func stage() -> void:
 	var time = 0
 	match stageNum:
 		1: # Show the initial prompt
-			title.visible = false
+			title.text = "Stage 1: Revealing Prompt"
+			title.visible = true
 			instructions.visible = false
 			chosenPrompt = prompts[currentRound - 1]
 			prompt.text = chosenPrompt
@@ -198,6 +200,7 @@ func countdown():
 		time -= 1
 		countdownText.text = str((time))
 		countdownText.scale *= 1.5
+		countdownText.label_settings
 	countdownText.visible = false
 
 func on_vote_button_pressed() -> void:

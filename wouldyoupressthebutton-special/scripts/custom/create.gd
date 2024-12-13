@@ -12,11 +12,11 @@ func _on_save_pressed() -> void:
 		file.close()
 
 		$"saved message".visible = true
-		await get_tree().create_timer(0.7).timeout
+		await get_tree().create_timer(0.8).timeout
 		$"saved message".visible = false
 	else:
 		$warning.visible = true
-		await get_tree().create_timer(0.7).timeout
+		await get_tree().create_timer(0.8).timeout
 		$warning.visible = false
 
 func _load_path(path):
