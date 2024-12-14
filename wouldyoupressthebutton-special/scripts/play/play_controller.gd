@@ -88,8 +88,7 @@ func _ready() -> void:
 	randomize()
 	prompts.shuffle()
 	
-	countdown()
-	#stage()
+	stage()
 
 func _process(_delta: float) -> void:
 	progressBar.value = (timer.time_left / timer.wait_time) * 100
@@ -284,37 +283,39 @@ func calculate_scores() -> void:
 	]
 
 func rankings():
-	var maxTiddleHeight = get_viewport().size.y - 200
+	var maxTiddleHeight = get_viewport().size.y - 350
 
 	var count = 0
-	var spacing = 90
+	var spacing = 100
 	var totalPlayers = Global.playerNames.size()
 	var leftSide = get_viewport().size.x / 2 - ((totalPlayers / 2) * spacing)
 
 	# Adjust leftSide for even number of players so that the graph is centered
 	if totalPlayers % 2 == 0:
 		leftSide += spacing / 2  # Shift by half of the spacing to center the bars
-
-	var winner = ""; var winnerTiddle;
+	
+	# find winner
+	var winner = ""
+	var winnerPoints: float = 0
+	for player_name in Global.playerNames:
+		if (points[player_name] > winnerPoints):
+			winner = player_name
+			winnerPoints = points[player_name]
+	
+	# tiddles are max height * points/max_points
 	for player_name in Global.playerNames:
 		var tiddle = rankTiddle.instantiate()
 		var x = leftSide + (count * spacing)
-		tiddle.position = Vector2(x, 420)
-		tiddle.get_node("bar").size.y = maxTiddleHeight - (maxTiddleHeight - points[player_name] * 15)
+		tiddle.position = Vector2(x, 560)
+		tiddle.get_node("bar").size.y = maxTiddleHeight * (points[player_name] / winnerPoints)
+		print((points[player_name] / winnerPoints))
 		tiddle.get_node("score").text = str(points[player_name])
 		tiddle.get_node("name").text = player_name
+		if player_name == winner:
+			tiddle.get_node("bar").color = Color(0.8, 0.8, 0.15, 1)
 		add_child(tiddle)
-
-		# Highlight the winner
-		if !points.has(winner) || points[player_name] > points[winner]:
-			if(winnerTiddle != null):
-				winnerTiddle.get_node("bar").color = Color(1, 1, 1, 1)
-			winner = player_name
-			winnerTiddle = tiddle
-			winnerTiddle.get_node("bar").color = Color(0.8, 0.8, 0.15, 1)
-
 		count += 1
-	
+
 	winnerName.text = "%s\nwas the best convincer!" % [winner]
 
 func end_game() -> void:
