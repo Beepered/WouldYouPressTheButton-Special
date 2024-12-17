@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bdyqluc1cfnb8"]
+[gd_scene load_steps=13 format=3 uid="uid://bdyqluc1cfnb8"]
 
 [ext_resource type="Script" path="res://scripts/menu/main_menu.gd" id="1_77ssq"]
 [ext_resource type="PackedScene" uid="uid://bnt4e3i3svop0" path="res://scenes/custom_selection.tscn" id="2_qn2u8"]
@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://w144d1ljncmu" path="res://fonts/Typography times.ttf" id="3_qbnwm"]
 [ext_resource type="Script" path="res://scripts/menu/discussSettingArrow.gd" id="4_flmkl"]
 [ext_resource type="Script" path="res://scripts/menu/voteSettingArrow.gd" id="4_ntwn2"]
+[ext_resource type="Script" path="res://scripts/button_behavior.gd" id="5_wmu26"]
 [ext_resource type="FontFile" uid="uid://c1xyljigb0kk4" path="res://fonts/GL-Nummernschild-Eng.otf" id="6_ggwyi"]
 
 [sub_resource type="Theme" id="Theme_32jrn"]
@@ -65,9 +66,11 @@ offset_right = 140.0
 offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(140, 45)
 theme_override_fonts/font = ExtResource("6_ggwyi")
 theme_override_font_sizes/font_size = 60
 text = "Play"
+script = ExtResource("5_wmu26")
 
 [node name="Instructions" type="Button" parent="Menu"]
 custom_minimum_size = Vector2(250, 60)
@@ -82,9 +85,11 @@ offset_right = 125.0
 offset_bottom = 87.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(125, 40)
 theme_override_fonts/font = ExtResource("6_ggwyi")
 theme_override_font_sizes/font_size = 45
 text = "Instructions"
+script = ExtResource("5_wmu26")
 
 [node name="Custom Button" type="Button" parent="Menu"]
 custom_minimum_size = Vector2(250, 60)
@@ -99,9 +104,11 @@ offset_right = 125.0
 offset_bottom = -218.0
 grow_horizontal = 2
 grow_vertical = 0
+pivot_offset = Vector2(125, 40)
 theme_override_fonts/font = ExtResource("6_ggwyi")
 theme_override_font_sizes/font_size = 45
 text = "Custom"
+script = ExtResource("5_wmu26")
 
 [node name="Credits Button" type="Button" parent="Menu"]
 custom_minimum_size = Vector2(0, 60)
@@ -116,9 +123,11 @@ offset_right = 125.0
 offset_bottom = -128.0
 grow_horizontal = 2
 grow_vertical = 0
+pivot_offset = Vector2(125, 40)
 theme_override_fonts/font = ExtResource("6_ggwyi")
 theme_override_font_sizes/font_size = 45
 text = "Credits"
+script = ExtResource("5_wmu26")
 
 [node name="5Players" type="Label" parent="Menu"]
 anchors_preset = 7
@@ -567,7 +576,9 @@ offset_right = 100.0
 offset_bottom = -180.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_font_sizes/font_size = 40
+pivot_offset = Vector2(100, 35)
+theme_override_fonts/font = ExtResource("6_ggwyi")
+theme_override_font_sizes/font_size = 50
 text = "PLAY"
 
 [node name="Instructions" type="CanvasLayer" parent="."]

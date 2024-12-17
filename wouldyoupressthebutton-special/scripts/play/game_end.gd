@@ -2,8 +2,10 @@ extends CanvasLayer
 
 signal beginMenu
 
+@onready var playController = $".."
+
 func _on_play_again_pressed() -> void:
-	$".."._ready()
+	playController.reset_game()
 
 func _on_backto_menu_pressed() -> void:
-	$"..".beginMenu.emit()
+	playController.beginMenu.emit()

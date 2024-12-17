@@ -118,14 +118,14 @@ anchor_bottom = 1.0
 offset_left = -100.0
 offset_top = -150.0
 offset_right = 100.0
-offset_bottom = -105.0
+offset_bottom = -100.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_font_sizes/font_size = 20
+theme_override_fonts/font = ExtResource("5_apm77")
+theme_override_font_sizes/font_size = 25
 text = "skip discussion"
 
 [node name="Voting" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="Countdown" type="Label" parent="Voting"]
 anchors_preset = 8
@@ -144,6 +144,7 @@ theme_override_fonts/font = ExtResource("4_kg1mt")
 theme_override_font_sizes/font_size = 120
 
 [node name="YesButton" type="Button" parent="Voting"]
+visible = false
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -163,6 +164,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_lwrul")
 text = "PRESS"
 
 [node name="NoButton" type="Button" parent="Voting"]
+visible = false
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -183,6 +185,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_syvud")
 text = "No"
 
 [node name="Game End" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("4_aeehb")
 
 [node name="Title" type="Label" parent="Game End"]
@@ -214,7 +217,7 @@ grow_vertical = 0
 theme_override_colors/font_color = Color(0.781364, 0.703021, 0.371483, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_apm77")
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 45
 text = "X
 was the best convincer"
 horizontal_alignment = 1
@@ -226,10 +229,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 347.0
-offset_top = -145.0
-offset_right = 547.0
-offset_bottom = -95.0
+offset_left = 333.0
+offset_top = -173.0
+offset_right = 553.0
+offset_bottom = -113.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("5_apm77")
@@ -242,10 +245,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 347.0
-offset_top = -82.0
-offset_right = 547.0
-offset_bottom = -32.0
+offset_left = 333.0
+offset_top = -100.0
+offset_right = 553.0
+offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("5_apm77")

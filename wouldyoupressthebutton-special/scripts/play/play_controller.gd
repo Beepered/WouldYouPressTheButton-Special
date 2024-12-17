@@ -38,7 +38,7 @@ var chosenPrompt
 var persuader; var opposer
 var points = {} # ex: {a:2, b:0, c:1, d:5, e:2}
 
-@onready var prompts = get_prompts()
+var prompts
 
 func get_prompts():
 	var load = promptReader.initialize_save(Global.file_path) # get dictionary
@@ -85,6 +85,7 @@ func _ready() -> void:
 	endCanvas.visible = false
 	
 	# Shuffle prompts
+	prompts = get_prompts()
 	randomize()
 	prompts.shuffle()
 	
@@ -141,6 +142,8 @@ func stage() -> void:
 			time = 3
 			currentRound += 1
 			if currentRound > numRounds:
+				timer.wait_time = time
+				timer.start()
 				end_game()
 				return
 			stageNum = 0 # Reset stage for the next round
@@ -198,7 +201,7 @@ func countdown():
 		await get_tree().create_timer(0.8).timeout
 		time -= 1
 		countdownText.text = str((time))
-		countdownText.scale *= 1.5
+		countdownText.scale *= 1.4
 		countdownText.label_settings
 	countdownText.visible = false
 
@@ -283,7 +286,7 @@ func calculate_scores() -> void:
 	]
 
 func rankings():
-	var maxTiddleHeight = get_viewport().size.y - 350
+	var maxTiddleHeight = get_viewport().size.y - 400
 
 	var count = 0
 	var spacing = 100
@@ -295,31 +298,55 @@ func rankings():
 		leftSide += spacing / 2  # Shift by half of the spacing to center the bars
 	
 	# find winner
-	var winner = ""
+	var tie: bool = false
+	var winners = []
 	var winnerPoints: float = 0
 	for player_name in Global.playerNames:
 		if (points[player_name] > winnerPoints):
-			winner = player_name
+			winners = []
+			winners.append(player_name)
 			winnerPoints = points[player_name]
+		elif(points[player_name] == winnerPoints):
+			tie = true
+			winners.append(player_name)
 	
 	# tiddles are max height * points/max_points
 	for player_name in Global.playerNames:
 		var tiddle = rankTiddle.instantiate()
 		var x = leftSide + (count * spacing)
-		tiddle.position = Vector2(x, 560)
+		tiddle.position = Vector2(x, 570)
 		tiddle.get_node("bar").size.y = maxTiddleHeight * (points[player_name] / winnerPoints)
-		print((points[player_name] / winnerPoints))
 		tiddle.get_node("score").text = str(points[player_name])
 		tiddle.get_node("name").text = player_name
-		if player_name == winner:
+		if winners.has(player_name):
 			tiddle.get_node("bar").color = Color(0.8, 0.8, 0.15, 1)
 		add_child(tiddle)
 		count += 1
 
-	winnerName.text = "%s\nwas the best convincer!" % [winner]
+	winnerName.text = "Winners:\n" if winners.size() > 1 else "Winner:\n"
+	for name in winners:
+		winnerName.text += name + " "
 
 func end_game() -> void:
 	mainCanvas.visible = false
 	endCanvas.visible = true
 	rankings()
 	timer.stop()
+
+func reset_game():
+	# Initialize points array
+	for player in Global.playerNames:
+		points[player] = 0
+	
+	mainCanvas.visible = true
+	discussCanvas.visible = false
+	voteCanvas.visible = false
+	endCanvas.visible = false
+	
+	# Shuffle prompts
+	prompts = get_prompts()
+	randomize()
+	prompts.shuffle()
+	
+	currentRound = 0
+	stage()
