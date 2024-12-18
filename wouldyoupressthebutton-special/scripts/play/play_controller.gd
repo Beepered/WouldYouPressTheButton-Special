@@ -24,15 +24,20 @@ signal beginMenu
 @onready var winnerName = $"Game End/winner"
 
 @export var rankTiddle: PackedScene
+@onready var crown = "res://sprites/crown.png"
 
 var numRounds = Global.playerNames.size()
 var stageNum = 1
 var currentRound = 1
-var roles_assigned = {}
 var currentPlayer: String = ""
 var hasVoted = []
 var finalVotes = {}
+
+var persuaderList = []
+var opposerList = []
 var current_role_index = 0 # Tracks the next player to assign a role
+
+var track_roles = []
 
 var chosenPrompt
 var persuader; var opposer
@@ -89,7 +94,8 @@ func _ready() -> void:
 	randomize()
 	prompts.shuffle()
 	
-	stage()
+	end_game()
+	#stage()
 
 func _process(_delta: float) -> void:
 	progressBar.value = (timer.time_left / timer.wait_time) * 100
@@ -107,12 +113,12 @@ func stage() -> void:
 			instructions.visible = false
 			chosenPrompt = prompts[currentRound - 1]
 			prompt.text = chosenPrompt
-			time = 8
+			time = 1
 		2: # Assign roles to players
 			title.text = "Stage 2: Assigning Roles"
 			title.visible = true
 			assign_roles()
-			time = 7
+			time = 1
 		3: # Discussion phase
 			title.text = "Stage 3: Discussion Phase 1"
 			prompt.text = chosenPrompt
@@ -144,6 +150,7 @@ func stage() -> void:
 			if currentRound > numRounds:
 				timer.wait_time = time
 				timer.start()
+				await timer
 				end_game()
 				return
 			stageNum = 0 # Reset stage for the next round
@@ -175,7 +182,6 @@ func start_voting_phase() -> void:
 	# Each player votes in turn
 	for i in range(Global.playerNames.size()):
 		var player = Global.playerNames[i]
-		print(player)
 		currentPlayer = player # Set the current player
 		if currentPlayer == persuader or player == opposer:
 			continue
@@ -219,7 +225,6 @@ func on_vote_button_pressed() -> void:
 	# Increment vote count and mark player as having voted
 	hasVoted.append(currentPlayer)
 	finalVotes[currentPlayer] = 1
-	print("Player %s voted. Total votes: %d" % [currentPlayer, hasVoted.size()])
 	
 	# After voting, reset currentPlayer to null
 	currentPlayer = ""
@@ -233,15 +238,28 @@ func on_no_button_pressed() -> void:
 	timer.emit_signal("timeout")
 
 func assign_roles() -> void:
-	# Assign roles sequentially
-	persuader = Global.playerNames[current_role_index]
-	current_role_index = (current_role_index + 1) % Global.playerNames.size()
-	opposer = Global.playerNames[current_role_index]
-	current_role_index = (current_role_index + 1) % Global.playerNames.size()
+	if(Global.playerNames.size() % 2 == 0):
+		if(track_roles.size() >= Global.playerNames.size()):
+			track_roles = []
+	else:
+		if(track_roles.size() >= Global.playerNames.size() - 1):
+			track_roles = []
 	
-	# Assign roles
-	roles_assigned["Persuader"] = persuader
-	roles_assigned["Opposer"] = opposer
+	# choose persuader
+	var randomPlayer = randi_range(0, Global.playerNames.size() - 1)
+	while(persuaderList.has(Global.playerNames[randomPlayer]) || track_roles.has(Global.playerNames[randomPlayer])):
+		randomPlayer = randi_range(0, Global.playerNames.size() - 1)
+	persuader = Global.playerNames[randomPlayer]
+	persuaderList.append(persuader)
+	track_roles.append(persuader)
+	
+	# choose opposer
+	randomPlayer = randi_range(0, Global.playerNames.size() - 1)
+	while(opposerList.has(Global.playerNames[randomPlayer]) || track_roles.has(Global.playerNames[randomPlayer]) || (Global.playerNames[randomPlayer] == persuader)):
+		randomPlayer = randi_range(0, Global.playerNames.size() - 1)
+	opposer = Global.playerNames[randomPlayer]
+	opposerList.append(opposer)
+	track_roles.append(opposer)
 	
 	# Update prompt
 	prompt.text = "Prepare Yourselves:\n%s must convince the group to press the button\n%s must convince the group NOT to press the button" % [persuader, opposer]
@@ -320,12 +338,19 @@ func rankings():
 		tiddle.get_node("name").text = player_name
 		if winners.has(player_name):
 			tiddle.get_node("bar").color = Color(0.8, 0.8, 0.15, 1)
+			var crownSprite = Sprite2D.new()
+			crownSprite.texture = load(crown)
+			crownSprite.position = Vector2(tiddle.position.x, tiddle.position.y - tiddle.get_node("bar").size.y - 35)
+			add_child(crownSprite)
 		add_child(tiddle)
 		count += 1
 
 	winnerName.text = "Winners:\n" if winners.size() > 1 else "Winner:\n"
 	for name in winners:
-		winnerName.text += name + " "
+		winnerName.text += name
+		if(name != winners[-1]):
+			winnerName.text += ", "
+	
 
 func end_game() -> void:
 	mainCanvas.visible = false

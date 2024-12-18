@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://dfja1v1feldnj"
-path="res://.godot/imported/geometric.otf-88a818b2cb6967b5007668ebee0370b8.fontdata"
+uid="uid://cpss7c0ju0y5r"
+path="res://.godot/imported/TimeandSpace-Regular.ttf-4ab38968b48fc7477f16c16bbd154ca6.fontdata"
 
 [deps]
 
-source_file="res://fonts/geometric.otf"
-dest_files=["res://.godot/imported/geometric.otf-88a818b2cb6967b5007668ebee0370b8.fontdata"]
+source_file="res://fonts/TimeandSpace-Regular.ttf"
+dest_files=["res://.godot/imported/TimeandSpace-Regular.ttf-4ab38968b48fc7477f16c16bbd154ca6.fontdata"]
 
 [params]
 
