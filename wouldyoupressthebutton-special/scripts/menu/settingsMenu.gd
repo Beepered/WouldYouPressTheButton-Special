@@ -14,13 +14,13 @@ func checkNumPlayers():
 	var count = 0
 	var nameList = []
 	for player_name in playerNames:
-		var name = player_name.text
-		if(name != ""):
-			if nameList.has(name):
+		var nameText = player_name.text
+		if(nameText != ""):
+			if nameList.has(nameText):
 				warning.visible = true
 				return 0
 			count += 1
-		nameList.append(name)
+		nameList.append(nameText)
 	warning.visible = false
 	return count
 

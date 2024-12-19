@@ -1,7 +1,5 @@
 extends CanvasLayer
 
-signal beginMenu
-
 @onready var playController = $".."
 
 func _on_play_again_pressed() -> void:

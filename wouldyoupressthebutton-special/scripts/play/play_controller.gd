@@ -21,7 +21,7 @@ signal beginMenu
 @onready var noButton = $"Voting/NoButton"
 
 @onready var endCanvas = $"Game End"
-@onready var winnerName = $"Game End/winner"
+@onready var winnerNames = $"Game End/winner names"
 
 @export var rankTiddle: PackedScene
 @onready var crown = "res://sprites/crown.png"
@@ -35,7 +35,6 @@ var finalVotes = {}
 
 var persuaderList = []
 var opposerList = []
-var current_role_index = 0 # Tracks the next player to assign a role
 
 var track_roles = []
 
@@ -46,32 +45,32 @@ var points = {} # ex: {a:2, b:0, c:1, d:5, e:2}
 var prompts
 
 func get_prompts():
-	var load = promptReader.initialize_save(Global.file_path) # get dictionary
-	var prompts = []
-	if(load.keys().size() < numRounds): # if too few keys then get all custom prompt and then take from default
-		for i in load.keys():
-			prompts.append(load[i].prompt)
-			load[i].chance = 0.1
-		promptReader.save_game(Global.file_path, load)
+	var load_data = promptReader.initialize_save(Global.file_path) # get dictionary
+	var promptList = []
+	if(load_data.keys().size() < numRounds): # if too few keys then get all custom prompt and then take from default
+		for i in load_data.keys():
+			promptList.append(load_data[i].prompt)
+			load_data[i].chance = 0.1
+		promptReader.save_game(Global.file_path, load_data)
 		var defaultLoad = promptReader.initialize_save("default")
-		while(prompts.size() < numRounds):
+		while(promptList.size() < numRounds):
 			for i in defaultLoad.keys():
 				if(defaultLoad[i].chance >= randf_range(0, 1)):
-					prompts.append(defaultLoad[i].prompt)
+					promptList.append(defaultLoad[i].prompt)
 					defaultLoad[i].chance = 0.1
 				else:
 					defaultLoad[i].chance += 0.1
 		promptReader.save_game("default", defaultLoad)
 	else:
-		while(prompts.size() < numRounds):
-			for i in load.keys():
-				if(load[i].chance >= randf_range(0, 1)):
-					prompts.append(load[i].prompt)
-					load[i].chance = 0.1
+		while(promptList.size() < numRounds):
+			for i in load_data.keys():
+				if(load_data[i].chance >= randf_range(0, 1)):
+					promptList.append(load_data[i].prompt)
+					load_data[i].chance = 0.1
 				else:
-					load[i].chance += 0.1
-	promptReader.save_game(Global.file_path, load)
-	return prompts
+					load_data[i].chance += 0.1
+	promptReader.save_game(Global.file_path, load_data)
+	return promptList
 
 func _ready() -> void:
 	# Initialize points array
@@ -94,8 +93,7 @@ func _ready() -> void:
 	randomize()
 	prompts.shuffle()
 	
-	end_game()
-	#stage()
+	stage()
 
 func _process(_delta: float) -> void:
 	progressBar.value = (timer.time_left / timer.wait_time) * 100
@@ -307,7 +305,7 @@ func rankings():
 	var maxTiddleHeight = get_viewport().size.y - 400
 
 	var count = 0
-	var spacing = 100
+	var spacing = 150
 	var totalPlayers = Global.playerNames.size()
 	var leftSide = get_viewport().size.x / 2 - ((totalPlayers / 2) * spacing)
 
@@ -316,7 +314,6 @@ func rankings():
 		leftSide += spacing / 2  # Shift by half of the spacing to center the bars
 	
 	# find winner
-	var tie: bool = false
 	var winners = []
 	var winnerPoints: float = 0
 	for player_name in Global.playerNames:
@@ -325,7 +322,6 @@ func rankings():
 			winners.append(player_name)
 			winnerPoints = points[player_name]
 		elif(points[player_name] == winnerPoints):
-			tie = true
 			winners.append(player_name)
 	
 	# tiddles are max height * points/max_points
@@ -341,16 +337,15 @@ func rankings():
 			var crownSprite = Sprite2D.new()
 			crownSprite.texture = load(crown)
 			crownSprite.position = Vector2(tiddle.position.x, tiddle.position.y - tiddle.get_node("bar").size.y - 35)
-			add_child(crownSprite)
-		add_child(tiddle)
+			endCanvas.get_node("TiddleHolder").add_child(crownSprite)
+		endCanvas.get_node("TiddleHolder").add_child(tiddle)
 		count += 1
 
-	winnerName.text = "Winners:\n" if winners.size() > 1 else "Winner:\n"
-	for name in winners:
-		winnerName.text += name
-		if(name != winners[-1]):
-			winnerName.text += ", "
-	
+	winnerNames.text = "Winners:\n" if winners.size() > 1 else "Winner:\n"
+	for playerName in winners:
+		winnerNames.text += playerName
+		if(playerName != winners[-1]):
+			winnerNames.text += ", "
 
 func end_game() -> void:
 	mainCanvas.visible = false
@@ -359,19 +354,25 @@ func end_game() -> void:
 	timer.stop()
 
 func reset_game():
-	# Initialize points array
 	for player in Global.playerNames:
 		points[player] = 0
+	
+	track_roles = []
+	persuaderList = []
+	opposerList = []
 	
 	mainCanvas.visible = true
 	discussCanvas.visible = false
 	voteCanvas.visible = false
 	endCanvas.visible = false
+	for n in endCanvas.get_node("TiddleHolder").get_children():
+		endCanvas.get_node("TiddleHolder").remove_child(n)
+		n.queue_free()
 	
-	# Shuffle prompts
 	prompts = get_prompts()
 	randomize()
 	prompts.shuffle()
 	
 	currentRound = 0
+	stageNum = 0
 	stage()
