@@ -111,12 +111,12 @@ func stage() -> void:
 			instructions.visible = false
 			chosenPrompt = prompts[currentRound - 1]
 			prompt.text = chosenPrompt
-			time = 1
+			time = 8
 		2: # Assign roles to players
 			title.text = "Stage 2: Assigning Roles"
 			title.visible = true
 			assign_roles()
-			time = 1
+			time = 7
 		3: # Discussion phase
 			title.text = "Stage 3: Discussion Phase 1"
 			prompt.text = chosenPrompt
