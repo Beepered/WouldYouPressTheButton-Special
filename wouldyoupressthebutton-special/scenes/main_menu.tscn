@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bdyqluc1cfnb8"]
+[gd_scene load_steps=17 format=3 uid="uid://bdyqluc1cfnb8"]
 
 [ext_resource type="Script" path="res://scripts/menu/main_menu.gd" id="1_77ssq"]
 [ext_resource type="PackedScene" uid="uid://bnt4e3i3svop0" path="res://scenes/custom_selection.tscn" id="2_qn2u8"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/menu/voteSettingArrow.gd" id="4_ntwn2"]
 [ext_resource type="Script" path="res://scripts/button_behavior.gd" id="5_wmu26"]
 [ext_resource type="FontFile" uid="uid://c1xyljigb0kk4" path="res://fonts/GL-Nummernschild-Eng.otf" id="6_ggwyi"]
+[ext_resource type="Texture2D" uid="uid://kr3owaxtrtk6" path="res://sprites/me.png" id="10_p5epo"]
 
 [sub_resource type="Theme" id="Theme_32jrn"]
 
@@ -16,6 +17,28 @@
 size = Vector2(40, 40)
 
 [sub_resource type="Theme" id="Theme_1foon"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j4hrv"]
+atlas = ExtResource("10_p5epo")
+region = Rect2(0, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_waicc"]
+atlas = ExtResource("10_p5epo")
+region = Rect2(60, 0, 60, 60)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t7f5x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j4hrv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_waicc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
 
 [node name="Main Menu" type="Node2D"]
 script = ExtResource("1_77ssq")
@@ -670,7 +693,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("6_ggwyi")
 theme_override_font_sizes/font_size = 45
-text = "Brendan Trieu
+text = "Luminice Star
 Carter Gruebel
 Garrett Blake
 Jacqueline Gracey"
@@ -696,6 +719,12 @@ text = "font: GL-Nummernschild-Eng by Gutenberg Labo
 font: Typography Times by Tipografia Leone Firenze
 font: Time and Space by Heliagon"
 vertical_alignment = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Credits/background"]
+position = Vector2(189, 49)
+sprite_frames = SubResource("SpriteFrames_t7f5x")
+autoplay = "default"
+frame_progress = 0.653033
 
 [connection signal="button_down" from="Menu/SettingButton" to="." method="_on_setting_button_button_down"]
 [connection signal="button_down" from="Menu/Instructions" to="." method="_on_instructions_button_down"]

@@ -57,7 +57,7 @@ func get_prompts():
 			for i in defaultLoad.keys():
 				if(defaultLoad[i].chance >= randf_range(0, 1)):
 					promptList.append(defaultLoad[i].prompt)
-					defaultLoad[i].chance = 0.1
+					defaultLoad[i].chance = 0
 				else:
 					defaultLoad[i].chance += 0.1
 		promptReader.save_game("default", defaultLoad)
@@ -112,11 +112,13 @@ func stage() -> void:
 			chosenPrompt = prompts[currentRound - 1]
 			prompt.text = chosenPrompt
 			time = 8
+			if(chosenPrompt.split(' ').size() > 20):
+				time += chosenPrompt.split(' ').size() / 4
 		2: # Assign roles to players
 			title.text = "Stage 2: Assigning Roles"
 			title.visible = true
 			assign_roles()
-			time = 7
+			time = 8
 		3: # Discussion phase
 			title.text = "Stage 3: Discussion Phase 1"
 			prompt.text = chosenPrompt
@@ -138,7 +140,7 @@ func stage() -> void:
 			title.visible = false
 			prompt.text = "Calculating Scores"
 			instructions.visible = false
-			time = 1
+			time = 2
 		6: # Scoring and preparation for the next round
 			title.text + "Stage 5: Revealing Scores"
 			title.visible = true
@@ -261,6 +263,8 @@ func assign_roles() -> void:
 	
 	# Update prompt
 	prompt.text = "Prepare Yourselves:\n%s must convince the group to press the button\n%s must convince the group NOT to press the button" % [persuader, opposer]
+	instructions.visible = true
+	instructions.text = chosenPrompt
 
 func on_skip_button_pressed():
 	timer.stop()
@@ -302,12 +306,11 @@ func calculate_scores() -> void:
 	]
 
 func rankings():
-	var maxTiddleHeight = get_viewport().size.y - 400
+	var maxTiddleHeight = get_viewport_rect().size.y / 1.9
 
-	var count = 0
-	var spacing = 150
 	var totalPlayers = Global.playerNames.size()
-	var leftSide = get_viewport().size.x / 2 - ((totalPlayers / 2) * spacing)
+	var spacing = 150
+	var leftSide = get_viewport_rect().size.x / 2 - ((totalPlayers / 2) * spacing)
 
 	# Adjust leftSide for even number of players so that the graph is centered
 	if totalPlayers % 2 == 0:
@@ -324,11 +327,12 @@ func rankings():
 		elif(points[player_name] == winnerPoints):
 			winners.append(player_name)
 	
+	var count = 0
 	# tiddles are max height * points/max_points
 	for player_name in Global.playerNames:
 		var tiddle = rankTiddle.instantiate()
 		var x = leftSide + (count * spacing)
-		tiddle.position = Vector2(x, 570)
+		tiddle.position = Vector2(x, 580)
 		tiddle.get_node("bar").size.y = maxTiddleHeight * (points[player_name] / winnerPoints)
 		tiddle.get_node("score").text = str(points[player_name])
 		tiddle.get_node("name").text = player_name
@@ -336,7 +340,7 @@ func rankings():
 			tiddle.get_node("bar").color = Color(0.8, 0.8, 0.15, 1)
 			var crownSprite = Sprite2D.new()
 			crownSprite.texture = load(crown)
-			crownSprite.position = Vector2(tiddle.position.x, tiddle.position.y - tiddle.get_node("bar").size.y - 35)
+			crownSprite.position = Vector2(tiddle.position.x, tiddle.position.y - tiddle.get_node("bar").size.y - 30)
 			endCanvas.get_node("TiddleHolder").add_child(crownSprite)
 		endCanvas.get_node("TiddleHolder").add_child(tiddle)
 		count += 1

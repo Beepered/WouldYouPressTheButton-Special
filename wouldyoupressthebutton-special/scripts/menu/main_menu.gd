@@ -10,6 +10,7 @@ signal beginPlay
 @onready var credits = $Credits
 
 func _ready() -> void:
+	Global.playerNames = []
 	mainMenu.visible = true;
 	settings.visible = false;
 	instructions.visible = false;
