@@ -6,17 +6,17 @@ func _on_save_pressed() -> void:
 	if($name.text):
 		var path = Global.custom_folder_path + $name.text + ".txt"
 		if(!FileAccess.open(path, FileAccess.READ)): # if file didn't exist
-			$"..".create_item($name.text)
+			$"..".create_item($name.text) # create a save with name
 		var file = FileAccess.open(path, FileAccess.WRITE)
 		file.store_string($prompts.text)
 		file.close()
 
 		$"saved message".visible = true
-		await get_tree().create_timer(0.8).timeout
+		await get_tree().create_timer(0.9).timeout
 		$"saved message".visible = false
 	else:
 		$warning.visible = true
-		await get_tree().create_timer(0.8).timeout
+		await get_tree().create_timer(0.9).timeout
 		$warning.visible = false
 
 func _load_path(path):

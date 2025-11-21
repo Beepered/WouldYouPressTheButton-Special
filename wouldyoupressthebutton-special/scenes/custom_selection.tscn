@@ -21,84 +21,100 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -450.0
-offset_top = -325.0
-offset_right = 450.0
-offset_bottom = 325.0
+offset_left = -725.0
+offset_top = -410.0
+offset_right = 725.0
+offset_bottom = 410.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.877616, 0.877616, 0.877616, 1)
+color = Color(0.758192, 0.758192, 0.758191, 1)
 
 [node name="MainBack" type="Button" parent="main"]
-offset_left = 240.0
-offset_top = 105.0
-offset_right = 340.0
-offset_bottom = 155.0
+offset_left = 300.0
+offset_top = 170.0
+offset_right = 470.0
+offset_bottom = 240.0
 theme_override_fonts/font = ExtResource("3_tnsgm")
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 40
 text = "back"
 
 [node name="Title" type="Label" parent="main"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -196.0
-offset_top = 129.0
-offset_right = 196.0
-offset_bottom = 198.0
+offset_left = -260.0
+offset_top = 195.0
+offset_right = 260.0
+offset_bottom = 264.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_7djx7")
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 65
 text = "Custom Settings"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="choice menu" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="create select" type="Button" parent="choice menu"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -100.0
-offset_top = 210.0
-offset_right = 100.0
-offset_bottom = 260.0
+offset_left = -125.0
+offset_top = 292.0
+offset_right = 125.0
+offset_bottom = 352.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("3_tnsgm")
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 35
 text = "create"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="choice menu"]
-anchors_preset = 7
+[node name="Custom Selections" type="ColorRect" parent="choice menu"]
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -354.0
-offset_top = -520.0
-offset_right = 354.0
-offset_bottom = -120.0
+anchor_bottom = 0.5
+offset_left = -470.0
+offset_top = -173.0
+offset_right = 470.0
+offset_bottom = 367.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0.589096, 0.589095, 0.589095, 1)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="choice menu/Custom Selections"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.0
+offset_top = -250.0
+offset_right = 450.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = SubResource("Theme_wda7e")
 horizontal_scroll_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="choice menu/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="choice menu/Custom Selections/ScrollContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="create menu" type="CanvasLayer" parent="."]
 visible = false
 script = ExtResource("1_k86w4")
 
 [node name="back" type="Button" parent="create menu"]
-offset_left = 240.0
-offset_top = 105.0
-offset_right = 340.0
-offset_bottom = 155.0
+offset_left = 300.0
+offset_top = 170.0
+offset_right = 470.0
+offset_bottom = 240.0
 theme_override_fonts/font = ExtResource("3_tnsgm")
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 40
 text = "back"
 
 [node name="name" type="LineEdit" parent="create menu"]
@@ -106,25 +122,25 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -240.0
-offset_top = 220.0
+offset_top = 316.0
 offset_right = 160.0
-offset_bottom = 260.0
+offset_bottom = 366.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 18
-placeholder_text = "give name"
+theme_override_font_sizes/font_size = 25
+placeholder_text = "name"
 max_length = 42
 
 [node name="save" type="Button" parent="create menu"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 170.0
-offset_top = 220.0
-offset_right = 250.0
-offset_bottom = 260.0
+offset_left = 172.0
+offset_top = 311.0
+offset_right = 282.0
+offset_bottom = 371.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("3_tnsgm")
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 35
 text = "save"
 
 [node name="prompts" type="TextEdit" parent="create menu"]
@@ -133,25 +149,27 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -300.0
-offset_top = -120.0
-offset_right = 300.0
-offset_bottom = 260.0
+offset_left = -450.0
+offset_top = -158.0
+offset_right = 450.0
+offset_bottom = 342.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 25
 placeholder_text = "put stuff here
 you can have multiple lines"
 
 [node name="saved message" type="Label" parent="create menu"]
 visible = false
-offset_left = 897.0
-offset_top = 226.0
-offset_right = 956.0
-offset_bottom = 256.0
+offset_left = 1145.0
+offset_top = 267.0
+offset_right = 1224.0
+offset_bottom = 307.0
 theme_override_colors/font_color = Color(0.766504, 0.80754, 0, 1)
+theme_override_colors/font_outline_color = Color(0.495256, 0.524214, 1.92523e-07, 1)
+theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("3_tnsgm")
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 40
 text = "saved"
 
 [node name="name exists" type="Label" parent="create menu"]
@@ -159,14 +177,14 @@ visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -87.0
-offset_top = 194.0
-offset_right = 87.0
-offset_bottom = 220.0
+offset_left = -75.0
+offset_top = 279.0
+offset_right = 75.0
+offset_bottom = 314.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0.815686, 0, 0, 1)
-theme_override_font_sizes/font_size = 18
-text = "name already exists"
+theme_override_font_sizes/font_size = 25
+text = "name exists"
 
 [node name="warning" type="Label" parent="create menu"]
 visible = false
@@ -176,14 +194,14 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -293.0
-offset_top = -41.5
+offset_top = -17.0
 offset_right = 293.0
-offset_bottom = 41.5
+offset_bottom = 68.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.815686, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_tnsgm")
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 85
 text = "Name Required"
 horizontal_alignment = 1
 vertical_alignment = 1

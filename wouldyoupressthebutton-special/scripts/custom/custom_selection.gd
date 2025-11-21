@@ -4,6 +4,7 @@ signal CustomFinished
 
 @onready var choiceMenu = $"choice menu"
 @onready var createMenu = $"create menu"
+@onready var playerPrompts = $"choice menu/Custom Selections/ScrollContainer/VBoxContainer"
 
 @onready var mainBack = $main/MainBack
 
@@ -33,7 +34,7 @@ func create_item(pathName):
 	var item = customItem.instantiate()
 	item.pathName = pathName.substr(0, pathName.find(".txt"))
 	item.editItem.connect(edit_item)
-	$"choice menu/ScrollContainer/VBoxContainer".add_child(item)
+	playerPrompts.add_child(item)
 
 func edit_item(path):
 	_on_create_select_pressed()

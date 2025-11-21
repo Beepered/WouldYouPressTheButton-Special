@@ -34,19 +34,19 @@ backgroundObj = ExtResource("2_aekbl")
 material = SubResource("ShaderMaterial_1jmgw")
 offset_left = -1.0
 offset_top = -1.0
-offset_right = 1279.0
-offset_bottom = 799.0
+offset_right = 1919.0
+offset_bottom = 1079.0
 
 [node name="Spiral 2" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_tkt46")
-offset_right = 1280.0
-offset_bottom = 800.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 
 [node name="Spiral 3" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_tkt46")
-offset_left = 1280.0
-offset_right = 2560.0
-offset_bottom = 800.0
+offset_left = 1920.0
+offset_right = 3840.0
+offset_bottom = 1080.0
 scale = Vector2(-1, 1)
 
 [node name="Timer" type="Timer" parent="."]
