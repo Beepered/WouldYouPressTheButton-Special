@@ -35,14 +35,16 @@ func load_game(path): # get SAVE file and return JSON
 
 func initialize_save(path):
 	var textFile
+	# get path to prompts
 	if(path == "default"):
 		textFile = FileAccess.open(Global.default_file_path, FileAccess.READ)
 	else:
 		textFile = FileAccess.open(Global.custom_folder_path + path + ".txt", FileAccess.READ)
+	
 	if(textFile):
 		var save_dict = {}
 		var save_file = FileAccess.open(Global.chance_folder_path + path + ".save", FileAccess.READ)
-		if(save_file):
+		if(save_file): # save exists
 			var json = JSON.new()
 			var json_string = save_file.get_line()
 			var parse_result = json.parse(json_string)
@@ -56,7 +58,7 @@ func initialize_save(path):
 			var position = 1
 			while textFile.get_position() < textFile.get_length():
 				var textPrompt = textFile.get_line()
-				if(savedPrompts.size() < position || textPrompt != savedPrompts[position - 1]):
+				if(savedPrompts.size() < position || textPrompt != savedPrompts[position - 1]): # prompt is different than text file
 					save_dict[position] = {"prompt": textPrompt, "chance": 0.5}
 				else:
 					save_dict[position] = {"prompt": textPrompt, "chance": savedChances[position - 1]}
@@ -64,7 +66,7 @@ func initialize_save(path):
 			var save_to_file = FileAccess.open(Global.chance_folder_path + path + ".save", FileAccess.WRITE)
 			json_string = JSON.stringify(save_dict)
 			save_to_file.store_line(json_string)
-		else:
+		else: # create fresh save, setting chance to 50%
 			var position = 1
 			while textFile.get_position() < textFile.get_length():
 				save_dict[position] = {"prompt": textFile.get_line(), "chance": 0.5}
